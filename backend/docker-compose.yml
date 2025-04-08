@@ -4,7 +4,7 @@ services:
     container_name: mysql_db
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: commerce_db
+      MYSQL_DATABASE: music_shop_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: spring_boot_app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/commerce_db
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/music_shop_db
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
     ports:
