@@ -1,9 +1,7 @@
 package main.java.com.example.demo.entity;
 
 import java.math.BigDecimal;
-import javax.annotation.processing.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -11,7 +9,7 @@ import lombok.Data;
 @Data
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.Identity)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
