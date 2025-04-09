@@ -1,4 +1,4 @@
-package main.java.com.example.demo.entity;
+package com.example.demo.entity;
 
 import java.util.Set;
 import jakarta.persistence.*;
