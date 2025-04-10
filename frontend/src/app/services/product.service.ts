@@ -11,8 +11,11 @@ export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products';
 
   getProducts() {
-    this.httpClient
-      .get<Product[]>(this.baseUrl)
-      .subscribe({ next: (res) => this.products.set(res) });
+    this.httpClient.get<ApiReponse>(this.baseUrl).subscribe({
+      next: (res) => {
+        this.products.set(res);
+        console.log(res._embedded);
+      },
+    });
   }
 }
