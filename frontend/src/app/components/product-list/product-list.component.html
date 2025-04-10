@@ -10,6 +10,7 @@
   <tbody>
     @for (product of productService.products(); track $index) {
     <tr>
+      <td><img src="{{ product.imageUrl }}" height="50" /></td>
       <td>{{ product.name }}</td>
       <td>{{ product.price }}</td>
       <td>{{ product.stock }}</td>
