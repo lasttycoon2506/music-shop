@@ -1,1 +1,6 @@
-<p>product-list works!</p>
+<table class="table table-hover">
+  @for (product of productService.products(); track $index) {
+  {{
+    product.name
+  }}}
+</table>
