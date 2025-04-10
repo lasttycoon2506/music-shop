@@ -13,7 +13,7 @@ type Links = {
 };
 
 export type ApiResponse = {
-  _embedded: Product[];
+  _embedded: { products: Product[] };
   page: Page;
   _links: Links;
 };
