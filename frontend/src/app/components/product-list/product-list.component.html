@@ -1,13 +1,19 @@
-<!-- @if (!productService.products()) {
-<div>chacha</div>
-} @else { -->
+<h1>Products</h1>
 <table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Stock</th>
+    </tr>
+  </thead>
   <tbody>
     @for (product of productService.products(); track $index) {
-    {{
-      product.name
-    }}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.stock }}</td>
+    </tr>
     }
   </tbody>
 </table>
-<!-- } -->
