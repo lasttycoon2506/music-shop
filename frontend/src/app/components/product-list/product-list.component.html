@@ -1,0 +1,9 @@
+<table class="table table-hover">
+  <tbody>
+    @for (product of productService.products(); track $index) {
+    {{
+      product.name
+    }}
+    }
+  </tbody>
+</table>
