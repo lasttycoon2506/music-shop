@@ -1,9 +1,7 @@
-export class Product {
-  constructor(
-    public name: string,
-    public description: string,
-    public price: number,
-    public imageUrl: string,
-    public stock: number
-  ) {}
-}
+export type Product = {
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  stock: number;
+};
