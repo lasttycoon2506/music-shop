@@ -1,3 +1,6 @@
+@if (!productService.products()) {
+<div>chacha</div>
+} @else {
 <table class="table table-hover">
   <tbody>
     @for (product of productService.products(); track $index) {
@@ -7,3 +10,4 @@
     }
   </tbody>
 </table>
+}
