@@ -55,3 +55,21 @@ VALUES ('Fender', 'Strat', 'assets/images/products/placeholder.png', 12, 1100.99
 
 INSERT INTO products (name, description, image_url, stock, price, category_id)
 VALUES ('Pearl Drums', 'Full-set with cymbals', 'assets/images/products/placeholder.png', 7, 500.99, 1);
+
+INSERT INTO products(category_name) VALUES ('ACCESSORIES');
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('Guitar strings premium', 'finest guitar strings ever',
+'assets/images/products/placeholder.png', 20, 25.99, 2);
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('Guitar strings value', 'best for your budget guaranteed!', 'assets/images/products/placeholder.png', 50, 15.99, 2);
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('guitar strap', 'groovy strap', 'assets/images/products/placeholder.png', 10, 20.99, 2);
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('picks', 'best variety of picks known', 'assets/images/products/placeholder.png', 12, 9.99, 2);
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('tuner', 'Fully electronic!', 'assets/images/products/placeholder.png', 7, 16.99, 2);
