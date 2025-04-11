@@ -72,4 +72,4 @@ INSERT INTO products (name, description, image_url, stock, price, category_id)
 VALUES ('picks', 'best variety of picks known', 'assets/images/products/placeholder.png', 12, 9.99, 2);
 
 INSERT INTO products (name, description, image_url, stock, price, category_id)
-VALUES ('tuner', 'Fully electronic!', 'assets/images/products/placeholder.png', 7, 16.99, 2);
+VALUES ('tuner non-electronic', 'really long description really long description really long description really long description really long description really long description really long description', 'assets/images/products/placeholder.png', 7, 16.99, 2);
