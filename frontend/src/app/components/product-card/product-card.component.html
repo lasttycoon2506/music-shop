@@ -1,0 +1,19 @@
+<div class="card pt-2 mt-3">
+  <img
+    src="{{ product().imageUrl }}"
+    class="card-img-top"
+    height="125"
+    width="125"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product().name }}</h5>
+    <p class="card-text">
+      {{ product().description }}
+    </p>
+  </div>
+  <div class="card-footer">
+    <small class="text-body-secondary">{{
+      product().price | currency : "USD"
+    }}</small>
+  </div>
+</div>
