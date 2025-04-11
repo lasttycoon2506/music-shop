@@ -16,7 +16,13 @@
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-center mb-2">
       <button class="btn btn-success" type="button">Add</button>
-      <button class="btn btn-info" (click)="<">type="button">Details</button>
+      <button
+        class="btn btn-info"
+        routerLink="/products/:{{ productIndex() }}"
+        type="button"
+      >
+        Details
+      </button>
     </div>
     <div class="card-footer">
       <small class="text-body-secondary">{{
