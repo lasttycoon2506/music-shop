@@ -7,7 +7,7 @@ export const routes: Routes = [
   { path: '', component: ProductListComponent },
   {
     path: 'products/:id',
-    resolve: productDetailResolver,
+    resolve: { product: productDetailResolver },
     component: ProductDetailComponent,
   },
 ];

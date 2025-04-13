@@ -11,21 +11,42 @@
     </div>
     <div class="col-lg-6">
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
-        Responsive left-aligned hero with image
+        {{ product.name }}
       </h1>
       <p class="lead">
-        Quickly design and customize responsive mobile-first sites with
-        Bootstrap, the world’s most popular front-end open source toolkit,
-        featuring Sass variables and mixins, responsive grid system, extensive
-        prebuilt components, and powerful JavaScript plugins.
+        {{ product.description }}
       </p>
+      <p class="lead">
+        <em>
+          <strong>{{ product.price | currency : "USD" }}</strong></em
+        >
+      </p>
+      <p>Stock: {{ product.stock }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">
-          Primary
+        <button type="button" class="btn btn-success btn-lg px-4 me-md-2">
+          Add
         </button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-          Default
-        </button>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Input group example"
+          aria-label="Input group example"
+          aria-describedby="btnGroupAddon"
+        />
+        <div class="row row-cols-1">
+          <button
+            type="button"
+            class="col btn btn-primary fw-bold btn-lg px-4 me-md-2"
+          >
+            +1
+          </button>
+          <button
+            type="button"
+            class="col btn btn-warning fw-bold btn-lg px-4 me-md-2"
+          >
+            -1
+          </button>
+        </div>
       </div>
     </div>
   </div>
