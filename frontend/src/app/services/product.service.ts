@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
-import { ApiResponse } from '../models/apiResponse';
 import { environment } from '../../environment/environment.development';
+import { ProductApiResponse } from '../models/productApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +10,15 @@ import { environment } from '../../environment/environment.development';
 export class ProductService {
   private httpClient = inject(HttpClient);
   private baseUrl = environment.apiUrl;
-  products = signal<Product[] | null>(null);
+  products = signal<ProductApiResponse[] | null>(null);
 
   getProducts() {
-    this.httpClient.get<ApiResponse>(this.baseUrl + 'products').subscribe({
-      next: (res) => {
-        this.products.set(res._embedded.products);
-      },
-    });
+    this.httpClient
+      .get<ProductApiResponse>(this.baseUrl + 'products')
+      .subscribe({
+        next: (res) => {
+          this.products.set([res]);
+        },
+      });
   }
-
-  parseId() {}
 }

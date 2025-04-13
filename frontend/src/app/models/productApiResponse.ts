@@ -8,12 +8,11 @@ type Page = {
 };
 
 type Links = {
-  product: { href: string };
+  profile: { href: string };
   self: { href: string };
-  category: { href: string };
 };
 
-export type ApiResponse = {
+export type ProductApiResponse = {
   _embedded: { products: Product[] };
   page: Page;
   _links: Links;

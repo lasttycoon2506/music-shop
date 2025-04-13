@@ -4,4 +4,9 @@ export type Product = {
   price: number;
   imageUrl: string;
   stock: number;
+  _links: {
+    self: { href: string };
+    product: { href: string };
+    category: { href: string };
+  };
 };
