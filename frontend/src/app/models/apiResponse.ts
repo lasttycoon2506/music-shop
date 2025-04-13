@@ -8,8 +8,9 @@ type Page = {
 };
 
 type Links = {
-  profile: { href: string };
+  product: { href: string };
   self: { href: string };
+  category: { href: string };
 };
 
 export type ApiResponse = {
