@@ -12,7 +12,7 @@ type Links = {
   self: { href: string };
 };
 
-export type ProductApiResponse = {
+export type ProductsApiResponse = {
   _embedded: { products: Product[] };
   page: Page;
   _links: Links;

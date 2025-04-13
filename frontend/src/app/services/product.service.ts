@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
 import { environment } from '../../environment/environment.development';
-import { ProductApiResponse } from '../models/productApiResponse';
+import { ProductsApiResponse } from '../models/productsApiResponse';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,15 @@ export class ProductService {
 
   getProducts() {
     this.httpClient
-      .get<ProductApiResponse>(this.baseUrl + 'products')
+      .get<ProductsApiResponse>(this.baseUrl + 'products')
       .subscribe({
         next: (res) => {
           this.products.set(res._embedded.products);
         },
       });
+  }
+
+  getProductDetail(id: string): Observable<Product> {
+    return this.httpClient.get<Product>(this.baseUrl + id);
   }
 }

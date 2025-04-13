@@ -3,19 +3,10 @@ import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { inject } from '@angular/core';
 
-export const productDetailResolverResolver: ResolveFn<Product | null> = (
-  route
-) => {
+export const productDetailResolver: ResolveFn<Product | null> = (route) => {
   const productService = inject(ProductService);
-  productService;
+
+  const id = route.paramMap.get('id');
+
+  return productService.getProductDetail(id!);
 };
-
-// export const memberDetailResolver: ResolveFn<Member | null> = (route) => {
-//   const memberService = inject(MemberService);
-
-//   const username = route.paramMap.get('username');
-
-//   if (!username) return null;
-
-//   return memberService.getMember(username);
-// };

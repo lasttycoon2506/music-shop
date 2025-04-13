@@ -1,8 +1,13 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { productDetailResolver } from './resolvers/product-detail-resolver.resolver';
 
 export const routes: Routes = [
   { path: '', component: ProductListComponent },
-  { path: 'products/:id', component: ProductDetailComponent },
+  {
+    path: 'products/:id',
+    resolve: productDetailResolver,
+    component: ProductDetailComponent,
+  },
 ];
