@@ -11,5 +11,9 @@ import { RouterModule } from '@angular/router';
 })
 export class ProductCardComponent {
   product = input.required<Product>();
-  productIndex = input.required<number>();
+
+  parseId(url: string): string {
+    const productId = url.match(/\d+$/)![0];
+    return productId;
+  }
 }

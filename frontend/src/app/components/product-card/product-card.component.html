@@ -18,7 +18,7 @@
       <button class="btn btn-success" type="button">Add</button>
       <button
         class="btn btn-info"
-        routerLink="/products/:{{ productIndex() }}"
+        routerLink="/products/:{{ parseId(product()._links.self.href) }}"
         type="button"
       >
         Details

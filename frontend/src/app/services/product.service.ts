@@ -10,14 +10,14 @@ import { ProductApiResponse } from '../models/productApiResponse';
 export class ProductService {
   private httpClient = inject(HttpClient);
   private baseUrl = environment.apiUrl;
-  products = signal<ProductApiResponse[] | null>(null);
+  products = signal<Product[] | null>(null);
 
   getProducts() {
     this.httpClient
       .get<ProductApiResponse>(this.baseUrl + 'products')
       .subscribe({
         next: (res) => {
-          this.products.set([res]);
+          this.products.set(res._embedded.products);
         },
       });
   }
