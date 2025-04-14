@@ -1,5 +1,5 @@
-<div class="container col-xxl-8 px-4 py-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+<div class="container col-xxl-8 px-3 py-3">
+  <div class="row flex-lg-row-reverse align-items-center g-5">
     <div class="col-10 col-sm-8 col-lg-6">
       <img
         src="assets/images/products/placeholder.png"
@@ -23,26 +23,26 @@
       </p>
       <p>Stock: {{ product.stock }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-success btn-lg px-4 me-md-2">
+        <button type="button" class="btn btn-success btn-lg px-4 me-md-2 my-3">
           Add
         </button>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Input group example"
-          aria-label="Input group example"
-          aria-describedby="btnGroupAddon"
-        />
-        <div class="row row-cols-1">
+        <div class="col-2 me-3">
+          <input
+            type="text"
+            class="form-control py-3 mt-4"
+            placeholder="Input group example"
+          />
+        </div>
+        <div class="row row-cols-1 gap-1">
           <button
             type="button"
-            class="col btn btn-primary fw-bold btn-lg px-4 me-md-2"
+            class="col btn btn-primary fw-bold btn-lg px-1 me-md-2"
           >
             +1
           </button>
           <button
             type="button"
-            class="col btn btn-warning fw-bold btn-lg px-4 me-md-2"
+            class="col btn btn-warning fw-bold btn-lg px-1 me-md-2"
           >
             -1
           </button>
