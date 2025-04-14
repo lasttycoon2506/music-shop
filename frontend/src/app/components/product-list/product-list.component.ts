@@ -21,6 +21,9 @@ export class ProductListComponent implements OnInit {
     if (this.router.snapshot.paramMap.has('id')) {
       const categoryId: string = this.router.snapshot.paramMap.get('id')!;
       this.searchByCategoryId(categoryId);
+    } else if (this.router.snapshot.paramMap.has('name')) {
+      const keyword: string = this.router.snapshot.paramMap.get('name')!;
+      this.searchByKeyword(keyword);
     } else {
       this.productService.getAllProducts();
     }
@@ -28,5 +31,9 @@ export class ProductListComponent implements OnInit {
 
   searchByCategoryId(id: string) {
     this.productService.getProductsByCategoryId(id);
+  }
+
+  searchByKeyword(keyword: string) {
+    this.productService.getProductsByKeyword(keyword);
   }
 }
