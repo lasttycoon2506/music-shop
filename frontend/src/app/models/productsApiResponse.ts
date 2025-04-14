@@ -10,6 +10,7 @@ type Page = {
 type Links = {
   profile: { href: string };
   self: { href: string };
+  search: { href: string };
 };
 
 export type ProductsApiResponse = {
