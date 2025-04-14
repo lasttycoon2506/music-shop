@@ -29,4 +29,10 @@ export class SideBarComponent implements OnInit {
     const productId = url.match(/\d+$/)![0];
     return productId;
   }
+
+  capitalizeFirstLetter(category: string) {
+    return (
+      String(category).charAt(0).toUpperCase() + category.toLowerCase().slice(1)
+    );
+  }
 }
