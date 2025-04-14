@@ -23,13 +23,13 @@
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li>
-      <a href="#" class="nav-link text-white">
-        <svg
-          class="bi pe-none me-2"
-          width="16"
-          height="16"
-          aria-hidden="true"
-        ></svg>
+      <a
+        href="#"
+        class="nav-link text-white"
+        routerLink=""
+        routerLinkActivate="active-link"
+      >
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
         All
       </a>
     </li>
@@ -41,12 +41,7 @@
         routerLink="category/{{ parseId(category._links.self.href) }}"
         routerLinkActive="active-link"
       >
-        <svg
-          class="bi pe-none me-2"
-          width="16"
-          height="16"
-          aria-hidden="true"
-        ></svg>
+        <svg class="bi pe-none me-2" width="16" height="16"></svg>
         {{ capitalizeFirstLetter(category.categoryName) }}
       </a>
     </li>

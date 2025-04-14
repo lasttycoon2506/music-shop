@@ -14,7 +14,7 @@ export class ProductService {
   private baseUrl = environment.apiUrl;
   products = signal<Product[] | null>(null);
 
-  getProducts() {
+  getAllProducts() {
     this.httpClient
       .get<ProductsApiResponse>(this.baseUrl + 'products')
       .subscribe({

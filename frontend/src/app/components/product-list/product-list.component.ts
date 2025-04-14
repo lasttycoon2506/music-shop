@@ -14,19 +14,19 @@ export class ProductListComponent implements OnInit {
   private router = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    this.router.paramMap.subscribe(() => this.loadProducts());
+  }
+
+  loadProducts() {
     if (this.router.snapshot.paramMap.has('id')) {
       const categoryId: string = this.router.snapshot.paramMap.get('id')!;
       this.searchByCategoryId(categoryId);
     } else {
-      this.loadProducts();
+      this.productService.getAllProducts();
     }
   }
 
   searchByCategoryId(id: string) {
     this.productService.getProductsByCategoryId(id);
-  }
-
-  loadProducts() {
-    this.productService.getProducts();
   }
 }
