@@ -23,7 +23,12 @@
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li>
-      <a class="nav-link text-white" routerLink="" routerLinkActive="active">
+      <a
+        class="nav-link text-white"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
         <svg class="bi pe-none me-2" width="16" height="16"></svg>
         All
       </a>
