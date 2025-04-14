@@ -35,7 +35,7 @@ export class ProductService {
   getProductCategories() {
     return this.httpClient
       .get<ProductsCategoriesApiResponse>(this.baseUrl + 'product-category')
-      .pipe(map((res) => res._embedded.productCategories));
+      .pipe(map((res) => res._embedded.productCategory));
   }
 
   getProductDetail(id: string): Observable<Product> {

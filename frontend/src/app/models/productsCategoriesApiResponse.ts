@@ -13,7 +13,7 @@ type Links = {
 };
 
 export type ProductsCategoriesApiResponse = {
-  _embedded: { productCategories: ProductCategory[] };
+  _embedded: { productCategory: ProductCategory[] };
   page: Page;
   _links: Links;
 };

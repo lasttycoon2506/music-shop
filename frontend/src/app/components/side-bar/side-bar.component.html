@@ -24,48 +24,32 @@
   <ul class="nav nav-pills flex-column mb-auto">
     <li>
       <a href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlink:href="#people-circle" />
-        </svg>
+        <svg
+          class="bi pe-none me-2"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        ></svg>
         All
       </a>
     </li>
+    @for (category of productCategories; track $index) {
     <li class="nav-item">
       <a
         href="#"
         class="nav-link text-white"
-        routerLink="category/1"
+        routerLink="category/{{ parseId(category._links.self.href) }}"
         routerLinkActive="active-link"
       >
-        <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlink:href="#home" />
-        </svg>
-        Instruments
+        <svg
+          class="bi pe-none me-2"
+          width="16"
+          height="16"
+          aria-hidden="true"
+        ></svg>
+        {{ category.categoryName.toLowerCase() }}
       </a>
     </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlink:href="#speedometer2" />
-        </svg>
-        Accessories
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlink:href="#table" />
-        </svg>
-        Books
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link text-white">
-        <svg class="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlink:href="#grid" />
-        </svg>
-        Lessons
-      </a>
-    </li>
+    }
   </ul>
 </div>
