@@ -23,12 +23,7 @@
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li>
-      <a
-        href="#"
-        class="nav-link text-white"
-        routerLink=""
-        routerLinkActivate="active-link"
-      >
+      <a class="nav-link text-white" routerLink="" routerLinkActive="active">
         <svg class="bi pe-none me-2" width="16" height="16"></svg>
         All
       </a>
@@ -36,15 +31,15 @@
     @for (category of productCategories; track $index) {
     <li class="nav-item">
       <a
-        href="#"
         class="nav-link text-white"
-        routerLink="category/{{ parseId(category._links.self.href) }}"
-        routerLinkActive="active-link"
+        routerLink="/category/{{ parseId(category._links.self.href) }}"
+        routerLinkActive="active"
       >
         <svg class="bi pe-none me-2" width="16" height="16"></svg>
         {{ capitalizeFirstLetter(category.categoryName) }}
       </a>
     </li>
+
     }
   </ul>
 </div>

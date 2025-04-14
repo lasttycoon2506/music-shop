@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../services/product.service';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'side-bar',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css',
 })
