@@ -5,6 +5,7 @@ import { environment } from '../../environment/environment.development';
 import { ProductsApiResponse } from '../models/productsApiResponse';
 import { map, Observable } from 'rxjs';
 import { ProductsCategoriesApiResponse } from '../models/productsCategoriesApiResponse';
+import { ProductCategory } from '../models/productCategory';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ProductService {
   private baseUrl = environment.apiUrl;
   products = signal<Product[] | null>(null);
 
-  getAllProducts() {
+  getAllProducts(): void {
     this.httpClient
       .get<ProductsApiResponse>(this.baseUrl + 'products')
       .subscribe({
@@ -24,7 +25,7 @@ export class ProductService {
       });
   }
 
-  getProductsByCategoryId(id: string) {
+  getProductsByCategoryId(id: string): void {
     this.httpClient
       .get<ProductsApiResponse>(
         this.baseUrl + 'products/search/findByCategoryId?id=' + id
@@ -32,7 +33,7 @@ export class ProductService {
       .subscribe({ next: (res) => this.products.set(res._embedded.products) });
   }
 
-  getProductCategories() {
+  getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient
       .get<ProductsCategoriesApiResponse>(this.baseUrl + 'product-category')
       .pipe(map((res) => res._embedded.productCategory));
@@ -40,5 +41,13 @@ export class ProductService {
 
   getProductDetail(id: string): Observable<Product> {
     return this.httpClient.get<Product>(this.baseUrl + 'products/' + id);
+  }
+
+  getProductsByKeyword(keyword: string): void {
+    this.httpClient
+      .get<ProductsApiResponse>(
+        this.baseUrl + 'products/search/findByNameContaining?name=' + keyword
+      )
+      .subscribe({ next: (res) => this.products.set(res._embedded.products) });
   }
 }
