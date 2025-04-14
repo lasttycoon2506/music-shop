@@ -3,7 +3,8 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Product } from '../models/product';
 import { environment } from '../../environment/environment.development';
 import { ProductsApiResponse } from '../models/productsApiResponse';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { ProductsCategoriesApiResponse } from '../models/productsCategoriesApiResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,9 @@ export class ProductService {
   }
 
   getProductCategories() {
-    this.httpClient.get<>;
+    return this.httpClient
+      .get<ProductsCategoriesApiResponse>(this.baseUrl + 'product-category')
+      .pipe(map((res) => res._embedded.productCategories));
   }
 
   getProductDetail(id: string): Observable<Product> {
