@@ -10,4 +10,8 @@ export const routes: Routes = [
     resolve: { product: productDetailResolver },
     component: ProductDetailComponent,
   },
+  {
+    path: 'category/:id',
+    component: ProductListComponent,
+  },
 ];
