@@ -23,6 +23,14 @@ export class ProductService {
       });
   }
 
+  getProductsByCategoryId(id: string) {
+    this.httpClient
+      .get<ProductsApiResponse>(
+        this.baseUrl + 'products/search/findByCategoryId?id=' + id
+      )
+      .subscribe({ next: (res) => this.products.set(res._embedded.products) });
+  }
+
   getProductDetail(id: string): Observable<Product> {
     return this.httpClient.get<Product>(this.baseUrl + 'products/' + id);
   }
