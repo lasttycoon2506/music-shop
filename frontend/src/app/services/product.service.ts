@@ -31,6 +31,10 @@ export class ProductService {
       .subscribe({ next: (res) => this.products.set(res._embedded.products) });
   }
 
+  getProductCategories() {
+    this.httpClient.get<>;
+  }
+
   getProductDetail(id: string): Observable<Product> {
     return this.httpClient.get<Product>(this.baseUrl + 'products/' + id);
   }
