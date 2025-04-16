@@ -44,7 +44,6 @@ export class ProductService {
   }
 
   getProductsByKeyword(keyword: string): void {
-    console.log('trigs');
     this.httpClient
       .get<ProductsApiResponse>(
         this.baseUrl + 'products/search/findByNameContaining?name=' + keyword
