@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../services/product.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'side-bar',
@@ -11,6 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SideBarComponent implements OnInit {
   private productService = inject(ProductService);
+  private router = inject(Router);
   productCategories: ProductCategory[] = [];
 
   ngOnInit(): void {
@@ -34,5 +35,9 @@ export class SideBarComponent implements OnInit {
     return (
       String(category).charAt(0).toUpperCase() + category.toLowerCase().slice(1)
     );
+  }
+
+  handleSearch(keyword: string) {
+    this.router.navigateByUrl(`search/${keyword}`);
   }
 }

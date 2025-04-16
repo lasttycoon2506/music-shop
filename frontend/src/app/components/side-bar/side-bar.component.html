@@ -14,10 +14,12 @@
   <hr />
   <form class="col-12 col-lg-auto mb-lg-0 me-lg-3 mx-3" role="search">
     <input
+      #searchInput
       type="search"
       class="form-control form-control-dark my-1"
       placeholder="keyword"
       aria-label="Search"
+      (keyup.enter)="handleSearch(searchInput.value)"
     />
   </form>
   <hr />
@@ -44,7 +46,6 @@
         {{ capitalizeFirstLetter(category.categoryName) }}
       </a>
     </li>
-
     }
   </ul>
 </div>
