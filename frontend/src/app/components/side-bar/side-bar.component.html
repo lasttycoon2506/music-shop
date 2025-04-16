@@ -12,7 +12,7 @@
     <span class="fs-4 mt-4">Search</span>
   </a>
   <hr />
-  <form class="col-12 col-lg-auto mb-lg-0 me-lg-3 mx-3" role="search">
+  <div class="col-12 col-lg-auto mb-lg-0 me-lg-3 mx-3" role="search">
     <input
       #searchInput
       type="search"
@@ -21,7 +21,7 @@
       aria-label="Search"
       (keyup.enter)="handleSearch(searchInput.value)"
     />
-  </form>
+  </div>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li>

@@ -38,6 +38,6 @@ export class SideBarComponent implements OnInit {
   }
 
   handleSearch(keyword: string) {
-    this.router.navigateByUrl(`search/${keyword}`);
+    this.router.navigateByUrl(`products/search/${keyword}`);
   }
 }
