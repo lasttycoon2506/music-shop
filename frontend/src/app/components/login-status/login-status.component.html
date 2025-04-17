@@ -1,7 +1,15 @@
-<div class="login-status-header">
-  @if (isAuthenticated) {
-  <button>{{ usersName }}</button>
-  } @else {
-  <button routerLink="/login">click me</button>
-  }
+@if (isAuthenticated) {
+<button>{{ usersName }}</button>
+} @else {
+<!-- <button routerLink="/login">click me</button> -->
+<div class="row">
+  <div class="col">
+    <button type="button" routerLink="/login" class="btn btn-primary px-4 me-4">
+      Login
+    </button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-warning">Sign-up</button>
+  </div>
 </div>
+}
