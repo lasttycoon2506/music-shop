@@ -3,7 +3,7 @@ import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 
 @Component({
-  selector: 'app-login-status',
+  selector: 'login-status',
   imports: [],
   templateUrl: './login-status.component.html',
   styleUrl: './login-status.component.css',

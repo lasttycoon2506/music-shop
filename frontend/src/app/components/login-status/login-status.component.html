@@ -1,1 +1,28 @@
-<p>login-status works!</p>
+@if (isAuthenticated) {
+<div>
+  <button>{{ usersName }}</button>
+</div>
+} @else {
+<form class="col-12 col-lg-auto me-lg-3">
+  <div class="row justify-content-end">
+    <div class="col-5">
+      <input
+        type="text"
+        class="form-control form-control-dark"
+        placeholder="username"
+      />
+    </div>
+    <div class="col-5">
+      <input
+        type="password"
+        class="form-control form-control-dark"
+        placeholder="********"
+      />
+    </div>
+  </div>
+</form>
+<div class="text-end">
+  <button type="button" class="btn btn-outline-light me-2">Login</button>
+  <button type="button" class="btn btn-warning">Sign-up</button>
+</div>
+}
