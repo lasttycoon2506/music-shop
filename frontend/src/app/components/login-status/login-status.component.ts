@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 
 @Component({
   selector: 'login-status',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './login-status.component.html',
   styleUrl: './login-status.component.css',
 })
