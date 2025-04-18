@@ -28,7 +28,7 @@ export class LoginStatusComponent implements OnInit {
         .getUser()
         .then(
           (result: UserClaims<CustomUserClaims>) =>
-            (this.usersName = result.name!)
+            (this.usersName = result.given_name!)
         );
     }
   }
