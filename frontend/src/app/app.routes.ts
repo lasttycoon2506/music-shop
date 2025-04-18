@@ -4,6 +4,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { productDetailResolver } from './resolvers/product-detail-resolver.resolver';
 import { OktaCallbackComponent } from '@okta/okta-angular';
 import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
   },
   {
     path: 'products/:id',
