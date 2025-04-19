@@ -10,14 +10,14 @@
         <h1 class="fw-bold mb-0 fs-2">Sign-up</h1>
       </div>
       <div class="modal-body p-5 pt-0">
-        <form (ngSubmit)="onSubmit()">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div class="form-floating mb-3">
             <input
               type="text"
               class="form-control rounded-3"
               id="firstName"
               placeholder="First Name"
-              [(ngModel)]="user!.firstName"
+              formControlName="firstName"
             />
             <label>First Name</label>
           </div>
@@ -27,7 +27,7 @@
               class="form-control rounded-3"
               id="lastName"
               placeholder="Last Name"
-              [(ngModel)]="user!.lastName"
+              formControlName="lastName"
             />
             <label>Last Name</label>
           </div>
@@ -37,7 +37,7 @@
               class="form-control rounded-3"
               id="email"
               placeholder="Email"
-              [(ngModel)]="user!.email"
+              formControlName="email"
             />
             <label>Email</label>
           </div>
@@ -47,7 +47,7 @@
               class="form-control rounded-3"
               id="password"
               placeholder="Password"
-              [(ngModel)]="user!.password"
+              formControlName="password"
             />
             <label>Password</label>
           </div>
