@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { OktaService } from '../../services/okta.service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +15,12 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 })
 export class SignUpComponent {
   private oktaService = inject(OktaService);
-  private formBuilder: FormBuilder = inject(FormBuilder);
+  userForm: FormGroup = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
 
   onSubmit() {
     // this.oktaService.createUser(this.user);
