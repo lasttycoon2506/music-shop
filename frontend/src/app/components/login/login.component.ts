@@ -1,11 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { OKTA_AUTH } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
-import {
-  OktaSignIn,
-  RenderError,
-  RenderResult,
-} from '@okta/okta-signin-widget';
+import { OktaSignIn } from '@okta/okta-signin-widget';
 import appConfig from '../../configs/app-config';
 
 @Component({
@@ -14,10 +10,11 @@ import appConfig from '../../configs/app-config';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private oktaAuth: OktaAuth = inject(OKTA_AUTH);
 
   oktaSignIn: OktaSignIn = new OktaSignIn({
+    el: '#okta-signin-widget',
     logo: 'assets/images/musicnote.png',
     baseUrl: appConfig.oidc.issuer,
     clientId: appConfig.oidc.clientId,
@@ -31,15 +28,19 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.oktaSignIn.remove();
-    this.oktaSignIn.renderEl(
-      { el: '#okta-signin-widget' },
-      (res: RenderResult) => {
-        if (res.status === 'SUCCESS') this.oktaAuth.signInWithRedirect();
-      },
-      (error: RenderError) => {
-        throw error;
-      }
-    );
+    this.oktaSignIn
+      .showSignIn()
+      .then(() => {
+        this.oktaAuth.signInWithRedirect();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.oktaSignIn && this.oktaSignIn.remove) {
+      this.oktaSignIn.remove();
+    }
   }
 }
