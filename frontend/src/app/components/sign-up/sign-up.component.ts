@@ -16,15 +16,14 @@ import {
 export class SignUpComponent {
   private oktaService = inject(OktaService);
   userForm: FormGroup = new FormGroup({
-    firstName: new FormControl('', [
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [
       Validators.required,
-      Validators.minLength(1),
+      Validators.pattern(
+        '^(([^<>()[\\]\\.,;:\\s@"]+(\\.[^<>()[\\]\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
+      ),
     ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
 
