@@ -27,13 +27,15 @@ export class SignUpComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(12),
-      Validators.pattern(/^(?=\D*\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{12,}$/),
+      Validators.pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{12,}$/
+      ),
     ]),
   });
 
   onSubmit() {
     console.log(this.userForm.value);
-    // this.oktaService.createUser(this.user);
+
+    // this.oktaService.createUser(this.userForm);
   }
 }
