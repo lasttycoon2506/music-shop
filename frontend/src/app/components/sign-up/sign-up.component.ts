@@ -34,8 +34,6 @@ export class SignUpComponent {
   });
 
   onSubmit() {
-    console.log(this.userForm.value);
-
-    // this.oktaService.createUser(this.userForm);
+    this.oktaService.createUser(this.userForm.value);
   }
 }
