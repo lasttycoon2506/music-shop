@@ -11,10 +11,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 @Data
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,8 +31,7 @@ public class Address {
     @Column(name = "zip")
     private String zip;
 
-    // @OneToOne
-    // @PrimaryKeyJoinColumn
-    // private Order order;
-
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Order order;
 }
