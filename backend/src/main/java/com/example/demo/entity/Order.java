@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -54,5 +55,13 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @OneToOne
+    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
+    private Address shippingAddress;
+
+    @OneToOne
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
+    private Address billingAddress;
 
 }
