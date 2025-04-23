@@ -12,6 +12,8 @@ import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CheckoutService {
     private CustomerRepository customerRepository;
@@ -20,7 +22,8 @@ public class CheckoutService {
         this.customerRepository = customerRepository;
     }
 
-    public PurchaseResponse MakePurchase(Purchase purchase) {
+    @Transactional
+    public PurchaseResponse PlaceOrder(Purchase purchase) {
         Order order = purchase.getOrder();
         String trackingNumber = generateOrderTrackingNumber();
         Set<OrderItem> orderItems = purchase.getOrderItems();
