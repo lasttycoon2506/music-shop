@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class PurchaseResponse {
-    private final Long orderTrackingNumber;
+    private final String orderTrackingNumber;
 }
