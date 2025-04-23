@@ -23,6 +23,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: password
     ports:
       - "8080:8080"
+      - "5005:5005"
+    entrypoint: ["java","-agentlib:jdwp=transport=dt_socket,address=*:5005,server=y,suspend=n","-jar","target/demo-0.0.1-SNAPSHOT.jar"]
     depends_on:
       - mysql
 
