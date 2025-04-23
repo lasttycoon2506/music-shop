@@ -32,7 +32,7 @@ public class Customer {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Set<Order> orders;
+    private Set<Order> orders = new HashSet<>();
 
     public void addOrder(Order order) {
         if (order != null) {

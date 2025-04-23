@@ -51,7 +51,7 @@ public class Order {
     private Date lastUpdated;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private Set<OrderItem> orderItems;
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

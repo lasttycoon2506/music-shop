@@ -25,16 +25,17 @@ public class CheckoutService {
     @Transactional
     public PurchaseResponse PlaceOrder(Purchase purchase) {
         Order order = purchase.getOrder();
-        String trackingNumber = generateOrderTrackingNumber();
-        Set<OrderItem> orderItems = purchase.getOrderItems();
-        Customer customer = purchase.getCustomer();
 
+        String trackingNumber = generateOrderTrackingNumber();
         order.setTrackingNumber(trackingNumber);
         order.setShippingAddress(purchase.getShippingAddress());
         order.setBillingAddress(purchase.getBillingAddress());
-        orderItems.forEach(item -> order.addItem(item));
-        customer.addOrder(order);
 
+        Set<OrderItem> orderItems = purchase.getOrderItems();
+        orderItems.forEach(item -> order.addItem(item));
+
+        Customer customer = purchase.getCustomer();
+        customer.addOrder(order);
         customerRepository.save(customer);
 
         return new PurchaseResponse(trackingNumber);

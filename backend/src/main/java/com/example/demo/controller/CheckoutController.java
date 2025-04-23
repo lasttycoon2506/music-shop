@@ -22,7 +22,7 @@ public class CheckoutController {
 
     @PostMapping("/purchase")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
-        System.out.println("cha cha");
+
         return checkoutService.PlaceOrder(purchase);
     }
 }
