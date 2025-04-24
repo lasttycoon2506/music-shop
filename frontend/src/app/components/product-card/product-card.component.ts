@@ -16,14 +16,14 @@ export class ProductCardComponent {
   private quantity: number = 0;
 
   addItem() {
-    this.checkoutService.shoppingCart.set([
-      {
+    this.checkoutService.order.set({
+      orderItems: {
         imageUrl: this.product().imageUrl,
         price: this.product().price,
         quantity: this.quantity + 1,
         productId: parseInt(this.parseId(this.product()._links.self.href)),
       },
-    ]);
+    });
   }
 
   parseId(url: string): string {

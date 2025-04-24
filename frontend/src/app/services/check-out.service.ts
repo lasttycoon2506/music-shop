@@ -6,5 +6,5 @@ import { OrderItems } from '../models/orderItems';
   providedIn: 'root',
 })
 export class CheckOutService {
-  shoppingCart = signal<OrderItems[] | null>(null);
+  order = signal<Order | null>(null);
 }
