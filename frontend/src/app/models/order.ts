@@ -8,8 +8,8 @@ export type Order = {
   billingAddress?: Address;
   order?: {
     totalQuantity: number;
-    totalPrice: number;
-    status: string;
+    totalPrice?: number;
+    status?: string;
   };
   orderItems: [
     {

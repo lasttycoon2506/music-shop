@@ -17,6 +17,11 @@ export class ProductCardComponent {
 
   addItem() {
     this.checkoutService.order.set({
+      order: {
+        totalQuantity:
+          (this.checkoutService.order()?.order?.totalQuantity || 0) +
+          this.quantity,
+      },
       orderItems: [
         {
           imageUrl: this.product().imageUrl,
