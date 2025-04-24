@@ -10,10 +10,10 @@ import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
   styleUrl: './login-status.component.css',
 })
 export class LoginStatusComponent implements OnInit {
-  isAuthenticated: boolean = false;
-  usersName: string = '';
   private oktaAuthService = inject(OktaAuthStateService);
   private oktaAuth = inject(OKTA_AUTH);
+  isAuthenticated: boolean = false;
+  usersName: string = '';
 
   ngOnInit(): void {
     this.oktaAuthService.authState$.subscribe((result) => {
