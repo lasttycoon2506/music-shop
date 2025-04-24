@@ -1,12 +1,12 @@
 export type Order = {
-  customer: {
+  customer?: {
     firstName: string;
     lastName: string;
     email: string;
   };
-  shippingAddress: Address;
-  billingAddress: Address;
-  order: {
+  shippingAddress?: Address;
+  billingAddress?: Address;
+  order?: {
     totalQuantity: number;
     totalPrice: number;
     status: string;
