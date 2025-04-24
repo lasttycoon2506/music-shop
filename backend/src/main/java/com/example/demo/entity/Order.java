@@ -19,11 +19,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Table(name = "orders")
 @Entity
-@Data
+@Getter
+@Setter
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,7 @@ public class Order {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "dateCreated")
+    @Column(name = "dateCreated", updatable = false)
     @CreationTimestamp
     private Date dateCreated;
 

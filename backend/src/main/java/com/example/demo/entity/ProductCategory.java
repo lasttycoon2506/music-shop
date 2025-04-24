@@ -2,11 +2,13 @@ package com.example.demo.entity;
 
 import java.util.Set;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "product_category")
-@Data
+@Getter
+@Setter
 public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
