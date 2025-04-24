@@ -4,18 +4,8 @@ export type Order = {
     lastName: string;
     email: string;
   };
-  shippingAddress: {
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-  };
-  billingAddress: {
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-  };
+  shippingAddress: Address;
+  billingAddress: Address;
   order: {
     totalQuantity: number;
     totalPrice: number;
@@ -29,4 +19,11 @@ export type Order = {
       productId: number;
     }
   ];
+};
+
+type Address = {
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
 };
