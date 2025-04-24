@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
+import { CheckOutService } from '../../services/check-out.service';
 
 @Component({
   selector: 'login-status',
@@ -11,6 +12,7 @@ import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 })
 export class LoginStatusComponent implements OnInit {
   private oktaAuthService = inject(OktaAuthStateService);
+  checkoutService = inject(CheckOutService);
   private oktaAuth = inject(OKTA_AUTH);
   isAuthenticated: boolean = false;
   usersName: string = '';

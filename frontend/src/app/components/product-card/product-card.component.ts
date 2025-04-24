@@ -13,20 +13,18 @@ import { CheckOutService } from '../../services/check-out.service';
 export class ProductCardComponent {
   private checkoutService = inject(CheckOutService);
   product = input.required<Product>();
-  private quantity: number = 0;
 
   addItem() {
     this.checkoutService.order.set({
       order: {
         totalQuantity:
-          (this.checkoutService.order()?.order?.totalQuantity || 0) +
-          this.quantity,
+          (this.checkoutService.order()?.order?.totalQuantity || 0) + 1,
       },
       orderItems: [
         {
           imageUrl: this.product().imageUrl,
           price: this.product().price,
-          quantity: this.quantity + 1,
+          quantity: 1,
           productId: parseInt(this.parseId(this.product()._links.self.href)),
         },
       ],
