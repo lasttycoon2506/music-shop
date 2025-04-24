@@ -23,7 +23,7 @@ public class OrderItem {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "imageUrl")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @Column(name = "price")
@@ -32,7 +32,7 @@ public class OrderItem {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "productId")
+    @Column(name = "product_id")
     private Long productId;
 
     @ManyToOne()

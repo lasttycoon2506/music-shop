@@ -32,23 +32,23 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "trackingNumber")
+    @Column(name = "tracking_number")
     private String trackingNumber;
 
-    @Column(name = "totalQuantity")
+    @Column(name = "total_quantity")
     private int totalQuantity;
 
-    @Column(name = "totalPrice")
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
     @Column(name = "status")
     private String status;
 
-    @Column(name = "dateCreated", updatable = false)
+    @Column(name = "date_created", updatable = false)
     @CreationTimestamp
     private Date dateCreated;
 
-    @Column(name = "lastUpdated")
+    @Column(name = "last_updated")
     @UpdateTimestamp
     private Date lastUpdated;
 
