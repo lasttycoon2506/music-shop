@@ -1,9 +1,10 @@
 import { Injectable, signal } from '@angular/core';
 import { Order } from '../models/order';
+import { OrderItems } from '../models/orderItems';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckOutService {
-  shoppingCart = signal<Order | null>(null);
+  shoppingCart = signal<OrderItems[] | null>(null);
 }

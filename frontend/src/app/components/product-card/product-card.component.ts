@@ -13,9 +13,17 @@ import { CheckOutService } from '../../services/check-out.service';
 export class ProductCardComponent {
   private checkoutService = inject(CheckOutService);
   product = input.required<Product>();
+  private quantity: number = 0;
 
   addItem() {
-    this.checkoutService.order.set();
+    this.checkoutService.shoppingCart.set([
+      {
+        imageUrl: this.product().imageUrl,
+        price: this.product().price,
+        quantity: this.quantity + 1,
+        productId: parseInt(this.parseId(this.product()._links.self.href)),
+      },
+    ]);
   }
 
   parseId(url: string): string {
