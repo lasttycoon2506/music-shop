@@ -1,3 +1,5 @@
+import { OrderItems } from './orderItems';
+
 export type Order = {
   customer: {
     firstName: string;
@@ -11,14 +13,7 @@ export type Order = {
     totalPrice: number;
     status: string;
   };
-  orderItems: [
-    {
-      imageUrl: string;
-      price: number;
-      quantity: number;
-      productId: number;
-    }
-  ];
+  orderItems: [OrderItems];
 };
 
 type Address = {
