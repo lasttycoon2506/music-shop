@@ -19,36 +19,41 @@ export class ProductCardComponent {
     const productId: number = parseInt(
       this.parseId(this.product()._links.self.href)
     );
-    const existingOrderItem: OrderItem | undefined = this.checkoutService
-      .order()
-      ?.orderItems.find((id) => id.productId === productId);
+
+    const currentOrder = this.checkoutService.order();
+    const existingOrderItem: OrderItem | undefined =
+      currentOrder?.orderItems.find((id) => id.productId === productId);
 
     if (existingOrderItem) {
-      existingOrderItem.quantity = existingOrderItem.quantity + 1;
-
+      const updatedOrderItem = currentOrder!.orderItems.map((item) =>
+        item.productId === productId ? { ...item, quantity: 1 } : item
+      );
       this.checkoutService.order.set({
+        ...currentOrder,
         order: {
-          totalQuantity:
-            (this.checkoutService.order()?.order?.totalQuantity || 0) + 1,
+          ...currentOrder?.order,
+          totalQuantity: currentOrder?.order?.totalQuantity! + 1,
         },
-        orderItems: [existingOrderItem],
+        orderItems: [updatedOrderItem[0]],
       });
     } else {
+      const newOrderItem: OrderItem = {
+        imageUrl: this.product().imageUrl,
+        price: this.product().price,
+        quantity: 1,
+        productId: productId,
+      };
+
       this.checkoutService.order.set({
+        ...currentOrder,
         order: {
-          totalQuantity:
-            (this.checkoutService.order()?.order?.totalQuantity || 0) + 1,
+          ...currentOrder?.order,
+          totalQuantity: currentOrder?.order?.totalQuantity! + 1,
         },
-        orderItems: [
-          {
-            imageUrl: this.product().imageUrl,
-            price: this.product().price,
-            quantity: 1,
-            productId: productId,
-          },
-        ],
+        orderItems: [...(currentOrder?.orderItems || []), newOrderItem],
       });
     }
+
     console.log(this.checkoutService.order());
   }
 
