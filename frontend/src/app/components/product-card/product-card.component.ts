@@ -34,8 +34,10 @@ export class ProductCardComponent {
     ).find((id) => id.productId === productId);
 
     if (existingOrderItem) {
-      const updatedOrderItem = currentOrder!.orderItems!.map((item) =>
-        item.productId === productId ? { ...item, quantity: 1 } : item
+      const updatedOrderItems = currentOrder!.orderItems!.map((item) =>
+        item.productId === productId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
       );
 
       this.checkoutService.order.set({
@@ -44,7 +46,7 @@ export class ProductCardComponent {
           ...currentOrder?.order,
           totalQuantity: currentOrder?.order?.totalQuantity! + 1,
         },
-        orderItems: [updatedOrderItem[0]],
+        orderItems: updatedOrderItems,
       });
     } else {
       const newOrderItem: OrderItem = {
@@ -63,8 +65,6 @@ export class ProductCardComponent {
         orderItems: [...(currentOrder?.orderItems ?? []), newOrderItem],
       });
     }
-
-    console.log(this.checkoutService.order());
   }
 
   parseId(url: string): string {
