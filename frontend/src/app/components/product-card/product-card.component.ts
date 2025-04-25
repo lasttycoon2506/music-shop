@@ -1,9 +1,10 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, InputSignal } from '@angular/core';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
+import { Order } from '../../models/order';
 
 @Component({
   selector: 'product-card',
@@ -13,14 +14,14 @@ import { OrderItem } from '../../models/orderItem';
 })
 export class ProductCardComponent {
   private checkoutService = inject(CheckOutService);
-  product = input.required<Product>();
+  product: InputSignal<Product> = input.required<Product>();
 
-  addItem() {
+  addItem(): void {
     const productId: number = parseInt(
       this.parseId(this.product()._links.self.href)
     );
 
-    let currentOrder = this.checkoutService.order();
+    let currentOrder: Order | null = this.checkoutService.order();
 
     if (!currentOrder) {
       this.checkoutService.order.set({
@@ -34,10 +35,11 @@ export class ProductCardComponent {
     ).find((id) => id.productId === productId);
 
     if (existingOrderItem) {
-      const updatedOrderItems = currentOrder!.orderItems!.map((item) =>
-        item.productId === productId
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+      const updatedOrderItems: OrderItem[] = currentOrder!.orderItems!.map(
+        (item) =>
+          item.productId === productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
       );
 
       this.checkoutService.order.set({

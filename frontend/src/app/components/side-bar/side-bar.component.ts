@@ -45,7 +45,7 @@ export class SideBarComponent implements OnInit {
     );
   }
 
-  handleSearch(keyword: string) {
+  handleSearch(keyword: string): void {
     if (this.searchInput) {
       this.searchInput.nativeElement.value = '';
     }

@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { validateClaims } from '@okta/okta-auth-js';
 
 @Component({
   selector: 'app-sign-up',
@@ -33,7 +32,7 @@ export class SignUpComponent {
     ]),
   });
 
-  onSubmit() {
+  onSubmit(): void {
     this.oktaService.createUser(this.userForm.value);
   }
 }

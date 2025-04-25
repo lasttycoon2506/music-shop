@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
     this.router.paramMap.subscribe(() => this.loadProducts());
   }
 
-  loadProducts() {
+  loadProducts(): void {
     if (this.router.snapshot.paramMap.has('id')) {
       const categoryId: string = this.router.snapshot.paramMap.get('id')!;
       this.searchByCategoryId(categoryId);
@@ -29,11 +29,11 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  searchByCategoryId(id: string) {
+  searchByCategoryId(id: string): void {
     this.productService.getProductsByCategoryId(id);
   }
 
-  searchByKeyword(keyword: string) {
+  searchByKeyword(keyword: string): void {
     this.productService.getProductsByKeyword(keyword);
   }
 }

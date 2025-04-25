@@ -12,7 +12,7 @@ import { ProductCategory } from '../models/productCategory';
 })
 export class ProductService {
   private httpClient = inject(HttpClient);
-  private baseUrl = environment.apiUrl;
+  private baseUrl: string = environment.apiUrl;
   products = signal<Product[] | null>(null);
 
   getAllProducts(): void {
