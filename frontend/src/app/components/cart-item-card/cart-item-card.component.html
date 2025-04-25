@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-4 d-flex align-items-center justify-content-center">
       {{ item().quantity }} x {{ item().price | currency : "USD" }} =
-      <div class="fw-bold text-danger ms-1">
+      <div class="fw-bold ms-1">
         {{ calculateItemTotal() | currency : "USD" }}
       </div>
     </div>
