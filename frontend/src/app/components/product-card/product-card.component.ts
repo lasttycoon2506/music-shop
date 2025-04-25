@@ -25,16 +25,16 @@ export class ProductCardComponent {
     if (!currentOrder) {
       this.checkoutService.order.set({
         order: { totalQuantity: 0 },
-        orderItems: [],
       });
       currentOrder = this.checkoutService.order();
     }
 
-    const existingOrderItem: OrderItem | undefined =
-      currentOrder?.orderItems.find((id) => id.productId === productId);
+    const existingOrderItem: OrderItem | undefined = (
+      currentOrder?.orderItems ?? []
+    ).find((id) => id.productId === productId);
 
     if (existingOrderItem) {
-      const updatedOrderItem = currentOrder!.orderItems.map((item) =>
+      const updatedOrderItem = currentOrder!.orderItems!.map((item) =>
         item.productId === productId ? { ...item, quantity: 1 } : item
       );
 

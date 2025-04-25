@@ -13,7 +13,7 @@ export type Order = {
     totalPrice?: number;
     status?: string;
   };
-  orderItems: OrderItem[];
+  orderItems?: OrderItem[];
 };
 
 type Address = {
