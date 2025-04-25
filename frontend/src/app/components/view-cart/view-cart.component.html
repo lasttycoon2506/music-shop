@@ -3,5 +3,8 @@
     @for (item of checkoutService.order()?.orderItems; track $index) {
     <cart-item-card [item]="item"></cart-item-card>
     }
+    <div class="d-flex justify-content-center fw-bold">
+      Total = {{ CalculateCartTotal() | currency : "USD" }}
+    </div>
   </div>
 </div>
