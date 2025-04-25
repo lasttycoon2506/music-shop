@@ -11,9 +11,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './cart-item-card.component.css',
 })
 export class CartItemCardComponent implements OnInit {
-  calculateItemTotal() {
-    throw new Error('Method not implemented.');
-  }
   private productService = inject(ProductService);
   item: InputSignal<OrderItem> = input.required<OrderItem>();
   product: Product | null = null;
@@ -24,5 +21,9 @@ export class CartItemCardComponent implements OnInit {
       .subscribe({
         next: (product: Product) => (this.product = product),
       });
+  }
+
+  calculateItemTotal(): number {
+    return this.item().quantity * this.item().price;
   }
 }

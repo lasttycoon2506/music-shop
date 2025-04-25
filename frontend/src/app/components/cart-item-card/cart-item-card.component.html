@@ -1,4 +1,4 @@
-<div class="card mb-3" style="max-width: 700px">
+<div class="card mb-3 border border-black" style="max-width: 700px">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="{{ item().imageUrl }}" class="img-fluid rounded-start" />
@@ -14,12 +14,15 @@
             item().price | currency : "USD"
           }}</small>
         </p>
+        <div class="fst-italic fw-medium text-danger">
+          {{ product?.stock }} left!
+        </div>
       </div>
     </div>
     <div class="col-md-4 d-flex align-items-center justify-content-center">
-      <div>
-        {{ item().quantity }} x {{ item().price | currency : "USD" }} =
-        {{ calculateItemTotal() }}
+      {{ item().quantity }} x {{ item().price | currency : "USD" }} =
+      <div class="fw-bold text-danger ms-1">
+        {{ calculateItemTotal() | currency : "USD" }}
       </div>
     </div>
   </div>
