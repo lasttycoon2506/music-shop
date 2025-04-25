@@ -37,6 +37,7 @@ export class ProductCardComponent {
         orderItems: [updatedOrderItem[0]],
       });
     } else {
+      console.log(1 + currentOrder?.order?.totalQuantity!);
       const newOrderItem: OrderItem = {
         imageUrl: this.product().imageUrl,
         price: this.product().price,
@@ -50,11 +51,11 @@ export class ProductCardComponent {
           ...currentOrder?.order,
           totalQuantity: currentOrder?.order?.totalQuantity! + 1,
         },
-        orderItems: [...(currentOrder?.orderItems || []), newOrderItem],
+        orderItems: [...(currentOrder?.orderItems ?? []), newOrderItem],
       });
     }
 
-    console.log(this.checkoutService.order());
+    // console.log(this.checkoutService.order());
   }
 
   parseId(url: string): string {
