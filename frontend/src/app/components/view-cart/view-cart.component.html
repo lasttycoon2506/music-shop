@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row row-cols-1 row-cols-md-5 g-4 me-1">
-    <!-- @for (product of productService.products(); track $index) {
-      <product-card [product]="product"></product-card>
-      } -->
+    @for (item of checkoutService.order()?.orderItems; track $index) {
+    <cart-item-card [item]="item"></cart-item-card>
+    }
   </div>
 </div>
