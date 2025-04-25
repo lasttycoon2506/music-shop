@@ -24,7 +24,7 @@ export class LoginStatusComponent implements OnInit {
     });
   }
 
-  getUserDetails() {
+  getUserDetails(): void {
     if (this.isAuthenticated) {
       this.oktaAuth
         .getUser()
@@ -35,7 +35,7 @@ export class LoginStatusComponent implements OnInit {
     }
   }
 
-  logout() {
+  logout(): void {
     this.oktaAuth.signOut();
   }
 }
