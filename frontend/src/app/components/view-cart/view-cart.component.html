@@ -1,15 +1,19 @@
 <div class="container">
-  <div class="row mt-2">
+  <div class="row mt-3">
     <div class="col-md-6 offset-md-3 text-primary"><h1>Your Cart</h1></div>
   </div>
   <div class="col mt-3">
     @for (item of checkoutService.order()?.orderItems; track $index) {
     <div class="row">
       <div class="col-8"><cart-item-card [item]="item"></cart-item-card></div>
+
       <div class="col-2 d-flex align-items-center">
-        <i class="bi bi-trash fs-1 red"></i>
+        <button class="btn btn-sm">
+          <i class="bi bi-trash fs-1 red"></i>
+        </button>
       </div>
     </div>
+
     }
     <div class="d-flex justify-content-center ms-5 ps-5">
       Total =
