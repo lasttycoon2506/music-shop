@@ -4,6 +4,7 @@ export type Product = {
   price: number;
   imageUrl: string;
   stock: number;
+  productId?: number;
   _links: {
     self: { href: string };
     product: { href: string };

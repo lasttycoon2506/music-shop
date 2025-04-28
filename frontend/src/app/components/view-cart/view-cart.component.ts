@@ -12,14 +12,12 @@ import { CommonModule } from '@angular/common';
 export class ViewCartComponent {
   checkoutService = inject(CheckOutService);
 
-  CalculateCartTotal(): number | undefined {
-    const total = this.checkoutService
+  calculateCartTotal(): number | undefined {
+    return this.checkoutService
       .order()
       ?.orderItems?.reduce(
         (total, item) => total + item.price * item.quantity,
         0
       );
-
-    return total;
   }
 }

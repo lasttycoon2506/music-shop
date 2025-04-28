@@ -16,15 +16,17 @@
           @for (item of checkoutService.order()?.orderItems; track $index) {
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0"></h6>
+              <h6 class="my-0">
+                {{ products }}
+              </h6>
               <small class="text-body-secondary"></small>
             </div>
             <span class="text-body-secondary">{{ item.price }}</span>
           </li>
           }
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
+            <span>Total</span>
+            <strong>{{ calculateCartTotal() | currency : "USD" }}</strong>
           </li>
         </ul>
       </div>
