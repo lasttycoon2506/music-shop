@@ -20,14 +20,12 @@ export class CheckOutComponent implements OnInit {
       this.productService
         .getProductDetail(item.productId.toString())
         .subscribe({
-          next: (product) => this.products.push(product),
+          next: (product) => {
+            this.products.push(product);
+            product.productId = Number(this.parseId(product._links.self.href));
+          },
         })
     );
-    console.log(this.products);
-  }
-
-  parseProductIds() {
-    this.products.forEach((product) => this.parseId(product._links.self.href));
   }
 
   parseId(url: string): string {
