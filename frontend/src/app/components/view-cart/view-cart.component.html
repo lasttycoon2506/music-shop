@@ -4,7 +4,12 @@
   </div>
   <div class="col mt-3">
     @for (item of checkoutService.order()?.orderItems; track $index) {
-    <cart-item-card [item]="item"></cart-item-card>
+    <div class="row">
+      <div class="col-8"><cart-item-card [item]="item"></cart-item-card></div>
+      <div class="col-2 d-flex align-items-center">
+        <i class="bi bi-trash fs-1 red"></i>
+      </div>
+    </div>
     }
     <div class="d-flex justify-content-center ms-5 ps-5">
       Total =
