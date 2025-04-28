@@ -14,11 +14,11 @@
     <div class="col-md-4">
       <div class="card-body">
         <h5 class="card-title">{{ product?.name }}</h5>
-        <p class="card-text">
+        <p class="lh-1 card-text mx-0 my-0">
           {{ product?.description }}
         </p>
-        <p class="card-text">
-          <small class="text-body-secondary">{{
+        <p class="card-text mt-1">
+          <small class="d-flex text-body-secondary">{{
             item().price | currency : "USD"
           }}</small>
         </p>
