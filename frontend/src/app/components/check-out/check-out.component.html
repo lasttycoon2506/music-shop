@@ -17,10 +17,13 @@
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h6 class="my-0">
-                {{ products }}
+                {{ getProduct(item.productId)?.name }}
               </h6>
-              <small class="text-body-secondary"></small>
+              <small class="text-body-secondary">
+                {{ getProduct(item.productId)?.description }}
+              </small>
             </div>
+            <span class="text-body-secondary">{{ item.quantity }} x</span>
             <span class="text-body-secondary">{{ item.price }}</span>
           </li>
           }

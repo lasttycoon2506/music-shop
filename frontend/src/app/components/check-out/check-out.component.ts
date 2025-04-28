@@ -33,6 +33,10 @@ export class CheckOutComponent implements OnInit {
     return productId;
   }
 
+  getProduct(id: number): Product | undefined {
+    return this.products.find((product) => product.productId === id);
+  }
+
   calculateCartTotal(): number | undefined {
     return this.checkoutService
       .order()
