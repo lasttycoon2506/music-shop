@@ -94,7 +94,10 @@
               <label for="state" class="form-label">State</label>
               <select class="form-select" id="state" required>
                 <option value="">Choose...</option>
-                <option>California</option>
+                @for (state of STATES_ABBREVIATIONS; track $index) {
+                <option>{{ state }}</option>
+
+                }
               </select>
               <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
