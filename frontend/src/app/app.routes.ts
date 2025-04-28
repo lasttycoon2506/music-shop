@@ -6,6 +6,7 @@ import { OktaCallbackComponent } from '@okta/okta-angular';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ViewCartComponent } from './components/view-cart/view-cart.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,10 @@ export const routes: Routes = [
   {
     path: 'view-cart',
     component: ViewCartComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckOutComponent,
   },
   { path: '', component: ProductListComponent },
 ];
