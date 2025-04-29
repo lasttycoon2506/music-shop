@@ -25,9 +25,7 @@ export class ProductDetailComponent implements OnInit {
       },
     });
 
-    this.product.productId = Number(
-      (this.product.productId = ParseProductId(this.product._links.self.href))
-    );
+    this.product.productId = ParseProductId(this.product._links.self.href);
 
     this.item = this.checkoutService
       .order()

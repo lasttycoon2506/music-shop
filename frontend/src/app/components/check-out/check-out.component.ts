@@ -78,9 +78,7 @@ export class CheckOutComponent implements OnInit {
         .subscribe({
           next: (product) => {
             this.products.push(product);
-            product.productId = Number(
-              ParseProductId(product._links.self.href)
-            );
+            product.productId = ParseProductId(product._links.self.href);
           },
         })
     );

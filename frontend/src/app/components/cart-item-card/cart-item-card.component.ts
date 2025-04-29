@@ -30,7 +30,7 @@ export class CartItemCardComponent implements OnInit {
   }
 
   setNewItemQuantity(event: Event, item: OrderItem) {
-    const newQuantity = Number((event.target as HTMLInputElement).value);
+    const newQuantity = parseInt((event.target as HTMLInputElement).value);
 
     if (newQuantity === 0) {
       this.checkoutService.order.update((currentOrder) => {
