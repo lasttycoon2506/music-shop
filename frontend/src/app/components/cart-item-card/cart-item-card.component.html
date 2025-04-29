@@ -3,7 +3,7 @@
   style="max-width: 700px"
 >
   <div class="row g-0">
-    <div class="col-md-4 d-flex align-items-center justify-content-center">
+    <div class="d-flex align-items-center justify-content-center w-25">
       <img
         src="{{ item().imageUrl }}"
         height="125"
@@ -11,7 +11,7 @@
         class="img-fluid rounded-start"
       />
     </div>
-    <div class="col-md-4">
+    <div class="col">
       <div class="card-body">
         <h5 class="card-title">{{ product?.name }}</h5>
         <p class="lh-1 card-text mx-0 my-0">
@@ -27,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 d-flex align-items-center justify-content-center">
-      <div class="w-25">
+    <div class="col d-flex align-items-center justify-content-end me-1">
+      <div class="w-25 me-2">
         <input
           type="number"
           class="form-control"
