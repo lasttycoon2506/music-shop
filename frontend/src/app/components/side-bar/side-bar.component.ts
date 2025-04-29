@@ -8,6 +8,7 @@ import {
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../services/product.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ParseProductId } from '../../helpers/parseProductId';
 
 @Component({
   selector: 'side-bar',
@@ -20,6 +21,7 @@ export class SideBarComponent implements OnInit {
   private router = inject(Router);
   productCategories: ProductCategory[] = [];
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
+  parseProductId = ParseProductId;
 
   ngOnInit(): void {
     this.loadProductCategories();
@@ -31,11 +33,6 @@ export class SideBarComponent implements OnInit {
         this.productCategories = data;
       },
     });
-  }
-
-  parseId(url: string): string {
-    const productId = url.match(/\d+$/)![0];
-    return productId;
   }
 
   capitalizeFirstLetter(category: string) {

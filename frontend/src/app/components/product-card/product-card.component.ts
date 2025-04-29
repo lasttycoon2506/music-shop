@@ -1,10 +1,11 @@
-import { Component, inject, input, InputSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { Order } from '../../models/order';
+import { ParseProductId } from '../../helpers/parseProductId';
 
 @Component({
   selector: 'product-card',
@@ -12,13 +13,16 @@ import { Order } from '../../models/order';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   product: InputSignal<Product> = input.required<Product>();
+  parseProductId = ParseProductId;
+
+  ngOnInit(): void {}
 
   addItem(): void {
-    const productId: number = parseInt(
-      this.parseId(this.product()._links.self.href)
+    const productId: number = this.parseProductId(
+      this.product()._links.self.href
     );
 
     let currentOrder: Order | null = this.checkoutService.order();
@@ -67,10 +71,5 @@ export class ProductCardComponent {
         orderItems: [...(currentOrder?.orderItems ?? []), newOrderItem],
       });
     }
-  }
-
-  parseId(url: string): string {
-    const productId = url.match(/\d+$/)![0];
-    return productId;
   }
 }
