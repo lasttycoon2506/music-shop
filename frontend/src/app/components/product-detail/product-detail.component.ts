@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   private router = inject(ActivatedRoute);
   private checkoutService = inject(CheckOutService);
   product!: Product;
-  item?: OrderItem;
+  item = signal<OrderItem | null>(null);
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -27,8 +27,40 @@ export class ProductDetailComponent implements OnInit {
 
     this.product.productId = ParseProductId(this.product._links.self.href);
 
-    this.item = this.checkoutService
+    const existingOrderItem = this.checkoutService
       .order()
       ?.orderItems?.find((item) => item.productId === this.product.productId);
+
+    if (existingOrderItem) {
+      this.item.set(existingOrderItem);
+    } else {
+      this.item.set({
+        quantity: 0,
+      });
+    }
+  }
+
+  setNewItemQuantity(event: Event) {
+    const newQuantity = parseInt((event.target as HTMLInputElement).value);
+    const currentOrder = this.checkoutService.order();
+
+    if (currentOrder) {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            ...currentOrder!.order,
+            totalQuantity:
+              currentOrder!.order!.totalQuantity -
+              (this.item()!.quantity - newQuantity),
+          },
+          orderItems: currentOrder?.orderItems?.map((orderItem) =>
+            orderItem.productId === this.item()!.productId
+              ? { ...orderItem, quantity: newQuantity }
+              : orderItem
+          ),
+        };
+      });
+    }
   }
 }
