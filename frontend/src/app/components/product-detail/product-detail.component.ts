@@ -4,6 +4,7 @@ import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
+import { parse } from 'path';
 
 @Component({
   selector: 'app-product-detail',
@@ -23,8 +24,18 @@ export class ProductDetailComponent implements OnInit {
         this.product = data['product'];
       },
     });
-    const item = this.checkoutService
+
+    this.product.productId = Number(
+      this.parseId(this.product._links.self.href)
+    );
+
+    this.item = this.checkoutService
       .order()
       ?.orderItems?.find((item) => item.productId === this.product.productId);
+  }
+
+  parseId(url: string): string {
+    const productId = url.match(/\d+$/)![0];
+    return productId;
   }
 }
