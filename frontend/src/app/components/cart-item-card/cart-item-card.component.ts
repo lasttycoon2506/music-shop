@@ -3,6 +3,7 @@ import { OrderItem } from '../../models/orderItem';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
+import { CheckOutService } from '../../services/check-out.service';
 
 @Component({
   selector: 'cart-item-card',
@@ -12,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CartItemCardComponent implements OnInit {
   private productService = inject(ProductService);
+  private checkoutService = inject(CheckOutService);
   item: InputSignal<OrderItem> = input.required<OrderItem>();
   product: Product | null = null;
 
@@ -25,5 +27,25 @@ export class CartItemCardComponent implements OnInit {
 
   calculateItemTotal(): number {
     return this.item().quantity * this.item().price;
+  }
+
+  setNewItemQuantity(event: Event, item: OrderItem) {
+    const newQuantity = Number((event.target as HTMLInputElement).value);
+
+    this.checkoutService.order.update((currentOrder) => {
+      return {
+        ...currentOrder,
+        order: {
+          ...currentOrder?.order,
+          totalQuantity:
+            currentOrder!.order!.totalQuantity - (item.quantity - newQuantity),
+        },
+        orderItems: currentOrder!.orderItems!.map((orderItem) =>
+          orderItem.productId === item.productId
+            ? { ...orderItem, quantity: newQuantity }
+            : orderItem
+        ),
+      };
+    });
   }
 }

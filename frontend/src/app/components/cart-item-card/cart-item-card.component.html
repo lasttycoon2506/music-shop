@@ -33,6 +33,7 @@
           type="number"
           class="form-control"
           value="{{ item().quantity }}"
+          (change)="setNewItemQuantity($event, item())"
         />
       </div>
       x {{ item().price | currency : "USD" }} =
