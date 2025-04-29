@@ -6,7 +6,9 @@
   <div class="col mt-3">
     @for (item of checkoutService.order()?.orderItems; track $index) {
     <div class="row">
-      <div class="col-8"><cart-item-card [item]="item"></cart-item-card></div>
+      <div class="col-8 ms-5">
+        <cart-item-card [item]="item"></cart-item-card>
+      </div>
       <div class="col-2 d-flex align-items-center">
         <button class="btn btn-sm" (click)="deleteAllItem(item)">
           <i class="bi bi-trash fs-1 red"></i>
