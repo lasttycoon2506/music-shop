@@ -32,20 +32,38 @@ export class CartItemCardComponent implements OnInit {
   setNewItemQuantity(event: Event, item: OrderItem) {
     const newQuantity = Number((event.target as HTMLInputElement).value);
 
-    this.checkoutService.order.update((currentOrder) => {
-      return {
-        ...currentOrder,
-        order: {
-          ...currentOrder?.order,
-          totalQuantity:
-            currentOrder!.order!.totalQuantity - (item.quantity - newQuantity),
-        },
-        orderItems: currentOrder!.orderItems!.map((orderItem) =>
-          orderItem.productId === item.productId
-            ? { ...orderItem, quantity: newQuantity }
-            : orderItem
-        ),
-      };
-    });
+    if (newQuantity === 0) {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            ...currentOrder?.order,
+            totalQuantity:
+              currentOrder!.order!.totalQuantity -
+              (item.quantity - newQuantity),
+          },
+          orderItems: currentOrder!.orderItems!.filter(
+            (orderItem) => orderItem.productId !== item.productId
+          ),
+        };
+      });
+    } else {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            ...currentOrder?.order,
+            totalQuantity:
+              currentOrder!.order!.totalQuantity -
+              (item.quantity - newQuantity),
+          },
+          orderItems: currentOrder!.orderItems!.map((orderItem) =>
+            orderItem.productId === item.productId
+              ? { ...orderItem, quantity: newQuantity }
+              : orderItem
+          ),
+        };
+      });
+    }
   }
 }
