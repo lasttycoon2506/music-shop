@@ -30,8 +30,8 @@ export class ViewCartComponent {
           ...currentOrder!.order,
           totalQuantity: currentOrder!.order!.totalQuantity - item.quantity,
         },
-        orderItems: currentOrder!.orderItems?.filter(
-          (item) => item.productId !== item.productId
+        orderItems: currentOrder!.orderItems!.filter(
+          (orderItem) => orderItem.productId !== item.productId
         ),
       };
     });
