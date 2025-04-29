@@ -9,7 +9,7 @@
         loading="lazy"
       />
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 ps-5">
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
         {{ product.name }}
       </h1>
@@ -28,9 +28,9 @@
         </button>
         <div class="col-2 me-3">
           <input
-            type="text"
+            type="number"
             class="form-control py-3 mt-4"
-            placeholder="Input group example"
+            [value]="item?.quantity"
           />
         </div>
         <div class="row row-cols-1 gap-1">

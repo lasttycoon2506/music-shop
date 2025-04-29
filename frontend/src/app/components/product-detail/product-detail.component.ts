@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
+import { CheckOutService } from '../../services/check-out.service';
+import { OrderItem } from '../../models/orderItem';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +13,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductDetailComponent implements OnInit {
   private router = inject(ActivatedRoute);
+  private checkoutService = inject(CheckOutService);
   product!: Product;
+  item?: OrderItem;
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -19,5 +23,8 @@ export class ProductDetailComponent implements OnInit {
         this.product = data['product'];
       },
     });
+    const item = this.checkoutService
+      .order()
+      ?.orderItems?.find((item) => item.productId === this.product.productId);
   }
 }

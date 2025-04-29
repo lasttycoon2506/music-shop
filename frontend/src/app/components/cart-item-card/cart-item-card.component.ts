@@ -1,4 +1,12 @@
-import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  InputSignal,
+  OnInit,
+  output,
+  OutputEmitterRef,
+} from '@angular/core';
 import { OrderItem } from '../../models/orderItem';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
