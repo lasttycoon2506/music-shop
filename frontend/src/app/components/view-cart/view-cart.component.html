@@ -2,6 +2,7 @@
   <div class="row mt-3">
     <div class="col-md-6 offset-md-3 text-primary"><h1>Your Cart</h1></div>
   </div>
+  @if (checkoutService.order()?.order?.totalQuantity) {
   <div class="col mt-3">
     @for (item of checkoutService.order()?.orderItems; track $index) {
     <div class="row">
@@ -20,4 +21,9 @@
       </div>
     </div>
   </div>
+  } @else {
+  <div class="row mt-3">
+    <div class="col-md-6 offset-md-3 mt-5"><h5>Your Cart is Empty!</h5></div>
+  </div>
+  }
 </div>
