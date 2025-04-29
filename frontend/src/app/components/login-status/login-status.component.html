@@ -1,5 +1,4 @@
 @if (isAuthenticated) {
-
 <div class="row">
   <div class="col d-flex align-items-center">
     <div class="navbar-collapse" id="navbarUser">
@@ -33,9 +32,11 @@
             data-bs-toggle="dropdown"
           >
             <i class="bi bi-cart fs-3"></i>
+            @if (checkoutService.order()?.order?.totalQuantity &&
+            checkoutService.order()?.order?.totalQuantity !== 0) {
             <span class="badge badge-warning" id="lblCartCount">
-              {{ checkoutService.order()?.order?.totalQuantity }}
-            </span>
+              {{ checkoutService.order()?.order?.totalQuantity }} </span
+            >}
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li>
