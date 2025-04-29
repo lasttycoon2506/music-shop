@@ -4,7 +4,6 @@ import {
   inject,
   OnInit,
   ViewChild,
-  viewChild,
 } from '@angular/core';
 import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../services/product.service';
