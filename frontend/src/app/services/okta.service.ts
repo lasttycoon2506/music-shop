@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { OKTA_AUTH } from '@okta/okta-angular';
+import { inject, Injectable, signal } from '@angular/core';
+import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
 import appConfig from '../configs/app-config';
 
@@ -7,7 +7,9 @@ import appConfig from '../configs/app-config';
   providedIn: 'root',
 })
 export class OktaService {
-  private oktaAuth: OktaAuth = inject(OKTA_AUTH);
+  oktaAuth: OktaAuth = inject(OKTA_AUTH);
+  oktaAuthService = inject(OktaAuthStateService);
+  isAuthenticated = signal<boolean>(false);
 
   async createUser(user: any) {
     // try {
@@ -18,7 +20,6 @@ export class OktaService {
     //   console.error(error);
     //   throw error;
     // }
-
     const resp = await fetch(`${appConfig.oidc.issuer}/api/v1/users`, {
       method: 'POST',
       headers: {
@@ -37,7 +38,6 @@ export class OktaService {
         },
       }),
     });
-
     const data = await resp.json();
     console.log(data);
   }

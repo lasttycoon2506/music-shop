@@ -1,8 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { OKTA_AUTH } from '@okta/okta-angular';
-import OktaAuth from '@okta/okta-auth-js';
 import { OktaSignIn } from '@okta/okta-signin-widget';
 import appConfig from '../../configs/app-config';
+import { OktaService } from '../../services/okta.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,7 @@ import appConfig from '../../configs/app-config';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private oktaAuth: OktaAuth = inject(OKTA_AUTH);
+  private oktaService = inject(OktaService);
 
   oktaSignIn: OktaSignIn = new OktaSignIn({
     el: '#okta-signin-widget',
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.oktaSignIn
       .showSignIn()
       .then(() => {
-        this.oktaAuth.signInWithRedirect();
+        this.oktaService.oktaAuth.signInWithRedirect();
       })
       .catch(function (error) {
         console.log(error);
