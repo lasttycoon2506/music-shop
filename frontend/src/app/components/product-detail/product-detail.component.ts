@@ -124,3 +124,13 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 }
+
+// "version": "0.2.0",
+// "configurations": [
+//   {
+//     "name": "ng serve",
+//     "type": "chrome",
+//     "request": "launch",
+//     "preLaunchTask": "npm: start",
+//     "url": "http://localhost:4200/"
+//   },
