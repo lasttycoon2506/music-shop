@@ -19,12 +19,16 @@ export class ProductDetailComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product!: Product;
-  item: Signal<OrderItem | undefined> = computed(() =>
-    this.checkoutService
-      .order()
-      ?.orderItems?.find(
-        (orderItem) => orderItem.productId === this.product.productId
-      )
+  item: Signal<OrderItem | null> = computed(
+    () =>
+      this.checkoutService
+        .order()
+        ?.orderItems?.find(
+          (orderItem) => orderItem.productId === this.product.productId
+        ) ?? null
+  );
+  currentOrder: Signal<Order | null> = computed(() =>
+    this.checkoutService.order()
   );
 
   ngOnInit(): void {
@@ -51,9 +55,8 @@ export class ProductDetailComponent implements OnInit {
     const newQuantity: number = parseInt(
       (event.target as HTMLInputElement).value
     );
-    const currentOrder: Order | null = this.checkoutService.order();
 
-    if (currentOrder) {
+    if (this.currentOrder()) {
       this.checkoutService.order.update((currentOrder) => {
         return {
           ...currentOrder,
@@ -89,9 +92,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addOneNewItem() {
-    const currentOrder: Order | null = this.checkoutService.order();
-
-    if (currentOrder) {
+    if (this.currentOrder()) {
       this.checkoutService.order.update((currentOrder) => {
         return {
           ...currentOrder,
@@ -108,8 +109,8 @@ export class ProductDetailComponent implements OnInit {
       });
     } else {
       const newOrderItem: OrderItem = {
-        price: this.item()?.price,
-        productId: this.item()?.productId,
+        price: this.product.price,
+        productId: this.product.productId,
         imageUrl: this.item()?.imageUrl,
         quantity: 1,
       };
