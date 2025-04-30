@@ -19,13 +19,13 @@ export class ProductDetailComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product!: Product;
-  item: Signal<OrderItem | null> = computed(
+  item: Signal<OrderItem> = computed(
     () =>
       this.checkoutService
         .order()
         ?.orderItems?.find(
           (orderItem) => orderItem.productId === this.product.productId
-        ) ?? null
+        ) ?? { quantity: 0 }
   );
   currentOrder: Signal<Order | null> = computed(() =>
     this.checkoutService.order()
@@ -37,18 +37,7 @@ export class ProductDetailComponent implements OnInit {
         this.product = data['product'];
       },
     });
-
     this.product.productId = ParseProductId(this.product._links.self.href);
-
-    const existingOrderItem = this.checkoutService
-      .order()
-      ?.orderItems?.find((item) => item.productId === this.product.productId);
-
-    // if (existingOrderItem) {
-    //   this.item( = existingOrderItem;
-    // } else {
-    //   this.item = { quantity: 0 };
-    // }
   }
 
   setNewItemQuantity(event: Event) {
