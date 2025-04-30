@@ -74,7 +74,7 @@ export class CheckOutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
-        .getProductDetail(item.productId.toString())
+        .getProductDetail((item.productId ?? '').toString())
         .subscribe({
           next: (product) => {
             this.products.push(product);
@@ -92,7 +92,7 @@ export class CheckOutComponent implements OnInit {
     return this.checkoutService
       .order()
       ?.orderItems?.reduce(
-        (total, item) => total + item.price * item.quantity,
+        (total, item) => total + (item.price ?? 0) * item.quantity,
         0
       );
   }

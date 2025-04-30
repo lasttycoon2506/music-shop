@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   private router = inject(ActivatedRoute);
   private checkoutService = inject(CheckOutService);
   product!: Product;
-  item = signal<OrderItem | null>(null);
+  item: OrderItem | null = null;
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -32,11 +32,9 @@ export class ProductDetailComponent implements OnInit {
       ?.orderItems?.find((item) => item.productId === this.product.productId);
 
     if (existingOrderItem) {
-      this.item.set(existingOrderItem);
+      this.item = existingOrderItem;
     } else {
-      this.item.set({
-        quantity: 0,
-      });
+      this.item = { quantity: 0 };
     }
   }
 
@@ -52,10 +50,13 @@ export class ProductDetailComponent implements OnInit {
             ...currentOrder!.order,
             totalQuantity:
               currentOrder!.order!.totalQuantity -
-              (this.item()!.quantity - newQuantity),
+              (currentOrder?.orderItems?.find(
+                (orderItem) => orderItem.productId === this.item?.productId
+              )?.quantity! -
+                newQuantity),
           },
           orderItems: currentOrder?.orderItems?.map((orderItem) =>
-            orderItem.productId === this.item()!.productId
+            orderItem.productId === this.item!.productId
               ? { ...orderItem, quantity: newQuantity }
               : orderItem
           ),

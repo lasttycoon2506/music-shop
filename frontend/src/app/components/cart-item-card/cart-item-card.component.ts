@@ -19,14 +19,14 @@ export class CartItemCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService
-      .getProductDetail(this.item().productId.toString())
+      .getProductDetail(this.item().productId!.toString())
       .subscribe({
         next: (product: Product) => (this.product = product),
       });
   }
 
   calculateItemTotal(): number {
-    return this.item().quantity * this.item().price;
+    return this.item().quantity * this.item().price!;
   }
 
   setNewItemQuantity(event: Event, item: OrderItem) {

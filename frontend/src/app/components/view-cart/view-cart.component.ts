@@ -17,7 +17,7 @@ export class ViewCartComponent {
     return this.checkoutService
       .order()
       ?.orderItems?.reduce(
-        (total, item) => total + item.price * item.quantity,
+        (total, item) => total + (item.price ?? 0) * item.quantity,
         0
       );
   }
