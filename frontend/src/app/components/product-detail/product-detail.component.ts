@@ -25,7 +25,12 @@ export class ProductDetailComponent implements OnInit {
         .order()
         ?.orderItems?.find(
           (orderItem) => orderItem.productId === this.product.productId
-        ) ?? { quantity: 0 }
+        ) ?? {
+        quantity: 0,
+        imageUrl: this.product.imageUrl,
+        price: this.product.price,
+        productId: this.product.productId,
+      }
   );
   currentOrder: Signal<Order | null> = computed(() =>
     this.checkoutService.order()
@@ -45,39 +50,30 @@ export class ProductDetailComponent implements OnInit {
       (event.target as HTMLInputElement).value
     );
 
-    if (this.currentOrder()) {
-      this.checkoutService.order.update((currentOrder) => {
-        return {
-          ...currentOrder,
-          order: {
-            ...currentOrder!.order,
-            totalQuantity:
-              currentOrder!.order!.totalQuantity -
-              (currentOrder!.orderItems!.find(
-                (orderItem) => orderItem.productId === this.item()!.productId
-              )?.quantity! -
-                newQuantity),
-          },
-          orderItems: currentOrder!.orderItems!.map((orderItem) =>
-            orderItem.productId === this.item()!.productId
-              ? { ...orderItem, quantity: newQuantity }
-              : orderItem
-          ),
-        };
-      });
-    } else {
-      const newOrderItem: OrderItem = {
-        price: this.item()?.price,
-        productId: this.item()?.productId,
-        imageUrl: this.item()?.imageUrl,
-        quantity: newQuantity,
+    console.log(this.checkoutService.order());
+    this.checkoutService.order.update((currentOrder) => {
+      return {
+        ...currentOrder,
+        order: {
+          totalQuantity:
+            (currentOrder?.order?.totalQuantity ?? 0) -
+            (currentOrder?.orderItems?.find(
+              (orderItem) => orderItem.productId === this.item()!.productId
+            )?.quantity ?? 0 - newQuantity),
+        },
+        orderItems: (
+          currentOrder?.orderItems ?? [
+            { ...this.item(), quantity: newQuantity },
+          ]
+        ).map((orderItem) =>
+          orderItem.productId === this.item()!.productId
+            ? { ...orderItem, quantity: newQuantity }
+            : orderItem
+        ),
       };
-
-      this.checkoutService.order.set({
-        order: { totalQuantity: newQuantity },
-        orderItems: [newOrderItem],
-      });
-    }
+    });
+    console.log(this.item());
+    console.log(this.checkoutService.order());
   }
 
   addOneItem() {
