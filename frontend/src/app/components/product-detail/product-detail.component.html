@@ -30,6 +30,7 @@
             [value]="item().quantity"
             (change)="setNewItemQuantity($event)"
             [disabled]="!oktaService.isAuthenticated()"
+            min="1"
           />
         </div>
         <div class="row row-cols-1 gap-1">

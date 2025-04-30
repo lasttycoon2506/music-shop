@@ -1,4 +1,11 @@
-import { Component, inject, input, InputSignal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  InputSignal,
+  Signal,
+} from '@angular/core';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -19,57 +26,36 @@ export class ProductCardComponent {
   oktaService = inject(OktaService);
   product: InputSignal<Product> = input.required<Product>();
   parseProductId = ParseProductId;
-
-  addItem(): void {
-    const productId: number = this.parseProductId(
-      this.product()._links.self.href
-    );
-
-    let currentOrder: Order | null = this.checkoutService.order();
-
-    if (!currentOrder) {
-      this.checkoutService.order.set({
-        order: { totalQuantity: 0 },
-      });
-      currentOrder = this.checkoutService.order();
-    }
-
-    const existingOrderItem: OrderItem | undefined = (
-      currentOrder?.orderItems ?? []
-    ).find((id) => id.productId === productId);
-
-    if (existingOrderItem) {
-      const updatedOrderItems: OrderItem[] = currentOrder!.orderItems!.map(
-        (item) =>
-          item.productId === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-      );
-
-      this.checkoutService.order.set({
-        ...currentOrder,
-        order: {
-          ...currentOrder?.order,
-          totalQuantity: currentOrder?.order?.totalQuantity! + 1,
-        },
-        orderItems: updatedOrderItems,
-      });
-    } else {
-      const newOrderItem: OrderItem = {
+  item: Signal<OrderItem> = computed(
+    () =>
+      this.checkoutService
+        .order()
+        ?.orderItems?.find(
+          (orderItem) => orderItem.productId === this.product().productId
+        ) ?? {
+        quantity: 0,
         imageUrl: this.product().imageUrl,
         price: this.product().price,
-        quantity: 1,
-        productId: productId,
-      };
+        productId: this.product().productId,
+      }
+  );
 
-      this.checkoutService.order.set({
+  addItem(): void {
+    console.log(this.product());
+    this.checkoutService.order.update((currentOrder) => {
+      return {
         ...currentOrder,
         order: {
-          ...currentOrder?.order,
-          totalQuantity: currentOrder?.order?.totalQuantity! + 1,
+          totalQuantity: (currentOrder?.order?.totalQuantity ?? 0) + 1,
         },
-        orderItems: [...(currentOrder?.orderItems ?? []), newOrderItem],
-      });
-    }
+        orderItems: (
+          currentOrder?.orderItems ?? [{ ...this.item(), quantity: 1 }]
+        ).map((orderItem) =>
+          orderItem.productId === this.item()!.productId
+            ? { ...orderItem, quantity: this.item().quantity + 1 }
+            : orderItem
+        ),
+      };
+    });
   }
 }

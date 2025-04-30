@@ -41,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
     this.product.productId = ParseProductId(this.product._links.self.href);
   }
 
-  setNewItemQuantity(event: Event) {
+  setNewItemQuantity(event: Event): void {
     const newQuantity: number = parseInt(
       (event.target as HTMLInputElement).value
     );
@@ -67,7 +67,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addOneItem() {
+  addOneItem(): void {
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,
@@ -85,7 +85,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  subtractOneItem() {
+  subtractOneItem(): void {
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,
