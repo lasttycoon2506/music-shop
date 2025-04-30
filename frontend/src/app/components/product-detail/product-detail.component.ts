@@ -64,6 +64,18 @@ export class ProductDetailComponent implements OnInit {
           ),
         };
       });
+    } else {
+      const newOrderItem: OrderItem = {
+        price: this.item?.price,
+        productId: this.item?.productId,
+        imageUrl: this.item?.imageUrl,
+        quantity: newQuantity,
+      };
+
+      this.checkoutService.order.set({
+        order: { totalQuantity: newQuantity },
+        orderItems: [newOrderItem],
+      });
     }
   }
 }
