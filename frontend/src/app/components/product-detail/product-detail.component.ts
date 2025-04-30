@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,13 @@ export class ProductDetailComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product!: Product;
-  item: OrderItem | null = null;
+  item: Signal<OrderItem | undefined> = computed(() =>
+    this.checkoutService
+      .order()
+      ?.orderItems?.find(
+        (orderItem) => orderItem.productId === this.product.productId
+      )
+  );
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -34,11 +40,11 @@ export class ProductDetailComponent implements OnInit {
       .order()
       ?.orderItems?.find((item) => item.productId === this.product.productId);
 
-    if (existingOrderItem) {
-      this.item = existingOrderItem;
-    } else {
-      this.item = { quantity: 0 };
-    }
+    // if (existingOrderItem) {
+    //   this.item( = existingOrderItem;
+    // } else {
+    //   this.item = { quantity: 0 };
+    // }
   }
 
   setNewItemQuantity(event: Event) {
@@ -55,13 +61,13 @@ export class ProductDetailComponent implements OnInit {
             ...currentOrder!.order,
             totalQuantity:
               currentOrder!.order!.totalQuantity -
-              (currentOrder?.orderItems?.find(
-                (orderItem) => orderItem.productId === this.item?.productId
+              (currentOrder!.orderItems!.find(
+                (orderItem) => orderItem.productId === this.item()!.productId
               )?.quantity! -
                 newQuantity),
           },
-          orderItems: currentOrder?.orderItems?.map((orderItem) =>
-            orderItem.productId === this.item!.productId
+          orderItems: currentOrder!.orderItems!.map((orderItem) =>
+            orderItem.productId === this.item()!.productId
               ? { ...orderItem, quantity: newQuantity }
               : orderItem
           ),
@@ -69,9 +75,9 @@ export class ProductDetailComponent implements OnInit {
       });
     } else {
       const newOrderItem: OrderItem = {
-        price: this.item?.price,
-        productId: this.item?.productId,
-        imageUrl: this.item?.imageUrl,
+        price: this.item()?.price,
+        productId: this.item()?.productId,
+        imageUrl: this.item()?.imageUrl,
         quantity: newQuantity,
       };
 
@@ -93,8 +99,8 @@ export class ProductDetailComponent implements OnInit {
             ...currentOrder!.order,
             totalQuantity: currentOrder!.order!.totalQuantity + 1,
           },
-          orderItems: currentOrder?.orderItems?.map((orderItem) =>
-            orderItem.productId === this.item!.productId
+          orderItems: currentOrder!.orderItems!.map((orderItem) =>
+            orderItem.productId === this.item()!.productId
               ? { ...orderItem, quantity: orderItem.quantity + 1 }
               : orderItem
           ),
@@ -102,9 +108,9 @@ export class ProductDetailComponent implements OnInit {
       });
     } else {
       const newOrderItem: OrderItem = {
-        price: this.item?.price,
-        productId: this.item?.productId,
-        imageUrl: this.item?.imageUrl,
+        price: this.item()?.price,
+        productId: this.item()?.productId,
+        imageUrl: this.item()?.imageUrl,
         quantity: 1,
       };
 
