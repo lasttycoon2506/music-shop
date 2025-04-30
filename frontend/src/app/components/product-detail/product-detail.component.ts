@@ -80,7 +80,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  addOneNewItem() {
+  addOneItem() {
     if (this.currentOrder()) {
       this.checkoutService.order.update((currentOrder) => {
         return {
@@ -109,5 +109,22 @@ export class ProductDetailComponent implements OnInit {
         orderItems: [newOrderItem],
       });
     }
+  }
+
+  subtractOneItem() {
+    this.checkoutService.order.update((currentOrder) => {
+      return {
+        ...currentOrder,
+        order: {
+          ...currentOrder!.order,
+          totalQuantity: currentOrder!.order!.totalQuantity - 1,
+        },
+        orderItems: currentOrder!.orderItems!.map((orderItem) =>
+          orderItem.productId === this.item()!.productId
+            ? { ...orderItem, quantity: orderItem.quantity - 1 }
+            : orderItem
+        ),
+      };
+    });
   }
 }

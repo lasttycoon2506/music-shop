@@ -36,7 +36,7 @@
           <button
             type="button"
             class="col btn btn-primary fw-bold btn-lg px-1 me-md-2"
-            (click)="addOneNewItem()"
+            (click)="addOneItem()"
             [disabled]="!oktaService.isAuthenticated()"
           >
             +1
@@ -44,7 +44,8 @@
           <button
             type="button"
             class="col btn btn-warning fw-bold btn-lg px-1 me-md-2"
-            [disabled]="!oktaService.isAuthenticated()"
+            (click)="subtractOneItem()"
+            [disabled]="!oktaService.isAuthenticated() || item().quantity === 0"
           >
             -1
           </button>
