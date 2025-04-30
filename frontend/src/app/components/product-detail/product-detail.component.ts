@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { ParseProductId } from '../../helpers/parseProductId';
+import { OktaService } from '../../services/okta.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,6 +16,7 @@ import { ParseProductId } from '../../helpers/parseProductId';
 export class ProductDetailComponent implements OnInit {
   private router = inject(ActivatedRoute);
   private checkoutService = inject(CheckOutService);
+  oktaService = inject(OktaService);
   product!: Product;
   item: OrderItem | null = null;
 
