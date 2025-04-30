@@ -50,16 +50,13 @@ export class ProductDetailComponent implements OnInit {
       (event.target as HTMLInputElement).value
     );
 
-    console.log(this.checkoutService.order());
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,
         order: {
           totalQuantity:
             (currentOrder?.order?.totalQuantity ?? 0) -
-            (currentOrder?.orderItems?.find(
-              (orderItem) => orderItem.productId === this.item()!.productId
-            )?.quantity ?? 0 - newQuantity),
+            (this.item().quantity - newQuantity),
         },
         orderItems: (
           currentOrder?.orderItems ?? [
@@ -72,8 +69,6 @@ export class ProductDetailComponent implements OnInit {
         ),
       };
     });
-    console.log(this.item());
-    console.log(this.checkoutService.order());
   }
 
   addOneItem() {
