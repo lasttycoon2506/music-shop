@@ -36,6 +36,7 @@
           <button
             type="button"
             class="col btn btn-primary fw-bold btn-lg px-1 me-md-2"
+            (click)="addOneNewItem()"
             [disabled]="!oktaService.isAuthenticated()"
           >
             +1

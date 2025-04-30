@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { ParseProductId } from '../../helpers/parseProductId';
 import { OktaService } from '../../services/okta.service';
+import { Order } from '../../models/order';
 
 @Component({
   selector: 'app-product-detail',
@@ -41,8 +42,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   setNewItemQuantity(event: Event) {
-    const newQuantity = parseInt((event.target as HTMLInputElement).value);
-    const currentOrder = this.checkoutService.order();
+    const newQuantity: number = parseInt(
+      (event.target as HTMLInputElement).value
+    );
+    const currentOrder: Order | null = this.checkoutService.order();
 
     if (currentOrder) {
       this.checkoutService.order.update((currentOrder) => {
@@ -74,6 +77,39 @@ export class ProductDetailComponent implements OnInit {
 
       this.checkoutService.order.set({
         order: { totalQuantity: newQuantity },
+        orderItems: [newOrderItem],
+      });
+    }
+  }
+
+  addOneNewItem() {
+    const currentOrder: Order | null = this.checkoutService.order();
+
+    if (currentOrder) {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            ...currentOrder!.order,
+            totalQuantity: currentOrder!.order!.totalQuantity + 1,
+          },
+          orderItems: currentOrder?.orderItems?.map((orderItem) =>
+            orderItem.productId === this.item!.productId
+              ? { ...orderItem, quantity: orderItem.quantity + 1 }
+              : orderItem
+          ),
+        };
+      });
+    } else {
+      const newOrderItem: OrderItem = {
+        price: this.item?.price,
+        productId: this.item?.productId,
+        imageUrl: this.item?.imageUrl,
+        quantity: 1,
+      };
+
+      this.checkoutService.order.set({
+        order: { totalQuantity: 1 },
         orderItems: [newOrderItem],
       });
     }

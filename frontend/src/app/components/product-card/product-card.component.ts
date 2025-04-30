@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
+import { Component, inject, input, InputSignal } from '@angular/core';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
