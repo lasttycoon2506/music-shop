@@ -41,7 +41,6 @@ export class ProductCardComponent {
   );
 
   addItem(): void {
-    console.log(this.product());
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,

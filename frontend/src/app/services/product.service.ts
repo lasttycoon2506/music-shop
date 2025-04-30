@@ -6,6 +6,7 @@ import { ProductsApiResponse } from '../models/productsApiResponse';
 import { map, Observable } from 'rxjs';
 import { ProductsCategoriesApiResponse } from '../models/productsCategoriesApiResponse';
 import { ProductCategory } from '../models/productCategory';
+import { ParseProductId } from '../helpers/parseProductId';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import { ProductCategory } from '../models/productCategory';
 export class ProductService {
   private httpClient = inject(HttpClient);
   private baseUrl: string = environment.apiUrl;
-  products = signal<Product[] | null>(null);
+  products = signal<Product[]>([]);
 
   getAllProducts(): void {
     this.httpClient
@@ -21,6 +22,12 @@ export class ProductService {
       .subscribe({
         next: (res) => {
           this.products.set(res._embedded.products);
+          this.products.update((products) =>
+            products.map((product) => {
+              product.productId = ParseProductId(product._links.self.href);
+              return product;
+            })
+          );
         },
       });
   }
