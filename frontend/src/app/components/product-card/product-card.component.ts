@@ -6,6 +6,7 @@ import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { Order } from '../../models/order';
 import { ParseProductId } from '../../helpers/parseProductId';
+import { OktaService } from '../../services/okta.service';
 
 @Component({
   selector: 'product-card',
@@ -13,12 +14,11 @@ import { ParseProductId } from '../../helpers/parseProductId';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
   private checkoutService = inject(CheckOutService);
+  oktaService = inject(OktaService);
   product: InputSignal<Product> = input.required<Product>();
   parseProductId = ParseProductId;
-
-  ngOnInit(): void {}
 
   addItem(): void {
     const productId: number = this.parseProductId(

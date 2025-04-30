@@ -17,7 +17,12 @@
       </span>
     </div>
     <div class="d-grid gap-2 d-md-flex justify-content-center mb-2">
-      <button class="btn btn-success" type="button" (click)="addItem()">
+      <button
+        class="btn btn-success"
+        type="button"
+        (click)="addItem()"
+        [disabled]="!oktaService.isAuthenticated()"
+      >
         Add
       </button>
       <button
