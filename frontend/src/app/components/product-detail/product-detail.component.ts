@@ -79,13 +79,14 @@ export class ProductDetailComponent implements OnInit {
         order: {
           totalQuantity: (currentOrder?.order?.totalQuantity ?? 0) + 1,
         },
-        orderItems: (
-          currentOrder?.orderItems ?? [{ ...this.item(), quantity: 1 }]
-        ).map((orderItem) =>
-          orderItem.productId === this.item()!.productId
-            ? { ...orderItem, quantity: this.item().quantity + 1 }
-            : orderItem
-        ),
+        orderItems:
+          currentOrder!.orderItems!.length === 0
+            ? [{ ...this.item(), quantity: 1 }]
+            : currentOrder!.orderItems!.map((orderItem) =>
+                orderItem.productId === this.item()!.productId
+                  ? { ...orderItem, quantity: this.item().quantity + 1 }
+                  : orderItem
+              ),
       };
     });
   }
