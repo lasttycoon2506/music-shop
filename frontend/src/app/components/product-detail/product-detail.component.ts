@@ -36,12 +36,12 @@ export class ProductDetailComponent implements OnInit {
         productId: this.product.productId,
       }
   );
-  itemQuantityForm: FormGroup = new FormGroup({
-    itemQuantity: new FormControl(
-      0,
-      Validators.pattern(/^(0|[1-9][0-9]{0,9})$/)
-    ),
-  });
+  //   itemQuantityForm: FormGroup = new FormGroup({
+  //     itemQuantity: new FormControl(
+  //       '',
+  //       Validators.pattern(/^(0|[1-9][0-9]{0,9})$/)
+  //     ),
+  //   });
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -55,6 +55,8 @@ export class ProductDetailComponent implements OnInit {
     const newQuantity: number = parseInt(
       (event.target as HTMLInputElement).value
     );
+    console.log(this.item());
+    console.log(this.checkoutService.order());
 
     this.checkoutService.order.update((currentOrder) => {
       return {
@@ -64,17 +66,17 @@ export class ProductDetailComponent implements OnInit {
             (currentOrder?.order?.totalQuantity ?? 0) -
             (this.item().quantity - newQuantity),
         },
-        orderItems: (
-          currentOrder?.orderItems ?? [
-            { ...this.item(), quantity: newQuantity },
-          ]
-        ).map((orderItem) =>
-          orderItem.productId === this.item()!.productId
-            ? { ...orderItem, quantity: newQuantity }
-            : orderItem
-        ),
+        orderItems:
+          currentOrder!.orderItems!.length === 0
+            ? [{ ...this.item(), quantity: newQuantity }]
+            : currentOrder!.orderItems!.map((orderItem) =>
+                orderItem.productId === this.item()!.productId
+                  ? { ...orderItem, quantity: newQuantity }
+                  : orderItem
+              ),
       };
     });
+    console.log(this.item());
     console.log(this.checkoutService.order());
   }
 
