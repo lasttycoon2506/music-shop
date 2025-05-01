@@ -3,7 +3,6 @@ import { CheckOutService } from '../../services/check-out.service';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
-import { ParseProductId } from '../../helpers/parseProductId';
 
 @Component({
   selector: 'app-check-out',
@@ -78,7 +77,6 @@ export class CheckOutComponent implements OnInit {
         .subscribe({
           next: (product) => {
             this.products.push(product);
-            product.productId = ParseProductId(product._links.self.href);
           },
         })
     );

@@ -38,7 +38,7 @@ export class ProductDetailComponent implements OnInit {
   );
   itemQuantityForm: FormGroup = new FormGroup({
     itemQuantity: new FormControl(
-      this.item().quantity,
+      0,
       Validators.pattern(/^(0|[1-9][0-9]{0,9})$/)
     ),
   });
