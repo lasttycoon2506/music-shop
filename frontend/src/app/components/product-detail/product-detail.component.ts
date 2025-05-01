@@ -18,7 +18,6 @@ export class ProductDetailComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product!: Product;
-  newQuantity: number = 0;
   item: Signal<OrderItem> = computed(
     () =>
       this.checkoutService
@@ -41,8 +40,16 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  setNewItemQuantity(): void {
-    if (this.newQuantity < 0) this.newQuantity = 0;
+  setNewItemQuantity(event: Event): void {
+    let newQuantity: number = parseInt(
+      (event.target as HTMLInputElement).value
+    );
+
+    if (newQuantity < 0) {
+      newQuantity = 0;
+      const quantityInputEl = event.target as HTMLInputElement;
+      quantityInputEl.value = '0';
+    }
 
     this.checkoutService.order.update((currentOrder) => {
       return {
@@ -51,14 +58,14 @@ export class ProductDetailComponent implements OnInit {
           ...currentOrder?.order,
           totalQuantity:
             (currentOrder?.order?.totalQuantity ?? 0) -
-            (this.item().quantity - this.newQuantity),
+            (this.item().quantity - newQuantity),
         },
         orderItems:
-          currentOrder!.orderItems!.length === 0
-            ? [{ ...this.item(), quantity: this.newQuantity }]
+          currentOrder!.orderItems!.length === 0 && newQuantity !== 0
+            ? [{ ...this.item(), quantity: newQuantity }]
             : currentOrder!.orderItems!.map((orderItem) =>
                 orderItem.productId === this.item()!.productId
-                  ? { ...orderItem, quantity: this.newQuantity }
+                  ? { ...orderItem, quantity: newQuantity }
                   : orderItem
               ),
       };
