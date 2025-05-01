@@ -6,10 +6,11 @@ import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { ParseProductId } from '../../helpers/parseProductId';
 import { OktaService } from '../../services/okta.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
@@ -65,6 +66,7 @@ export class ProductDetailComponent implements OnInit {
         ),
       };
     });
+    console.log(this.checkoutService.order());
   }
 
   addOneItem(): void {
