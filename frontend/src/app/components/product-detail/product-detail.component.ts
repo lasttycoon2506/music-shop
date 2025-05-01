@@ -4,13 +4,17 @@ import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
-import { ParseProductId } from '../../helpers/parseProductId';
 import { OktaService } from '../../services/okta.service';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
@@ -32,6 +36,12 @@ export class ProductDetailComponent implements OnInit {
         productId: this.product.productId,
       }
   );
+  itemQuantityForm: FormGroup = new FormGroup({
+    itemQuantity: new FormControl(
+      this.item().quantity,
+      Validators.pattern(/^(0|[1-9][0-9]{0,9})$/)
+    ),
+  });
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -39,7 +49,6 @@ export class ProductDetailComponent implements OnInit {
         this.product = data['product'];
       },
     });
-    this.product.productId = ParseProductId(this.product._links.self.href);
   }
 
   setNewItemQuantity(event: Event): void {

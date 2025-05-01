@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
-import { ParseProductId } from '../../helpers/parseProductId';
 import { OktaService } from '../../services/okta.service';
 
 @Component({
@@ -24,7 +23,6 @@ export class ProductCardComponent {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product: InputSignal<Product> = input.required<Product>();
-  parseProductId = ParseProductId;
   item: Signal<OrderItem> = computed(
     () =>
       this.checkoutService

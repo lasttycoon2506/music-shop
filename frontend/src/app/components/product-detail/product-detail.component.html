@@ -24,15 +24,17 @@
       <p>Stock: {{ product.stock }}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <div class="col-2 me-3">
-          <input
-            type="number"
-            class="form-control py-2 w-75 mt-4 ms-1 text-center"
-            [value]="item().quantity"
-            (change)="setNewItemQuantity($event)"
-            [disabled]="!oktaService.isAuthenticated()"
-            min="1"
-            appInputValidationQuantity="^(0|[1-9][0-9]{0,9})$"
-          />
+          <form [formGroup]="itemQuantityForm">
+            <input
+              type="number"
+              class="form-control py-2 w-75 mt-4 ms-1 text-center"
+              [value]="item().quantity"
+              (change)="setNewItemQuantity($event)"
+              [disabled]="!oktaService.isAuthenticated()"
+              min="1"
+              formControlName="itemQuantity"
+            />
+          </form>
         </div>
         <div class="row row-cols-1 gap-1">
           <button

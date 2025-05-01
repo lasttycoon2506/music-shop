@@ -16,8 +16,8 @@ import {
 export class SignUpComponent {
   private oktaService = inject(OktaService);
   userForm: FormGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
     email: new FormControl('', [
       Validators.required,
       Validators.pattern(
