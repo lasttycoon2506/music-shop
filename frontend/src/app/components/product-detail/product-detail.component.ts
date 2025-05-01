@@ -8,13 +8,15 @@ import { OktaService } from '../../services/okta.service';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { PositiveIntegersOnlyPipe } from '../../pipes/positive-integers-only.pipe';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, PositiveIntegersOnlyPipe],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
@@ -37,10 +39,9 @@ export class ProductDetailComponent implements OnInit {
       }
   );
   //   itemQuantityForm: FormGroup = new FormGroup({
-  //     itemQuantity: new FormControl(
-  //       '',
-  //       Validators.pattern(/^(0|[1-9][0-9]{0,9})$/)
-  //     ),
+  //     itemQuantity: new FormControl('', [
+  //       Validators.pattern(/^(0|[1-9][0-9]{0,9})$/),
+  //     ]),
   //   });
 
   ngOnInit(): void {
@@ -55,8 +56,6 @@ export class ProductDetailComponent implements OnInit {
     const newQuantity: number = parseInt(
       (event.target as HTMLInputElement).value
     );
-    console.log(this.item());
-    console.log(this.checkoutService.order());
 
     this.checkoutService.order.update((currentOrder) => {
       return {
@@ -76,8 +75,6 @@ export class ProductDetailComponent implements OnInit {
               ),
       };
     });
-    console.log(this.item());
-    console.log(this.checkoutService.order());
   }
 
   addOneItem(): void {
