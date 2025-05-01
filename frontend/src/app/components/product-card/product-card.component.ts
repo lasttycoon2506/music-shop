@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
-import { Order } from '../../models/order';
 import { ParseProductId } from '../../helpers/parseProductId';
 import { OktaService } from '../../services/okta.service';
 
@@ -45,20 +44,35 @@ export class ProductCardComponent {
       .order()!
       .orderItems!.includes(this.item());
 
-    this.checkoutService.order.update((currentOrder) => {
-      return {
-        ...currentOrder,
-        order: {
-          totalQuantity: (currentOrder?.order?.totalQuantity ?? 0) + 1,
-        },
-        orderItems: (
-          currentOrder?.orderItems ?? [{ ...this.item(), quantity: 1 }]
-        ).map((orderItem) =>
-          orderItem.productId === this.item()!.productId
-            ? { ...orderItem, quantity: this.item().quantity + 1 }
-            : orderItem
-        ),
-      };
-    });
+    if (!itemExistsInCart) {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            totalQuantity: (currentOrder?.order?.totalQuantity ?? 0) + 1,
+          },
+          orderItems: [
+            ...currentOrder!.orderItems!,
+            { ...this.item(), quantity: this.item().quantity + 1 },
+          ],
+        };
+      });
+    } else {
+      this.checkoutService.order.update((currentOrder) => {
+        return {
+          ...currentOrder,
+          order: {
+            totalQuantity: (currentOrder?.order?.totalQuantity ?? 0) + 1,
+          },
+          orderItems: (
+            currentOrder?.orderItems ?? [{ ...this.item(), quantity: 1 }]
+          ).map((orderItem) =>
+            orderItem.productId === this.item()!.productId
+              ? { ...orderItem, quantity: this.item().quantity + 1 }
+              : orderItem
+          ),
+        };
+      });
+    }
   }
 }
