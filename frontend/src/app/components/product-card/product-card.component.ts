@@ -41,6 +41,10 @@ export class ProductCardComponent {
   );
 
   addItem(): void {
+    const itemExistsInCart: boolean = this.checkoutService
+      .order()!
+      .orderItems!.includes(this.item());
+
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,
