@@ -18,10 +18,14 @@ import {
   ],
 })
 export class InputValidationQuantityDirective implements Validator {
-  forbiddenName = input<string>('', { alias: 'appInputValidationQuantity' });
+  validQuantityRegex = input<string>('', {
+    alias: 'appInputValidationQuantity',
+  });
   validate(control: AbstractControl): ValidationErrors | null {
-    return this.forbiddenName
-      ? forbiddenNameValidator(new RegExp(this.forbiddenName(), 'i'))(control)
+    return this.validQuantityRegex
+      ? forbiddenNameValidator(new RegExp(this.validQuantityRegex(), 'i'))(
+          control
+        )
       : null;
   }
 }
@@ -30,6 +34,6 @@ export class InputValidationQuantityDirective implements Validator {
 function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const forbidden = nameRe.test(control.value);
-    return forbidden ? { forbiddenName: { value: control.value } } : null;
+    return forbidden ? { validQuantityRegex: { value: control.value } } : null;
   };
 }
