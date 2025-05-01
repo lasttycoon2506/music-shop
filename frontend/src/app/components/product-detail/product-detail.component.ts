@@ -5,18 +5,11 @@ import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
 import { OrderItem } from '../../models/orderItem';
 import { OktaService } from '../../services/okta.service';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { PositiveIntegersOnlyPipe } from '../../pipes/positive-integers-only.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, FormsModule, PositiveIntegersOnlyPipe],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
 })
@@ -25,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   private checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
   product!: Product;
+  newQuantity: number = 0;
   item: Signal<OrderItem> = computed(
     () =>
       this.checkoutService
@@ -38,11 +32,6 @@ export class ProductDetailComponent implements OnInit {
         productId: this.product.productId,
       }
   );
-  //   itemQuantityForm: FormGroup = new FormGroup({
-  //     itemQuantity: new FormControl('', [
-  //       Validators.pattern(/^(0|[1-9][0-9]{0,9})$/),
-  //     ]),
-  //   });
 
   ngOnInit(): void {
     this.router.data.subscribe({
@@ -52,25 +41,24 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  setNewItemQuantity(event: Event): void {
-    const newQuantity: number = parseInt(
-      (event.target as HTMLInputElement).value
-    );
+  setNewItemQuantity(): void {
+    if (this.newQuantity < 0) this.newQuantity = 0;
 
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,
         order: {
+          ...currentOrder?.order,
           totalQuantity:
             (currentOrder?.order?.totalQuantity ?? 0) -
-            (this.item().quantity - newQuantity),
+            (this.item().quantity - this.newQuantity),
         },
         orderItems:
           currentOrder!.orderItems!.length === 0
-            ? [{ ...this.item(), quantity: newQuantity }]
+            ? [{ ...this.item(), quantity: this.newQuantity }]
             : currentOrder!.orderItems!.map((orderItem) =>
                 orderItem.productId === this.item()!.productId
-                  ? { ...orderItem, quantity: newQuantity }
+                  ? { ...orderItem, quantity: this.newQuantity }
                   : orderItem
               ),
       };
