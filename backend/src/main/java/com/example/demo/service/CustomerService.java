@@ -13,12 +13,25 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void createCustomer(CustomerDto customer) {
-        Optional<Customer> existingCustomer = customerRepository.findByEmail(customer.getEmail());
+    public int createCustomer(CustomerDto customerDto) {
+        int createResult = 0;
+        Optional<Customer> existingCustomer = customerRepository.findByEmail(customerDto.getEmail());
 
-        if (existingCustomer.isPresent()) {
+        if (!existingCustomer.isPresent()) {
+            Customer customer = new Customer();
 
+            customer.setFirstName(customerDto.getFirstName());
+            customer.setLastName(customerDto.getLastName());
+            customer.setBillingAddress(customerDto.getBillingAddress());
+            customer.setShippingAddress(customerDto.getShippingAddress());
+
+            Customer savedCustomer = customerRepository.save(customer);
+
+            if (savedCustomer != null) {
+                createResult = 1;
+            }
         }
+        return createResult;
     }
 
     public void editCustomer(CustomerDto customer) {
