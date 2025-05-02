@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.dto.CustomerDto;
+import com.example.demo.entity.Customer;
 
 public class CustomerService {
     private CustomerRepository customerRepository;
@@ -10,7 +11,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void editCustomer(CustomerDto customer) {
+    public void editCustomer(CustomerDto customerDto) {
 
     }
+
 }
