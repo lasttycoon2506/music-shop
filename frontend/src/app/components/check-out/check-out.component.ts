@@ -4,6 +4,7 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { ParseProductId } from '../../helpers/parseProductId';
+import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 
 @Component({
   selector: 'app-check-out',
@@ -15,61 +16,7 @@ export class CheckOutComponent implements OnInit {
   private productService = inject(ProductService);
   checkoutService = inject(CheckOutService);
   products: Product[] = [];
-  STATES_ABBREVIATIONS: string[] = [
-    'AL',
-    'AK',
-    'AS',
-    'AZ',
-    'AR',
-    'CA',
-    'CO',
-    'CT',
-    'DE',
-    'DC',
-    'FL',
-    'GA',
-    'HI',
-    'ID',
-    'IL',
-    'IN',
-    'IA',
-    'KS',
-    'KY',
-    'LA',
-    'ME',
-    'MD',
-    'MA',
-    'MI',
-    'MN',
-    'MS',
-    'MO',
-    'MT',
-    'NE',
-    'NV',
-    'NH',
-    'NJ',
-    'NM',
-    'NY',
-    'NC',
-    'ND',
-    'OH',
-    'OK',
-    'OR',
-    'PW',
-    'PA',
-    'RI',
-    'SC',
-    'SD',
-    'TN',
-    'TX',
-    'UT',
-    'VT',
-    'VA',
-    'WA',
-    'WV',
-    'WI',
-    'WY',
-  ];
+  STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
 
   ngOnInit(): void {
     this.checkoutService.order()?.orderItems?.forEach((item) =>
