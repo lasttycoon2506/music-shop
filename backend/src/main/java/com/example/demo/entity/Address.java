@@ -21,6 +21,12 @@ public class Address {
     @Column(name = "id")
     private long id;
 
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
     @Column(name = "street")
     private String street;
 

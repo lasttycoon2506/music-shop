@@ -11,6 +11,8 @@ SET FOREIGN_KEY_CHECKS=1;
 --
 CREATE TABLE `addresses` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `street` varchar(255) DEFAULT NULL,
