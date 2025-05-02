@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.dto.PurchaseDto;
-import com.example.demo.dto.PurchaseResponse;
+import com.example.demo.dto.PurchaseResponseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
@@ -23,7 +23,7 @@ public class CheckoutService {
     }
 
     @Transactional
-    public PurchaseResponse PlaceOrder(PurchaseDto purchase) {
+    public PurchaseResponseDto PlaceOrder(PurchaseDto purchase) {
         Order order = purchase.getOrder();
 
         String trackingNumber = generateOrderTrackingNumber();
@@ -38,7 +38,7 @@ public class CheckoutService {
         customer.addOrder(order);
         customerRepository.save(customer);
 
-        return new PurchaseResponse(trackingNumber);
+        return new PurchaseResponseDto(trackingNumber);
     }
 
     private String generateOrderTrackingNumber() {

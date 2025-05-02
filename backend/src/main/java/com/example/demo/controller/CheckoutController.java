@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PurchaseDto;
-import com.example.demo.dto.PurchaseResponse;
+import com.example.demo.dto.PurchaseResponseDto;
 import com.example.demo.service.CheckoutService;
 
 @CrossOrigin("http://localhost:4200")
@@ -21,7 +21,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/purchase")
-    public PurchaseResponse placeOrder(@RequestBody PurchaseDto purchase) {
+    public PurchaseResponseDto placeOrder(@RequestBody PurchaseDto purchase) {
 
         return checkoutService.PlaceOrder(purchase);
     }
