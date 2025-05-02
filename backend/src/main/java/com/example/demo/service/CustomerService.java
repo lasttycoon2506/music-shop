@@ -10,7 +10,7 @@ import com.example.demo.entity.Customer;
 
 @Service
 public class CustomerService {
-    private CustomerRepository customerRepository;
+    public CustomerRepository customerRepository;
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
