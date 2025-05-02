@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,15 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PutMapping("/edit")
-    public PurchaseResponseDto placeOrder(@RequestBody CustomerDto customer) {
+    @PostMapping("/create")
+    public void createCustomer(@RequestBody CustomerDto customer) {
 
-        return customerService.editCustomer(customer);
+        return customerService.createCustomer(customer);
     }
+
+    // @PutMapping("/edit")
+    // public PurchaseResponseDto editCustomer(@RequestBody CustomerDto customer) {
+
+    // return customerService.editCustomer(customer);
+    // }
 }
