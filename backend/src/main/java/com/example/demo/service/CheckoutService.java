@@ -28,13 +28,13 @@ public class CheckoutService {
 
         String trackingNumber = generateOrderTrackingNumber();
         order.setTrackingNumber(trackingNumber);
-        order.setShippingAddress(purchase.getShippingAddress());
-        order.setBillingAddress(purchase.getBillingAddress());
 
         Set<OrderItem> orderItems = purchase.getOrderItems();
         orderItems.forEach(item -> order.addItem(item));
 
         Customer customer = purchase.getCustomer();
+        customer.setBillingAddress(purchase.getBillingAddress());
+        customer.setShippingAddress(purchase.getShippingAddress());
         customer.addOrder(order);
         customerRepository.save(customer);
 
