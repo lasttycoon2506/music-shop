@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
-import OktaAuth from '@okta/okta-auth-js';
+import { OKTA_AUTH } from '@okta/okta-angular';
+import OktaAuth, { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import appConfig from '../configs/app-config';
 
 @Injectable({
@@ -8,7 +8,6 @@ import appConfig from '../configs/app-config';
 })
 export class OktaService {
   oktaAuth: OktaAuth = inject(OKTA_AUTH);
-  oktaAuthService = inject(OktaAuthStateService);
   isAuthenticated = signal<boolean>(false);
 
   async createUser(user: any) {
@@ -40,5 +39,14 @@ export class OktaService {
     });
     const data = await resp.json();
     console.log(data);
+  }
+
+  getUser() {
+    this.oktaAuth
+      .getUser()
+      .then(
+        (result: UserClaims<CustomUserClaims>) =>
+          (return result)
+      );
   }
 }
