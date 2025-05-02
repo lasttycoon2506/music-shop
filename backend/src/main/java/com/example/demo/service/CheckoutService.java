@@ -36,9 +36,16 @@ public class CheckoutService {
         customer.setBillingAddress(purchase.getBillingAddress());
         customer.setShippingAddress(purchase.getShippingAddress());
         customer.addOrder(order);
-        customerRepository.save(customer);
 
-        return new PurchaseResponseDto(trackingNumber);
+        try {
+            customerRepository.save(customer);
+            return new PurchaseResponseDto(trackingNumber);
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage() + " cause: " + e.getCause());
+            throw new Error(e.getMessage(), e.getCause());
+        }
+
     }
 
     private String generateOrderTrackingNumber() {
