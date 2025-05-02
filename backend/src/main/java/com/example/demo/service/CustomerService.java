@@ -17,7 +17,7 @@ public class CustomerService {
     }
 
     public int createCustomer(CustomerDto customerDto) {
-        int createResult = 0;
+        int createSuccess = 0;
         Optional<Customer> existingCustomer = customerRepository.findByEmail(customerDto.getEmail());
 
         if (!existingCustomer.isPresent()) {
@@ -29,30 +29,39 @@ public class CustomerService {
             customer.setBillingAddress(customerDto.getBillingAddress());
             customer.setShippingAddress(customerDto.getShippingAddress());
 
-            Customer savedCustomer = customerRepository.save(customer);
+            try {
+                customerRepository.save(customer);
+                createSuccess = 1;
 
-            if (savedCustomer != null) {
-                createResult = 1;
+            } catch (Exception e) {
+                System.err.println(e.getMessage() + " cause: " + e.getCause());
+                throw new Error(e.getMessage(), e.getCause());
             }
+
         } else {
-            createResult = editCustomer(customerDto, existingCustomer.get());
+            createSuccess = editCustomer(customerDto, existingCustomer.get());
         }
-        return createResult;
+        return createSuccess;
     }
 
     public int editCustomer(CustomerDto customerDto, Customer existingCustomer) {
+        int editSuccess = 0;
+
         existingCustomer.setFirstName(customerDto.getFirstName());
         existingCustomer.setLastName(customerDto.getLastName());
         existingCustomer.setEmail(customerDto.getEmail());
         existingCustomer.setBillingAddress(customerDto.getBillingAddress());
         existingCustomer.setShippingAddress(customerDto.getShippingAddress());
 
-        Customer editedCustomer = customerRepository.save(existingCustomer);
+        try {
+            customerRepository.save(existingCustomer);
+            editSuccess = 1;
 
-        if (editedCustomer.equals(null)) {
-            return 0;
+        } catch (Exception e) {
+            System.err.println(e.getMessage() + " cause: " + e.getCause());
+            throw new Error(e.getMessage(), e.getCause());
         }
-        return 1;
+        return editSuccess;
     }
 
 }
