@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CustomerRepository;
-import com.example.demo.dto.Purchase;
+import com.example.demo.dto.PurchaseDto;
 import com.example.demo.dto.PurchaseResponse;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
@@ -23,7 +23,7 @@ public class CheckoutService {
     }
 
     @Transactional
-    public PurchaseResponse PlaceOrder(Purchase purchase) {
+    public PurchaseResponse PlaceOrder(PurchaseDto purchase) {
         Order order = purchase.getOrder();
 
         String trackingNumber = generateOrderTrackingNumber();

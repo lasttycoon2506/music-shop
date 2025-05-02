@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Purchase {
+public class PurchaseDto {
     private Customer customer;
 
     private Address shippingAddress;

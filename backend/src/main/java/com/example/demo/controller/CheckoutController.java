@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.Purchase;
+import com.example.demo.dto.PurchaseDto;
 import com.example.demo.dto.PurchaseResponse;
 import com.example.demo.service.CheckoutService;
 
@@ -21,7 +21,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/purchase")
-    public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
+    public PurchaseResponse placeOrder(@RequestBody PurchaseDto purchase) {
 
         return checkoutService.PlaceOrder(purchase);
     }
