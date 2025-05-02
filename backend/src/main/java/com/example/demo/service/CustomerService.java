@@ -34,12 +34,25 @@ public class CustomerService {
             if (savedCustomer != null) {
                 createResult = 1;
             }
+        } else {
+            createResult = editCustomer(customerDto, existingCustomer.get());
         }
         return createResult;
     }
 
-    // public void editCustomer(CustomerDto customer) {
+    public int editCustomer(CustomerDto customerDto, Customer existingCustomer) {
+        existingCustomer.setFirstName(customerDto.getFirstName());
+        existingCustomer.setLastName(customerDto.getLastName());
+        existingCustomer.setEmail(customerDto.getEmail());
+        existingCustomer.setBillingAddress(customerDto.getBillingAddress());
+        existingCustomer.setShippingAddress(customerDto.getShippingAddress());
 
-    // }
+        Customer editedCustomer = customerRepository.save(existingCustomer);
+
+        if (editedCustomer.equals(null)) {
+            return 0;
+        }
+        return 1;
+    }
 
 }

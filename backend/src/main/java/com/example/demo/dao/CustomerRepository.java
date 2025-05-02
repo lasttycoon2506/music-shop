@@ -11,11 +11,10 @@ import com.example.demo.entity.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Optional<Customer> findByEmail(String email);
-    // @Modifying
-    // @Query("update Customer c set c.firstName = ?1, c.lastName = ?2, c.email =
-    // ?3, c.billingAddress = ?4, c.shippingAddress = ?5 where c.email = ?3")
-    // int setUserInfoById(String firstName, String lastName, String email, Address
-    // billingAddress,
-    // Address shippingAddress);
+
+    @Modifying
+    @Query("update Customer c set c.firstName = ?1, c.lastName = ?2, c.email =?3, c.billingAddress = ?4, c.shippingAddress = ?5 where c.email=?3")
+    int setUserInfoById(String firstName, String lastName, String email, Address billingAddress,
+            Address shippingAddress);
 
 }
