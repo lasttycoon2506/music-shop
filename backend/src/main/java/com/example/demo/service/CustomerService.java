@@ -2,10 +2,13 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.entity.Customer;
 
+@Service
 public class CustomerService {
     private CustomerRepository customerRepository;
 
@@ -22,6 +25,7 @@ public class CustomerService {
 
             customer.setFirstName(customerDto.getFirstName());
             customer.setLastName(customerDto.getLastName());
+            customer.setEmail(customerDto.getEmail());
             customer.setBillingAddress(customerDto.getBillingAddress());
             customer.setShippingAddress(customerDto.getShippingAddress());
 
@@ -34,8 +38,8 @@ public class CustomerService {
         return createResult;
     }
 
-    public void editCustomer(CustomerDto customer) {
+    // public void editCustomer(CustomerDto customer) {
 
-    }
+    // }
 
 }
