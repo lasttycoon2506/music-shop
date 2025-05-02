@@ -14,8 +14,7 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                placeholder=""
-                value=""
+                value="{{ oktaService.currentUser()?.firstName }}"
                 required
               />
               <div class="invalid-feedback">Valid first name is required.</div>
@@ -27,8 +26,7 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                placeholder=""
-                value=""
+                value="{{ oktaService.currentUser()?.lastName }}"
                 required
               />
               <div class="invalid-feedback">Valid last name is required.</div>
@@ -40,7 +38,8 @@
                 type="email"
                 class="form-control"
                 id="email"
-                placeholder="you@example.com"
+                value="{{ oktaService.currentUser()?.email }}"
+                required
               />
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.

@@ -11,7 +11,7 @@ export class OktaService {
   oktaAuth: OktaAuth = inject(OKTA_AUTH);
   oktaAuthService = inject(OktaAuthStateService);
   isAuthenticated = signal<boolean>(false);
-  user = signal<User | null>(null);
+  currentUser = signal<User | null>(null);
 
   async createUser(user: any) {
     // try {

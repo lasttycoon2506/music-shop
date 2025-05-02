@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import { CheckOutService } from '../../services/check-out.service';
 import { OktaService } from '../../services/okta.service';
 
@@ -19,7 +18,7 @@ export class LoginStatusComponent implements OnInit {
       this.oktaService.isAuthenticated.set(result.isAuthenticated!);
       if (result.isAuthenticated) {
         this.oktaService.oktaAuth.getUser().then((result) => {
-          this.oktaService.user.set({
+          this.oktaService.currentUser.set({
             firstName: result.given_name!,
             lastName: result.family_name!,
             email: result.email!,
