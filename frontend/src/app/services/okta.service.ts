@@ -43,13 +43,4 @@ export class OktaService {
     const data = await resp.json();
     console.log(data);
   }
-
-  async getUser(): void {
-    const result = await this.oktaAuth.getUser();
-    this.user.set({
-      firstName: result.given_name,
-      lastName: result.family_name,
-      email: result.email,
-    });
-  }
 }

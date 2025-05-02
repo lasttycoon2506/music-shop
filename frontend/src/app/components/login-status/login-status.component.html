@@ -8,7 +8,7 @@
             class="btn btn-dark dropdown-toggle"
             data-bs-toggle="dropdown"
           >
-            {{ usersName }}
+            {{ oktaService.user()?.firstName }}
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li>
