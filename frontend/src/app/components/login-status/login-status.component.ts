@@ -24,12 +24,7 @@ export class LoginStatusComponent implements OnInit {
 
   getUserDetails(): void {
     if (this.oktaService.isAuthenticated()) {
-      this.oktaService.oktaAuth
-        .getUser()
-        .then(
-          (result: UserClaims<CustomUserClaims>) =>
-            (this.usersName = result.given_name!)
-        );
+      this.oktaService.getUser();
     }
   }
 

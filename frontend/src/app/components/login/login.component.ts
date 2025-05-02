@@ -31,6 +31,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       .showSignIn()
       .then(() => {
         this.oktaService.oktaAuth.signInWithRedirect();
+        this.oktaService.oktaAuth.getUser().then((result) =>
+          this.oktaService.user.set({
+            firstName: result.given_name!,
+            lastName: result.family_name!,
+            email: result.email!,
+          })
+        );
       })
       .catch(function (error) {
         console.log(error);

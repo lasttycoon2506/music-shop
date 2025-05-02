@@ -1,14 +1,17 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { OKTA_AUTH } from '@okta/okta-angular';
+import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth, { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import appConfig from '../configs/app-config';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OktaService {
   oktaAuth: OktaAuth = inject(OKTA_AUTH);
+  oktaAuthService = inject(OktaAuthStateService);
   isAuthenticated = signal<boolean>(false);
+  user = signal<User | null>(null);
 
   async createUser(user: any) {
     // try {
@@ -41,12 +44,12 @@ export class OktaService {
     console.log(data);
   }
 
-  getUser() {
-    this.oktaAuth
-      .getUser()
-      .then(
-        (result: UserClaims<CustomUserClaims>) =>
-          (return result)
-      );
+  async getUser(): void {
+    const result = await this.oktaAuth.getUser();
+    this.user.set({
+      firstName: result.given_name,
+      lastName: result.family_name,
+      email: result.email,
+    });
   }
 }
