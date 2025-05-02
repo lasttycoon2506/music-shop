@@ -23,7 +23,7 @@ public class CheckoutService {
     }
 
     @Transactional
-    public PurchaseResponseDto PlaceOrder(PurchaseDto purchase) {
+    public PurchaseResponseDto placeOrder(PurchaseDto purchase) {
         Order order = purchase.getOrder();
 
         String trackingNumber = generateOrderTrackingNumber();

@@ -23,6 +23,6 @@ public class CheckoutController {
     @PostMapping("/purchase")
     public PurchaseResponseDto placeOrder(@RequestBody PurchaseDto purchase) {
 
-        return checkoutService.PlaceOrder(purchase);
+        return checkoutService.placeOrder(purchase);
     }
 }

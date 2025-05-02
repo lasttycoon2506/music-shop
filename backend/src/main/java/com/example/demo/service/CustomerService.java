@@ -10,7 +10,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void EditCustomer(CustomerDto customer) {
+    public void editCustomer(CustomerDto customer) {
 
     }
 }
