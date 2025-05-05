@@ -27,7 +27,6 @@ export class CustomerService {
     this.httpClient.put(this.apiUrl + 'customer/edit', customer).subscribe({
       next: (res) => {
         if (res) {
-          console.log(res);
           this.currentCustomer.set(customer);
         }
       },

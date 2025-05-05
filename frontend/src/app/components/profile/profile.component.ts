@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 import { OktaService } from '../../services/okta.service';
 import { CustomerService } from '../../services/customer.service';
@@ -22,14 +22,24 @@ export class ProfileComponent {
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
   profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl(this.oktaService.currentUser()!.firstName),
-    lastName: new FormControl(this.oktaService.currentUser()!.lastName),
-    email: new FormControl(this.oktaService.currentUser()!.email),
+    firstName: new FormControl(
+      this.oktaService.currentUser()!.firstName,
+      Validators.required
+    ),
+    lastName: new FormControl(
+      this.oktaService.currentUser()!.lastName,
+      Validators.required
+    ),
+    email: new FormControl(
+      this.oktaService.currentUser()!.email,
+      Validators.required
+    ),
     billingFirstName: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
     ),
     billingLastName: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.lastName ?? ''
+      this.customerService.currentCustomer()?.billingAddress?.lastName ?? '',
+      Validators.required
     ),
     billingStreet: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.street ?? ''
@@ -76,9 +86,9 @@ export class ProfileComponent {
 
   editCustomer() {
     const customer: Customer = {
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: this.profileForm.get('firstName')!.value,
+      lastName: this.profileForm.get('lastName')!.value,
+      email: this.profileForm.get('email')!.value,
       billingAddress: {
         firstName: this.profileForm.get('billingFirstName')?.value,
         lastName: this.profileForm.get('billingLastName')?.value,
