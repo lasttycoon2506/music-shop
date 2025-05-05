@@ -25,8 +25,8 @@ export class LoginStatusComponent implements OnInit {
             lastName: result.family_name!,
             email: result.email!,
           });
+          this.customerService.getCustomer(result.email!);
         });
-        this.customerService.getCustomer(this.oktaService.currentUser()!.email);
       }
     });
   }

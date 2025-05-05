@@ -57,7 +57,6 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                placeholder="John"
                 value="{{
                   customerService.currentCustomer()?.billingAddress?.firstName
                 }}"
@@ -72,7 +71,6 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                placeholder="Doe"
                 value="{{
                   customerService.currentCustomer()?.billingAddress?.lastName
                 }}"
@@ -87,7 +85,6 @@
                 type="text"
                 class="form-control"
                 id="address"
-                placeholder="1234 Main St"
                 value="{{
                   customerService.currentCustomer()?.billingAddress?.street
                 }}"
@@ -104,7 +101,6 @@
                 type="text"
                 class="form-control"
                 id="address"
-                placeholder="Somewhere"
                 value="{{
                   customerService.currentCustomer()?.billingAddress?.city
                 }}"
@@ -140,13 +136,7 @@
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input
-                type="text"
-                class="form-control"
-                id="zip"
-                placeholder="12345"
-                required
-              />
+              <input type="text" class="form-control" id="zip" required />
               <div class="invalid-feedback">Zip code required.</div>
             </div>
           </div>
