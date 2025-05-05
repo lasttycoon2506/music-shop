@@ -12,5 +12,15 @@ import { CustomerService } from '../../services/customer.service';
 export class ProfileComponent {
   oktaService = inject(OktaService);
   customerService = inject(CustomerService);
+  billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
+
+  billingShippingAddrSame(event: Event) {
+    const isChecked: boolean = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      this.billingShippingSame = true;
+    } else {
+      this.billingShippingSame = false;
+    }
+  }
 }
