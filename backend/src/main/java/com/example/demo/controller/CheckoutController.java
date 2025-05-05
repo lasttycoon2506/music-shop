@@ -22,7 +22,6 @@ public class CheckoutController {
 
     @PostMapping("/purchase")
     public ResponseEntity<String> placeOrder(@RequestBody PurchaseDto purchase) {
-
         return checkoutService.placeOrder(purchase);
     }
 }
