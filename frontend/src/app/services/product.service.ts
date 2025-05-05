@@ -13,12 +13,12 @@ import { ParseProductId } from '../helpers/parseProductId';
 })
 export class ProductService {
   private httpClient = inject(HttpClient);
-  private baseUrl: string = environment.apiUrl;
+  private apiUrl: string = environment.apiUrl;
   products = signal<Product[]>([]);
 
   getAllProducts(): void {
     this.httpClient
-      .get<ProductsApiResponse>(this.baseUrl + 'products')
+      .get<ProductsApiResponse>(this.apiUrl + 'products')
       .subscribe({
         next: (res) => {
           this.products.set(res._embedded.products);
@@ -35,25 +35,25 @@ export class ProductService {
   getProductsByCategoryId(id: string): void {
     this.httpClient
       .get<ProductsApiResponse>(
-        this.baseUrl + 'products/search/findByCategoryId?id=' + id
+        this.apiUrl + 'products/search/findByCategoryId?id=' + id
       )
       .subscribe({ next: (res) => this.products.set(res._embedded.products) });
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient
-      .get<ProductsCategoriesApiResponse>(this.baseUrl + 'product-category')
+      .get<ProductsCategoriesApiResponse>(this.apiUrl + 'product-category')
       .pipe(map((res) => res._embedded.productCategory));
   }
 
   getProductDetail(id: string): Observable<Product> {
-    return this.httpClient.get<Product>(this.baseUrl + 'products/' + id);
+    return this.httpClient.get<Product>(this.apiUrl + 'products/' + id);
   }
 
   getProductsByKeyword(keyword: string): void {
     this.httpClient
       .get<ProductsApiResponse>(
-        this.baseUrl + 'products/search/findByNameContaining?name=' + keyword
+        this.apiUrl + 'products/search/findByNameContaining?name=' + keyword
       )
       .subscribe({ next: (res) => this.products.set(res._embedded.products) });
   }
