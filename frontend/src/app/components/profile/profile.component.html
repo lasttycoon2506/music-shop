@@ -115,28 +115,26 @@
               <label for="state" class="form-label">State</label>
               <select class="form-select" id="state" required>
                 <option>Choose...</option>
-                @if (customerService.currentCustomer()?.billingAddress?.state) {
                 @for (state of STATES_ABBREVIATIONS; track $index) {
-                <option
-                  [defaultSelected]="
-                    customerService.currentCustomer()?.billingAddress?.state
-                  "
-                  value="{{ state }}"
-                >
+                <option selected value="{{ state }}">
                   {{ state }}
                 </option>
-                } } @else { @for (state of STATES_ABBREVIATIONS; track $index) {
-                <option [defaultSelected]="" value="{{ state }}">
-                  {{ state }}
-                </option>
-                }}
+                }
               </select>
               <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" required />
+              <input
+                type="text"
+                class="form-control"
+                id="zip"
+                required
+                value="{{
+                  customerService.currentCustomer()?.billingAddress?.zip
+                }}"
+              />
               <div class="invalid-feedback">Zip code required.</div>
             </div>
           </div>
