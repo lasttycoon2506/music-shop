@@ -20,4 +20,17 @@ export class CustomerService {
         next: (res) => this.currentCustomer.set(res),
       });
   }
+
+  editCustomer(customer: Customer) {
+    this.httpClient
+      .post(this.apiUrl + 'customer/create', { customer })
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            console.log(res);
+            this.currentCustomer.set(customer);
+          }
+        },
+      });
+  }
 }
