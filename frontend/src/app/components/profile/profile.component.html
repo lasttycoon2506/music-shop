@@ -49,7 +49,7 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                formControlName="firstName"
+                formControlName="billingFirstName"
               />
             </div>
 
@@ -59,7 +59,7 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                formControlName="lastName"
+                formControlName="billingLastName"
               />
             </div>
 
@@ -69,7 +69,7 @@
                 type="text"
                 class="form-control"
                 id="address"
-                formControlName="street"
+                formControlName="billingStreet"
               />
             </div>
 
@@ -79,13 +79,17 @@
                 type="text"
                 class="form-control"
                 id="address"
-                formControlName="city"
+                formControlName="billingCity"
               />
             </div>
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" formControlName="state">
+              <select
+                class="form-select"
+                id="billingState"
+                formControlName="state"
+              >
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">
@@ -101,7 +105,7 @@
                 type="text"
                 class="form-control"
                 id="zip"
-                formControlName="zip"
+                formControlName="billingZip"
               />
             </div>
           </div>
@@ -131,12 +135,8 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                value="{{
-                  customerService.currentCustomer()?.shippingAddress?.firstName
-                }}"
-                required
+                formControlName="shippingFirstName"
               />
-              <div class="invalid-feedback">Valid first name is required.</div>
             </div>
 
             <div class="col-sm-6">
@@ -145,12 +145,8 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                value="{{
-                  customerService.currentCustomer()?.shippingAddress?.lastName
-                }}"
-                required
+                formControlName="shippingLastName"
               />
-              <div class="invalid-feedback">Valid last name is required.</div>
             </div>
 
             <div class="col-12">
@@ -159,14 +155,8 @@
                 type="text"
                 class="form-control"
                 id="address"
-                value="{{
-                  customerService.currentCustomer()?.shippingAddress?.street
-                }}"
-                required
+                formControlName="shippingStreet"
               />
-              <div class="invalid-feedback">
-                Please enter your billing address.
-              </div>
             </div>
 
             <div class="col-12">
@@ -175,19 +165,17 @@
                 type="text"
                 class="form-control"
                 id="address"
-                value="{{
-                  customerService.currentCustomer()?.shippingAddress?.city
-                }}"
-                required
+                formControlName="shippingCity"
               />
-              <div class="invalid-feedback">
-                Please enter your billing address.
-              </div>
             </div>
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
+              <select
+                class="form-select"
+                id="state"
+                formControlName="shippingState"
+              >
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">
@@ -204,12 +192,8 @@
                 type="text"
                 class="form-control"
                 id="zip"
-                required
-                value="{{
-                  customerService.currentCustomer()?.shippingAddress?.zip
-                }}"
+                formControlName="shippingZip"
               />
-              <div class="invalid-feedback">Zip code required.</div>
             </div>
           </div>
 

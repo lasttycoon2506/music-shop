@@ -17,7 +17,9 @@ export class CustomerService {
         this.apiUrl + 'customers/search/findByEmail?email=' + email
       )
       .subscribe({
-        next: (res) => this.currentCustomer.set(res),
+        next: (res) => {
+          this.currentCustomer.set(res);
+        },
       });
   }
 

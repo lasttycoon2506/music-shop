@@ -4,8 +4,8 @@ export type Customer = {
   firstName: string;
   lastName: string;
   email: string;
-  shippingAddress: Address;
-  billingAddress: Address;
+  shippingAddress?: Address;
+  billingAddress?: Address;
   orders: OrderItem[];
   _links: {
     self: {

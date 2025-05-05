@@ -21,23 +21,42 @@ export class ProfileComponent {
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
   profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.firstName
+    billingFirstName: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
     ),
-    lastName: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.lastName
+    billingLastName: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.lastName ?? ''
     ),
-    street: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.street
+    billingStreet: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.street ?? ''
     ),
-    city: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.city
+    billingCity: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.city ?? ''
     ),
-    state: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.state
+    billingState: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.state ?? ''
     ),
-    zip: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress.zip,
+    billingZip: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress?.zip ?? '',
+      [Validators.minLength(5), Validators.maxLength(5)]
+    ),
+    shippingFirstName: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.firstName ?? ''
+    ),
+    shippingLastName: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.lastName ?? ''
+    ),
+    shippingStreet: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.street ?? ''
+    ),
+    shippingCity: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.city ?? ''
+    ),
+    shippingState: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.state ?? ''
+    ),
+    shippingZip: new FormControl(
+      this.customerService.currentCustomer()?.shippingAddress?.zip ?? '',
       [Validators.minLength(5), Validators.maxLength(5)]
     ),
   });
