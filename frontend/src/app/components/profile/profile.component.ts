@@ -73,8 +73,6 @@ export class ProfileComponent {
 
   editCustomer() {
     const customer: Customer = {
-      firstName: this.profileForm.get('billingFirstName')?.value,
-      lastName: this.profileForm.get('billingLastName')?.value,
       billingAddress: {
         firstName: this.profileForm.get('billingFirstName')?.value,
         lastName: this.profileForm.get('billingLastName')?.value,

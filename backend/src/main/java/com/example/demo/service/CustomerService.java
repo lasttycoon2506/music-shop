@@ -53,8 +53,10 @@ public class CustomerService {
             editedCustomer.setFirstName(customerDto.getFirstName());
             editedCustomer.setLastName(customerDto.getLastName());
             editedCustomer.setEmail(customerDto.getEmail());
-            editedCustomer.setBillingAddress(customerDto.getBillingAddress());
-            editedCustomer.setShippingAddress(customerDto.getShippingAddress());
+            editedCustomer.setBillingAddress(
+                    customerDto.getBillingAddress() != null ? customerDto.getBillingAddress() : null);
+            editedCustomer.setShippingAddress(
+                    customerDto.getShippingAddress() != null ? customerDto.getShippingAddress() : null);
 
             try {
                 customerRepository.save(editedCustomer);

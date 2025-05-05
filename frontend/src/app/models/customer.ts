@@ -1,8 +1,8 @@
 import { OrderItem } from './orderItem';
 
 export type Customer = {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   shippingAddress?: Address;
   billingAddress?: Address;
