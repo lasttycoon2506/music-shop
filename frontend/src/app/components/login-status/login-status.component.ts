@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OktaService } from '../../services/okta.service';
 import { CustomerService } from '../../services/customer.service';
@@ -12,6 +12,7 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class LoginStatusComponent implements OnInit {
   private customerService = inject(CustomerService);
+  private router = inject(Router);
   checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
 
@@ -34,5 +35,6 @@ export class LoginStatusComponent implements OnInit {
   logout(): void {
     this.oktaService.oktaAuth.signOut();
     this.oktaService.isAuthenticated.set(false);
+    this.router.navigate(['/']);
   }
 }
