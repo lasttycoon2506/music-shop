@@ -21,12 +21,25 @@ export class ProfileComponent {
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
   profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    street: new FormControl(''),
-    city: new FormControl(''),
-    state: new FormControl(''),
-    zip: new FormControl('', Validators.minLength(5)),
+    firstName: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.firstName
+    ),
+    lastName: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.lastName
+    ),
+    street: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.street
+    ),
+    city: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.city
+    ),
+    state: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.state
+    ),
+    zip: new FormControl(
+      this.customerService.currentCustomer()?.billingAddress.zip,
+      [Validators.minLength(5), Validators.maxLength(5)]
+    ),
   });
 
   billingShippingAddrSame(event: Event) {

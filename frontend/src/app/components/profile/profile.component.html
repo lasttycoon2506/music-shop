@@ -15,9 +15,7 @@
                 class="form-control"
                 id="firstName"
                 value="{{ oktaService.currentUser()?.firstName }}"
-                required
               />
-              <div class="invalid-feedback">Valid first name is required.</div>
             </div>
 
             <div class="col-sm-6">
@@ -27,9 +25,7 @@
                 class="form-control"
                 id="lastName"
                 value="{{ oktaService.currentUser()?.lastName }}"
-                required
               />
-              <div class="invalid-feedback">Valid last name is required.</div>
             </div>
 
             <div class="col-12">
@@ -39,11 +35,7 @@
                 class="form-control"
                 id="email"
                 value="{{ oktaService.currentUser()?.email }}"
-                required
               />
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
             </div>
           </div>
 
@@ -57,12 +49,8 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                value="{{
-                  customerService.currentCustomer()?.billingAddress?.firstName
-                }}"
-                required
+                formControlName="firstName"
               />
-              <div class="invalid-feedback">Valid first name is required.</div>
             </div>
 
             <div class="col-sm-6">
@@ -71,28 +59,18 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                value="{{
-                  customerService.currentCustomer()?.billingAddress?.lastName
-                }}"
-                required
+                formControlName="lastName"
               />
-              <div class="invalid-feedback">Valid last name is required.</div>
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Address</label>
+              <label for="address" class="form-label">Street</label>
               <input
                 type="text"
                 class="form-control"
                 id="address"
-                value="{{
-                  customerService.currentCustomer()?.billingAddress?.street
-                }}"
-                required
+                formControlName="street"
               />
-              <div class="invalid-feedback">
-                Please enter your billing address.
-              </div>
             </div>
 
             <div class="col-12">
@@ -101,19 +79,13 @@
                 type="text"
                 class="form-control"
                 id="address"
-                value="{{
-                  customerService.currentCustomer()?.billingAddress?.city
-                }}"
-                required
+                formControlName="city"
               />
-              <div class="invalid-feedback">
-                Please enter your billing address.
-              </div>
             </div>
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
+              <select class="form-select" id="state" formControlName="state">
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">
@@ -121,7 +93,6 @@
                 </option>
                 }
               </select>
-              <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
 
             <div class="col-md-3">
@@ -130,12 +101,8 @@
                 type="text"
                 class="form-control"
                 id="zip"
-                required
-                value="{{
-                  customerService.currentCustomer()?.billingAddress?.zip
-                }}"
+                formControlName="zip"
               />
-              <div class="invalid-feedback">Zip code required.</div>
             </div>
           </div>
 
@@ -187,7 +154,7 @@
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Address</label>
+              <label for="address" class="form-label">Street</label>
               <input
                 type="text"
                 class="form-control"
