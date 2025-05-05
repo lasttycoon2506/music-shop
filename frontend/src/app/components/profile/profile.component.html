@@ -88,7 +88,7 @@
               <select
                 class="form-select"
                 id="billingState"
-                formControlName="state"
+                formControlName="billingState"
               >
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
@@ -117,7 +117,7 @@
               type="checkbox"
               class="form-check-input"
               id="same-address"
-              (change)="billingShippingAddrSame($event)"
+              (change)="sameAddressToggle($event)"
             />
             <label class="form-check-label" for="same-address"
               >Shipping address is same as billing address</label
@@ -183,7 +183,6 @@
                 </option>
                 }
               </select>
-              <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
 
             <div class="col-md-3">

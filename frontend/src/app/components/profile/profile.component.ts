@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 import { OktaService } from '../../services/okta.service';
 import { CustomerService } from '../../services/customer.service';
@@ -61,7 +61,7 @@ export class ProfileComponent {
     ),
   });
 
-  billingShippingAddrSame(event: Event) {
+  sameAddressToggle(event: Event) {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.billingShippingSame = true;
