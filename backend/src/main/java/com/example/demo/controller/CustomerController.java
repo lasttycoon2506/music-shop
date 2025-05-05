@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDto;
-import com.example.demo.entity.Customer;
 import com.example.demo.service.CustomerService;
 
 @CrossOrigin("http://localhost:4200")

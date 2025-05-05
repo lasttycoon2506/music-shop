@@ -3,11 +3,12 @@ package com.example.demo.service;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CustomerRepository;
 import com.example.demo.dto.PurchaseDto;
-import com.example.demo.dto.PurchaseResponseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
@@ -23,7 +24,7 @@ public class CheckoutService {
     }
 
     @Transactional
-    public PurchaseResponseDto placeOrder(PurchaseDto purchase) {
+    public ResponseEntity<String> placeOrder(PurchaseDto purchase) {
         Order order = purchase.getOrder();
 
         String trackingNumber = generateOrderTrackingNumber();
@@ -39,11 +40,12 @@ public class CheckoutService {
 
         try {
             customerRepository.save(customer);
-            return new PurchaseResponseDto(trackingNumber);
+            return ResponseEntity.status(HttpStatus.CREATED).body(trackingNumber);
 
         } catch (Exception e) {
-            System.err.println(e.getMessage() + " cause: " + e.getCause());
-            throw new Error(e.getMessage(), e.getCause());
+            System.err.println(e.getMessage() + " CAUSE:  " + e.getCause());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error creating order: " + e.getMessage() + "CAUSE: " + e.getCause());
         }
 
     }
