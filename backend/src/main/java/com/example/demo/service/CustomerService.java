@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CustomerRepository;
@@ -16,11 +18,13 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public int createCustomer(CustomerDto customerDto) {
-        int createSuccess = 0;
+    public ResponseEntity<String> createCustomer(CustomerDto customerDto) {
         Optional<Customer> existingCustomer = customerRepository.findByEmail(customerDto.getEmail());
 
-        if (!existingCustomer.isPresent()) {
+        if (existingCustomer.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Customer already exists!");
+        } else {
             Customer customer = new Customer();
 
             customer.setFirstName(customerDto.getFirstName());
@@ -31,17 +35,14 @@ public class CustomerService {
 
             try {
                 customerRepository.save(customer);
-                createSuccess = 1;
+                return ResponseEntity.status(HttpStatus.CREATED).body("Customer created successfully!");
 
             } catch (Exception e) {
-                System.err.println(e.getMessage() + " cause: " + e.getCause());
-                throw new Error(e.getMessage(), e.getCause());
+                System.err.println(e.getMessage() + "CAUSE: " + e.getCause());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error creating customer: " + e.getMessage() + " CAUSE: " + e.getCause());
             }
-
-        } else {
-            createSuccess = editCustomer(customerDto, existingCustomer.get());
         }
-        return createSuccess;
     }
 
     public int editCustomer(CustomerDto customerDto, Customer existingCustomer) {
@@ -58,8 +59,9 @@ public class CustomerService {
             editSuccess = 1;
 
         } catch (Exception e) {
-            System.err.println(e.getMessage() + " cause: " + e.getCause());
-            throw new Error(e.getMessage(), e.getCause());
+            // Return a 500 Internal Server Error with the exception message
+            // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            // .body("Error creating customer: " + e.getMessage());
         }
 
         return editSuccess;

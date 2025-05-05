@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDto;
+import com.example.demo.entity.Customer;
 import com.example.demo.service.CustomerService;
 
 @CrossOrigin("http://localhost:4200")
@@ -20,13 +23,13 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public int createCustomer(@RequestBody CustomerDto customer) {
+    public ResponseEntity<String> createCustomer(@RequestBody CustomerDto customer) {
         return customerService.createCustomer(customer);
     }
 
-    // @PutMapping("/edit")
-    // public PurchaseResponseDto editCustomer(@RequestBody CustomerDto customer) {
+    @PutMapping("/edit")
+    public Customer editCustomer(@RequestBody CustomerDto customer) {
 
-    // return customerService.editCustomer(customer);
-    // }
+        return customerService.editCustomer(customer);
+    }
 }
