@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OktaService } from '../../services/okta.service';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'login-status',
@@ -10,6 +11,7 @@ import { OktaService } from '../../services/okta.service';
   styleUrl: './login-status.component.css',
 })
 export class LoginStatusComponent implements OnInit {
+  private customerService = inject(CustomerService);
   checkoutService = inject(CheckOutService);
   oktaService = inject(OktaService);
 
@@ -24,6 +26,7 @@ export class LoginStatusComponent implements OnInit {
             email: result.email!,
           });
         });
+        this.customerService.getCustomer(this.oktaService.currentUser()!.email);
       }
     });
   }
