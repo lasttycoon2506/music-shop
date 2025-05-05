@@ -24,15 +24,13 @@ export class CustomerService {
   }
 
   editCustomer(customer: Customer) {
-    this.httpClient
-      .post(this.apiUrl + 'customer/create', { customer })
-      .subscribe({
-        next: (res) => {
-          if (res) {
-            console.log(res);
-            this.currentCustomer.set(customer);
-          }
-        },
-      });
+    this.httpClient.put(this.apiUrl + 'customer/edit', customer).subscribe({
+      next: (res) => {
+        if (res) {
+          console.log(res);
+          this.currentCustomer.set(customer);
+        }
+      },
+    });
   }
 }
