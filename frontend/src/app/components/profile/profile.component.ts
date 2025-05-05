@@ -22,6 +22,9 @@ export class ProfileComponent {
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
   profileForm: FormGroup = new FormGroup({
+    firstName: new FormControl(this.oktaService.currentUser()!.firstName),
+    lastName: new FormControl(this.oktaService.currentUser()!.lastName),
+    email: new FormControl(this.oktaService.currentUser()!.email),
     billingFirstName: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
     ),
@@ -73,6 +76,9 @@ export class ProfileComponent {
 
   editCustomer() {
     const customer: Customer = {
+      firstName: '',
+      lastName: '',
+      email: '',
       billingAddress: {
         firstName: this.profileForm.get('billingFirstName')?.value,
         lastName: this.profileForm.get('billingLastName')?.value,
