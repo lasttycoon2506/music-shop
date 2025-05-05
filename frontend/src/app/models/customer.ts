@@ -3,11 +3,11 @@ import { OrderItem } from './orderItem';
 export type Customer = {
   firstName: string;
   lastName: string;
-  email: string;
+  email?: string;
   shippingAddress?: Address;
   billingAddress?: Address;
-  orders: OrderItem[];
-  _links: {
+  orders?: OrderItem[];
+  _links?: {
     self: {
       href: string;
     };
@@ -24,7 +24,7 @@ type Address = {
   city: string;
   state: string;
   zip: string;
-  _links: {
+  _links?: {
     customer: {
       href: string;
     };

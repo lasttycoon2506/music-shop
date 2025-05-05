@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Customer } from '../../models/customer';
 
 @Component({
   selector: 'app-profile',
@@ -71,6 +72,26 @@ export class ProfileComponent {
   }
 
   editCustomer() {
-    console.log('working');
+    const customer: Customer = {
+      firstName: this.profileForm.get('billingFirstName')?.value,
+      lastName: this.profileForm.get('billingLastName')?.value,
+      billingAddress: {
+        firstName: this.profileForm.get('billingFirstName')?.value,
+        lastName: this.profileForm.get('billingLastName')?.value,
+        street: this.profileForm.get('billingStreet')?.value,
+        city: this.profileForm.get('billingCity')?.value,
+        state: this.profileForm.get('billingState')?.value,
+        zip: this.profileForm.get('billingZip')?.value,
+      },
+      shippingAddress: {
+        firstName: this.profileForm.get('shippingFirstName')?.value,
+        lastName: this.profileForm.get('shippingLastName')?.value,
+        street: this.profileForm.get('shippingStreet')?.value,
+        city: this.profileForm.get('shippingCity')?.value,
+        state: this.profileForm.get('shippingState')?.value,
+        zip: this.profileForm.get('shippingZip')?.value,
+      },
+    };
+    this.customerService.editCustomer(customer);
   }
 }
