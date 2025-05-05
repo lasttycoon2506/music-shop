@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 import { OktaService } from '../../services/okta.service';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,5 +11,6 @@ import { OktaService } from '../../services/okta.service';
 })
 export class ProfileComponent {
   oktaService = inject(OktaService);
+  customerService = inject(CustomerService);
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
 }

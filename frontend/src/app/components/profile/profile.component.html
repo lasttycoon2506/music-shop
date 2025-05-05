@@ -57,8 +57,10 @@
                 type="text"
                 class="form-control"
                 id="firstName"
-                placeholder=""
-                value=""
+                placeholder="John"
+                value="{{
+                  customerService.currentCustomer()?.billingAddress?.firstName
+                }}"
                 required
               />
               <div class="invalid-feedback">Valid first name is required.</div>
@@ -70,8 +72,10 @@
                 type="text"
                 class="form-control"
                 id="lastName"
-                placeholder=""
-                value=""
+                placeholder="Doe"
+                value="{{
+                  customerService.currentCustomer()?.billingAddress?.lastName
+                }}"
                 required
               />
               <div class="invalid-feedback">Valid last name is required.</div>
@@ -84,10 +88,30 @@
                 class="form-control"
                 id="address"
                 placeholder="1234 Main St"
+                value="{{
+                  customerService.currentCustomer()?.billingAddress?.street
+                }}"
                 required
               />
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                Please enter your billing address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                placeholder="Somewhere"
+                value="{{
+                  customerService.currentCustomer()?.billingAddress?.city
+                }}"
+                required
+              />
+              <div class="invalid-feedback">
+                Please enter your billing address.
               </div>
             </div>
 
@@ -95,10 +119,21 @@
               <label for="state" class="form-label">State</label>
               <select class="form-select" id="state" required>
                 <option>Choose...</option>
+                @if (customerService.currentCustomer()?.billingAddress?.state) {
                 @for (state of STATES_ABBREVIATIONS; track $index) {
-                <option value="{{ state }}">{{ state }}</option>
-
-                }
+                <option
+                  [defaultSelected]="
+                    customerService.currentCustomer()?.billingAddress?.state
+                  "
+                  value="{{ state }}"
+                >
+                  {{ state }}
+                </option>
+                } } @else { @for (state of STATES_ABBREVIATIONS; track $index) {
+                <option [defaultSelected]="" value="{{ state }}">
+                  {{ state }}
+                </option>
+                }}
               </select>
               <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
@@ -109,7 +144,7 @@
                 type="text"
                 class="form-control"
                 id="zip"
-                placeholder=""
+                placeholder="12345"
                 required
               />
               <div class="invalid-feedback">Zip code required.</div>
