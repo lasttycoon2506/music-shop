@@ -45,26 +45,30 @@ public class CustomerService {
         }
     }
 
-    public int editCustomer(CustomerDto customerDto, Customer existingCustomer) {
-        int editSuccess = 0;
+    public ResponseEntity<String> editCustomer(CustomerDto customerDto) {
+        Optional<Customer> existingCustomer = customerRepository.findByEmail(customerDto.getEmail());
 
-        existingCustomer.setFirstName(customerDto.getFirstName());
-        existingCustomer.setLastName(customerDto.getLastName());
-        existingCustomer.setEmail(customerDto.getEmail());
-        existingCustomer.setBillingAddress(customerDto.getBillingAddress());
-        existingCustomer.setShippingAddress(customerDto.getShippingAddress());
+        if (existingCustomer.isPresent()) {
+            Customer editedCustomer = existingCustomer.get();
+            editedCustomer.setFirstName(customerDto.getFirstName());
+            editedCustomer.setLastName(customerDto.getLastName());
+            editedCustomer.setEmail(customerDto.getEmail());
+            editedCustomer.setBillingAddress(customerDto.getBillingAddress());
+            editedCustomer.setShippingAddress(customerDto.getShippingAddress());
 
-        try {
-            customerRepository.save(existingCustomer);
-            editSuccess = 1;
+            try {
+                customerRepository.save(editedCustomer);
+                return ResponseEntity.status(HttpStatus.OK).body("Customer edited successfully!");
 
-        } catch (Exception e) {
-            // Return a 500 Internal Server Error with the exception message
-            // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            // .body("Error creating customer: " + e.getMessage());
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error creating customer: " + e.getMessage() + "CAUSE: " + e.getCause());
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("customer DNE!");
         }
 
-        return editSuccess;
     }
 
 }

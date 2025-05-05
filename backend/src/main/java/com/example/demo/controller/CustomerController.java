@@ -28,8 +28,7 @@ public class CustomerController {
     }
 
     @PutMapping("/edit")
-    public Customer editCustomer(@RequestBody CustomerDto customer) {
-
+    public ResponseEntity<String> editCustomer(@RequestBody CustomerDto customer) {
         return customerService.editCustomer(customer);
     }
 }
