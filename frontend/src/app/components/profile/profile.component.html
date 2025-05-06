@@ -12,7 +12,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="firstName"
                 value="{{ oktaService.currentUser()?.firstName }}"
               />
             </div>
@@ -22,7 +21,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="lastName"
                 value="{{ oktaService.currentUser()?.lastName }}"
               />
             </div>
@@ -32,7 +30,6 @@
               <input
                 type="email"
                 class="form-control"
-                id="email"
                 value="{{ oktaService.currentUser()?.email }}"
               />
             </div>
@@ -47,7 +44,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="firstName"
                 formControlName="billingFirstName"
               />
               @if(profileForm.errors && profileForm.errors["billingFirstName"])
@@ -63,7 +59,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="lastName"
                 formControlName="billingLastName"
               />
               @if(profileForm.errors && profileForm.errors["billingLastName"]) {
@@ -78,7 +73,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="address"
                 formControlName="billingStreet"
               />
             </div>
@@ -93,7 +87,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="address"
                 formControlName="billingCity"
               />
             </div>
@@ -105,11 +98,7 @@
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select
-                class="form-select"
-                id="billingState"
-                formControlName="billingState"
-              >
+              <select class="form-select" formControlName="billingState">
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">
@@ -129,13 +118,14 @@
               <input
                 type="text"
                 class="form-control"
-                id="zip"
                 formControlName="billingZip"
               />
               @if(profileForm.errors && profileForm.errors["billingZip"]) {
               <div class="text-danger">
                 {{ profileForm.errors["billingZip"] }}
               </div>
+              } @if (profileForm.get("billingZip")?.errors) {
+              <div class="text-danger">Must be 5 digits!</div>
               }
             </div>
           </div>
@@ -164,7 +154,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="firstName"
                 formControlName="shippingFirstName"
               />
               @if(profileForm.errors && profileForm.errors["shippingFirstName"])
@@ -180,7 +169,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="lastName"
                 formControlName="shippingLastName"
               />
               @if(profileForm.errors && profileForm.errors["shippingLastName"])
@@ -196,7 +184,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="address"
                 formControlName="shippingStreet"
               />
               @if(profileForm.errors && profileForm.errors["shippingStreet"]) {
@@ -211,7 +198,6 @@
               <input
                 type="text"
                 class="form-control"
-                id="address"
                 formControlName="shippingCity"
               />
               @if(profileForm.errors && profileForm.errors["shippingCity"]) {
@@ -223,11 +209,7 @@
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select
-                class="form-select"
-                id="state"
-                formControlName="shippingState"
-              >
+              <select class="form-select" formControlName="shippingState">
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">
@@ -247,13 +229,15 @@
               <input
                 type="text"
                 class="form-control"
-                id="zip"
+                id="shippingZip"
                 formControlName="shippingZip"
               />
               @if(profileForm.errors && profileForm.errors["shippingZip"]) {
               <div class="text-danger">
                 {{ profileForm.errors["shippingZip"] }}
               </div>
+              } @if (profileForm.get("shippingZip")?.errors) {
+              <div class="text-danger">Must be 5 digits!</div>
               }
             </div>
           </div>
@@ -264,7 +248,7 @@
           <button
             class="w-100 btn btn-success btn-lg"
             type="submit"
-            [disabled]="!profileForm.valid"
+            [disabled]="profileForm.invalid"
           >
             Save
           </button>
