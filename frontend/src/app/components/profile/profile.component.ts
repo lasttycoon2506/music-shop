@@ -86,12 +86,12 @@ export class ProfileComponent {
     if (isChecked) {
       this.billingShippingSame = true;
       this.profileForm.setValue({
-        shippingFirstName: this.profileForm.get('billingFirstName'),
-        shippingLastName: this.profileForm.get('billingLastName'),
-        shippingStreet: this.profileForm.get('billingStreet'),
-        shippingCity: this.profileForm.get('billingCity'),
-        shippingState: this.profileForm.get('billingState'),
-        shippingZip: this.profileForm.get('billingZip'),
+        shippingFirstName: this.profileForm.get('billingFirstName')?.value,
+        shippingLastName: this.profileForm.get('billingLastName')?.value,
+        shippingStreet: this.profileForm.get('billingStreet')?.value,
+        shippingCity: this.profileForm.get('billingCity')?.value,
+        shippingState: this.profileForm.get('billingState')?.value,
+        shippingZip: this.profileForm.get('billingZip')?.value,
       });
     } else {
       this.billingShippingSame = false;
