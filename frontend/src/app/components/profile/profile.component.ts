@@ -35,10 +35,10 @@ export class ProfileComponent {
         this.oktaService.currentUser()!.lastName,
         Validators.required
       ),
-      email: new FormControl(
-        this.oktaService.currentUser()!.email,
-        Validators.required
-      ),
+      email: new FormControl(this.oktaService.currentUser()!.email, [
+        Validators.required,
+        Validators.email,
+      ]),
       billingFirstName: new FormControl(
         this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
       ),

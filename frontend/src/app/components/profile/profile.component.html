@@ -12,8 +12,11 @@
               <input
                 type="text"
                 class="form-control"
-                value="{{ oktaService.currentUser()?.firstName }}"
+                formControlName="firstName"
               />
+              @if (profileForm.get("firstName")?.errors) {
+              <div class="text-danger">Missing!</div>
+              }
             </div>
 
             <div class="col-sm-6">
@@ -21,8 +24,11 @@
               <input
                 type="text"
                 class="form-control"
-                value="{{ oktaService.currentUser()?.lastName }}"
+                formControlName="lastName"
               />
+              @if (profileForm.get("lastName")?.errors) {
+              <div class="text-danger">Missing!</div>
+              }
             </div>
 
             <div class="col-12">
@@ -30,8 +36,13 @@
               <input
                 type="email"
                 class="form-control"
-                value="{{ oktaService.currentUser()?.email }}"
+                formControlName="email"
               />
+              @if (profileForm.get("email")?.hasError("required")) {
+              <div class="text-danger">Missing!</div>
+              } @if (profileForm.get("email")?.hasError("email")) {
+              <div class="text-danger">Incorrect Email Format!</div>
+              }
             </div>
           </div>
 
