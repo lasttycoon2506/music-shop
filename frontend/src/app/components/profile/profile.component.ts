@@ -13,10 +13,11 @@ import {
   billingAddressValidator,
   shippingAddressValidator,
 } from '../../validators/profile';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ToastComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
