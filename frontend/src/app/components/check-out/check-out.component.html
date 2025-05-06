@@ -39,19 +39,15 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation">
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
               <input
                 type="text"
                 class="form-control"
-                id="firstName"
-                placeholder=""
-                value=""
-                required
+                formControlName="billingFirstName"
               />
-              <div class="invalid-feedback">Valid first name is required.</div>
             </div>
 
             <div class="col-sm-6">
@@ -59,63 +55,41 @@
               <input
                 type="text"
                 class="form-control"
-                id="lastName"
-                placeholder=""
-                value=""
-                required
+                formControlName="billingLastName"
               />
-              <div class="invalid-feedback">Valid last name is required.</div>
             </div>
 
             <div class="col-12">
-              <label for="email" class="form-label">Email </label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="you@example.com"
-              />
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
-            </div>
-
-            <div class="col-12">
-              <label for="address" class="form-label">Address</label>
+              <label for="address" class="form-label">Street</label>
               <input
                 type="text"
                 class="form-control"
-                id="address"
-                placeholder="1234 Main St"
-                required
+                formControlName="billingStreet"
               />
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
             </div>
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
+              <select
+                class="form-select"
+                id="state"
+                formControlName="billingState"
+              >
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
                 <option value="{{ state }}">{{ state }}</option>
 
                 }
               </select>
-              <div class="invalid-feedback">Please provide a valid state.</div>
             </div>
 
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
-                id="zip"
-                placeholder=""
-                required
+                formControlName="billingZip"
               />
-              <div class="invalid-feedback">Zip code required.</div>
             </div>
           </div>
 
@@ -127,6 +101,90 @@
               >Shipping address is same as billing address</label
             >
           </div>
+
+          <hr class="my-4" />
+
+          @if (!billingShippingSame) {
+          <h4 class="mb-3">Shipping address</h4>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="shippingFirstName"
+              />
+              @if(checkoutForm.get("shippingFirstName")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="shippingLastName"
+              />
+              @if(checkoutForm.get("shippingLastName")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">Street</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="shippingStreet"
+              />
+              @if(checkoutForm.get("shippingStreet")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">City</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="shippingCity"
+              />
+              @if(checkoutForm.get("shippingCity")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
+            </div>
+
+            <div class="col-md-4">
+              <label for="state" class="form-label">State</label>
+              <select class="form-select" formControlName="shippingState">
+                <option>Choose...</option>
+                @for (state of STATES_ABBREVIATIONS; track $index) {
+                <option value="{{ state }}">
+                  {{ state }}
+                </option>
+                }
+              </select>
+              @if(checkoutForm.get("shippingState")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
+            </div>
+
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Zip</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="shippingZip"
+              />
+              @if(checkoutForm.get("shippingZip")?.hasError("required")) {
+              <div class="text-danger">Required!</div>
+              } @if (checkoutForm.get("shippingZip")?.hasError("minLength")) {
+              <div class="text-danger">Must be 5 digits!</div>
+              }
+            </div>
+          </div>
+          }
 
           <hr class="my-4" />
           <h4 class="mb-3">Payment</h4>

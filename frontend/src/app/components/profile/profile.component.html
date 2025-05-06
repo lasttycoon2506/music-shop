@@ -128,7 +128,7 @@
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 formControlName="billingZip"
               />
@@ -239,9 +239,8 @@
             <div class="col-md-3">
               <label for="zip" class="form-label">Zip</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
-                id="shippingZip"
                 formControlName="shippingZip"
               />
               @if(profileForm.errors && profileForm.errors["shippingZip"]) {
