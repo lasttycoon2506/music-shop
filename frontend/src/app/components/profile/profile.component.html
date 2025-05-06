@@ -167,6 +167,12 @@
                 id="firstName"
                 formControlName="shippingFirstName"
               />
+              @if(profileForm.errors && profileForm.errors["shippingFirstName"])
+              {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingFirstName"] }}
+              </div>
+              }
             </div>
 
             <div class="col-sm-6">
@@ -177,6 +183,12 @@
                 id="lastName"
                 formControlName="shippingLastName"
               />
+              @if(profileForm.errors && profileForm.errors["shippingLastName"])
+              {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingLastName"] }}
+              </div>
+              }
             </div>
 
             <div class="col-12">
@@ -187,6 +199,11 @@
                 id="address"
                 formControlName="shippingStreet"
               />
+              @if(profileForm.errors && profileForm.errors["shippingStreet"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingStreet"] }}
+              </div>
+              }
             </div>
 
             <div class="col-12">
@@ -197,6 +214,11 @@
                 id="address"
                 formControlName="shippingCity"
               />
+              @if(profileForm.errors && profileForm.errors["shippingCity"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingCity"] }}
+              </div>
+              }
             </div>
 
             <div class="col-md-4">
@@ -213,6 +235,11 @@
                 </option>
                 }
               </select>
+              @if(profileForm.errors && profileForm.errors["shippingState"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingState"] }}
+              </div>
+              }
             </div>
 
             <div class="col-md-3">
@@ -223,6 +250,11 @@
                 id="zip"
                 formControlName="shippingZip"
               />
+              @if(profileForm.errors && profileForm.errors["shippingZip"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["shippingZip"] }}
+              </div>
+              }
             </div>
           </div>
 

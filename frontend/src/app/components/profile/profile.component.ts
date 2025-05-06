@@ -9,7 +9,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Customer } from '../../models/customer';
-import { billingAddressValidator } from '../../validators/profile';
+import {
+  billingAddressValidator,
+  shippingAddressValidator,
+} from '../../validators/profile';
 
 @Component({
   selector: 'app-profile',
@@ -75,7 +78,7 @@ export class ProfileComponent {
         [Validators.minLength(5), Validators.maxLength(5)]
       ),
     },
-    { validators: billingAddressValidator() }
+    { validators: [billingAddressValidator(), shippingAddressValidator()] }
   );
 
   sameAddressToggle(event: Event) {
