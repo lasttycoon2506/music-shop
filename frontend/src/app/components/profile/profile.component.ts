@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Customer } from '../../models/customer';
+import { billingAddressValidator } from '../../validators/profile';
 
 @Component({
   selector: 'app-profile',
@@ -21,59 +22,62 @@ export class ProfileComponent {
   customerService = inject(CustomerService);
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
-  profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl(
-      this.oktaService.currentUser()!.firstName,
-      Validators.required
-    ),
-    lastName: new FormControl(
-      this.oktaService.currentUser()!.lastName,
-      Validators.required
-    ),
-    email: new FormControl(
-      this.oktaService.currentUser()!.email,
-      Validators.required
-    ),
-    billingFirstName: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
-    ),
-    billingLastName: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.lastName ?? '',
-      Validators.required
-    ),
-    billingStreet: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.street ?? ''
-    ),
-    billingCity: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.city ?? ''
-    ),
-    billingState: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.state ?? ''
-    ),
-    billingZip: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.zip ?? '',
-      [Validators.minLength(5), Validators.maxLength(5)]
-    ),
-    shippingFirstName: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.firstName ?? ''
-    ),
-    shippingLastName: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.lastName ?? ''
-    ),
-    shippingStreet: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.street ?? ''
-    ),
-    shippingCity: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.city ?? ''
-    ),
-    shippingState: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.state ?? ''
-    ),
-    shippingZip: new FormControl(
-      this.customerService.currentCustomer()?.shippingAddress?.zip ?? '',
-      [Validators.minLength(5), Validators.maxLength(5)]
-    ),
-  });
+  profileForm: FormGroup = new FormGroup(
+    {
+      firstName: new FormControl(
+        this.oktaService.currentUser()!.firstName,
+        Validators.required
+      ),
+      lastName: new FormControl(
+        this.oktaService.currentUser()!.lastName,
+        Validators.required
+      ),
+      email: new FormControl(
+        this.oktaService.currentUser()!.email,
+        Validators.required
+      ),
+      billingFirstName: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
+      ),
+      billingLastName: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.lastName ?? '',
+        Validators.required
+      ),
+      billingStreet: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.street ?? ''
+      ),
+      billingCity: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.city ?? ''
+      ),
+      billingState: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.state ?? ''
+      ),
+      billingZip: new FormControl(
+        this.customerService.currentCustomer()?.billingAddress?.zip ?? '',
+        [Validators.minLength(5), Validators.maxLength(5)]
+      ),
+      shippingFirstName: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.firstName ?? ''
+      ),
+      shippingLastName: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.lastName ?? ''
+      ),
+      shippingStreet: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.street ?? ''
+      ),
+      shippingCity: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.city ?? ''
+      ),
+      shippingState: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.state ?? ''
+      ),
+      shippingZip: new FormControl(
+        this.customerService.currentCustomer()?.shippingAddress?.zip ?? '',
+        [Validators.minLength(5), Validators.maxLength(5)]
+      ),
+    },
+    { validators: billingAddressValidator }
+  );
 
   sameAddressToggle(event: Event) {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
