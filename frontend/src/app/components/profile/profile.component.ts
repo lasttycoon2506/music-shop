@@ -117,6 +117,7 @@ export class ProfileComponent {
   editCustomer() {
     this.alertComponent.showAlert('Profile Edited!', 'success');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.profileForm.markAsPristine();
 
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
