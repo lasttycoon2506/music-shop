@@ -40,8 +40,7 @@ export class ProfileComponent {
         this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
       ),
       billingLastName: new FormControl(
-        this.customerService.currentCustomer()?.billingAddress?.lastName ?? '',
-        Validators.required
+        this.customerService.currentCustomer()?.billingAddress?.lastName ?? ''
       ),
       billingStreet: new FormControl(
         this.customerService.currentCustomer()?.billingAddress?.street ?? ''
@@ -76,7 +75,7 @@ export class ProfileComponent {
         [Validators.minLength(5), Validators.maxLength(5)]
       ),
     },
-    { validators: billingAddressValidator }
+    { validators: billingAddressValidator() }
   );
 
   sameAddressToggle(event: Event) {
@@ -89,6 +88,10 @@ export class ProfileComponent {
   }
 
   editCustomer() {
+    if (this.profileForm.invalid) {
+      console.error('invalid profile form');
+      return;
+    }
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
       lastName: this.profileForm.get('lastName')!.value,

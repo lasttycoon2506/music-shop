@@ -2,14 +2,21 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function billingAddressValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
-    const firstName = group.get('billingFirstName')?.value;
-    const lastName = group.get('billingLastName')?.value;
-    const street = group.get('billingStreet')?.value;
-    const city = group.get('billingCity')?.value;
-    const state = group.get('billingState')?.value;
-    const zip = group.get('billingZip')?.value;
+    const billingFirstName = group.get('billingFirstName')?.value;
+    const billingLastName = group.get('billingLastName')?.value;
+    const billingStreet = group.get('billingStreet')?.value;
+    const billingCity = group.get('billingCity')?.value;
+    const billingState = group.get('billingState')?.value;
+    const billingZip = group.get('billingZip')?.value;
 
-    const fields = { firstName, lastName, street, city, state, zip };
+    const fields = {
+      billingFirstName,
+      billingLastName,
+      billingStreet,
+      billingCity,
+      billingState,
+      billingZip,
+    };
     const anyFieldFilled = Object.values(fields).some(
       (field) => field && field.trim() !== ''
     );
@@ -18,7 +25,7 @@ export function billingAddressValidator(): ValidatorFn {
       const errors: ValidationErrors = {};
       Object.entries(fields).forEach(([key, value]) => {
         if (!value || value.trim() === '') {
-          errors[key] = `${key} is required`;
+          errors[key] = 'Missing!';
         }
       });
       return Object.keys(errors).length > 0 ? errors : null;

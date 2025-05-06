@@ -50,6 +50,12 @@
                 id="firstName"
                 formControlName="billingFirstName"
               />
+              @if(profileForm.errors && profileForm.errors["billingFirstName"])
+              {
+              <div class="text-danger">
+                {{ profileForm.errors["billingFirstName"] }}
+              </div>
+              }
             </div>
 
             <div class="col-sm-6">
@@ -60,6 +66,11 @@
                 id="lastName"
                 formControlName="billingLastName"
               />
+              @if(profileForm.errors && profileForm.errors["billingLastName"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["billingLastName"] }}
+              </div>
+              }
             </div>
 
             <div class="col-12">
@@ -71,6 +82,11 @@
                 formControlName="billingStreet"
               />
             </div>
+            @if(profileForm.errors && profileForm.errors["billingStreet"]) {
+            <div class="text-danger">
+              {{ profileForm.errors["billingStreet"] }}
+            </div>
+            }
 
             <div class="col-12">
               <label for="address" class="form-label">City</label>
@@ -81,6 +97,11 @@
                 formControlName="billingCity"
               />
             </div>
+            @if(profileForm.errors && profileForm.errors["billingCity"]) {
+            <div class="text-danger">
+              {{ profileForm.errors["billingCity"] }}
+            </div>
+            }
 
             <div class="col-md-4">
               <label for="state" class="form-label">State</label>
@@ -96,6 +117,11 @@
                 </option>
                 }
               </select>
+              @if(profileForm.errors && profileForm.errors["billingState"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["billingState"] }}
+              </div>
+              }
             </div>
 
             <div class="col-md-3">
@@ -106,6 +132,11 @@
                 id="zip"
                 formControlName="billingZip"
               />
+              @if(profileForm.errors && profileForm.errors["billingZip"]) {
+              <div class="text-danger">
+                {{ profileForm.errors["billingZip"] }}
+              </div>
+              }
             </div>
           </div>
 
