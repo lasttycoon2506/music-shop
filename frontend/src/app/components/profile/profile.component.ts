@@ -30,17 +30,17 @@ export class ProfileComponent {
   profileForm: FormGroup = new FormGroup(
     {
       firstName: new FormControl(
-        this.oktaService.currentUser()!.firstName,
+        this.customerService.currentCustomer()?.firstName ?? '',
         Validators.required
       ),
       lastName: new FormControl(
-        this.oktaService.currentUser()!.lastName,
+        this.customerService.currentCustomer()?.lastName ?? '',
         Validators.required
       ),
-      email: new FormControl(this.oktaService.currentUser()!.email, [
-        Validators.required,
-        Validators.email,
-      ]),
+      email: new FormControl(
+        this.customerService.currentCustomer()?.email ?? '',
+        [Validators.required, Validators.email]
+      ),
       billingFirstName: new FormControl(
         this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
       ),
