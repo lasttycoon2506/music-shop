@@ -261,7 +261,11 @@
           <hr class="my-4" />
           }
 
-          <button class="w-100 btn btn-success btn-lg" type="submit">
+          <button
+            class="w-100 btn btn-success btn-lg"
+            type="submit"
+            [disabled]="!profileForm.valid"
+          >
             Save
           </button>
         </form>
