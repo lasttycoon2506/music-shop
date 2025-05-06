@@ -1,27 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-toast',
+  selector: 'app-alert',
   imports: [],
-  templateUrl: './toast.component.html',
-  styleUrl: './toast.component.css',
+  templateUrl: './alert.component.html',
+  styleUrl: './alert.component.css',
 })
-export class ToastComponent implements OnInit {
+export class AlertComponent implements OnInit {
   alertPlaceholder: HTMLElement | null = null;
-  alertTrigger: HTMLElement | null = null;
 
   ngOnInit() {
     this.alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-    this.alertTrigger = document.getElementById('liveAlertBtn');
-
-    if (this.alertTrigger) {
-      this.alertTrigger.addEventListener('click', () => {
-        this.appendAlert('Nice, you triggered this alert message!', 'success');
-      });
-    }
   }
 
-  appendAlert(message: any, type: any) {
+  showAlert(message: string, type: string) {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,

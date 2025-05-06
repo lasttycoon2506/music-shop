@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, viewChild } from '@angular/core';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 import { OktaService } from '../../services/okta.service';
 import { CustomerService } from '../../services/customer.service';
@@ -13,11 +13,11 @@ import {
   billingAddressValidator,
   shippingAddressValidator,
 } from '../../validators/profile';
-import { ToastComponent } from '../toast/toast.component';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, ToastComponent],
+  imports: [ReactiveFormsModule, AlertComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -26,6 +26,7 @@ export class ProfileComponent {
   customerService = inject(CustomerService);
   billingShippingSame: boolean = false;
   STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
+  @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   profileForm: FormGroup = new FormGroup(
     {
       firstName: new FormControl(
@@ -114,10 +115,8 @@ export class ProfileComponent {
   }
 
   editCustomer() {
-    if (this.profileForm.invalid) {
-      console.error('invalid profile form');
-      return;
-    }
+    this.alertComponent.showAlert('Profile Edited!', 'success');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
