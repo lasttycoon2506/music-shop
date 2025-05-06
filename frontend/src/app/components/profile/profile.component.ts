@@ -85,7 +85,7 @@ export class ProfileComponent {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.billingShippingSame = true;
-      this.profileForm.setValue({
+      this.profileForm.patchValue({
         shippingFirstName: this.profileForm.get('billingFirstName')?.value,
         shippingLastName: this.profileForm.get('billingLastName')?.value,
         shippingStreet: this.profileForm.get('billingStreet')?.value,
