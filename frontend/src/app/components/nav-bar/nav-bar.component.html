@@ -1,17 +1,21 @@
 <header class="p-2 text-bg-dark">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center">
-      <a
-        href="/"
+      <button
+        routerLink="/"
         class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
       >
         <img src="assets/images/musicnote.png" height="50" width="50" />
-      </a>
+      </button>
 
       <ul
         class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
       >
-        <li><a href="/" class="nav-link ms-5 ps-4 text-white">Home</a></li>
+        <li>
+          <button routerLink="/" class="nav-link ms-5 ps-4 text-white">
+            Home
+          </button>
+        </li>
       </ul>
       <login-status></login-status>
     </div>
