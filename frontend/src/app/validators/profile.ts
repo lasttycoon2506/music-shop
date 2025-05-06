@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  ValidationErrors,
+  Validator,
+  ValidatorFn,
+} from '@angular/forms';
 
 export function billingAddressValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
@@ -17,6 +22,7 @@ export function billingAddressValidator(): ValidatorFn {
       billingState,
       billingZip,
     };
+
     const anyFieldFilled = Object.values(fields).some(
       (field) => field && field.trim() !== ''
     );
@@ -31,6 +37,41 @@ export function billingAddressValidator(): ValidatorFn {
       return Object.keys(errors).length > 0 ? errors : null;
     }
 
+    return null;
+  };
+}
+
+export function shippingAddressValidator(): ValidatorFn {
+  return (group: AbstractControl): ValidationErrors | null => {
+    const shippingFirstName = group.get('shippingFirstName')?.value;
+    const shippingLastName = group.get('shippingLastName')?.value;
+    const shippingStreet = group.get('shippingStreet')?.value;
+    const shippingCity = group.get('shippingCity')?.value;
+    const shippingState = group.get('shippingState')?.value;
+    const shippingZip = group.get('shippingZip')?.value;
+
+    const fields = {
+      shippingFirstName,
+      shippingLastName,
+      shippingStreet,
+      shippingCity,
+      shippingState,
+      shippingZip,
+    };
+
+    const anyFieldFilled = Object.values(fields).some(
+      (field) => field && field.trim() !== ''
+    );
+
+    const valErrors: ValidationErrors = {};
+    if (anyFieldFilled) {
+      Object.entries(fields).forEach(([key, value]) => {
+        if (!value || value.trim() === '') {
+          valErrors[key] = 'Missing!';
+        }
+      });
+      return Object.keys(valErrors).length > 0 ? valErrors : null;
+    }
     return null;
   };
 }
