@@ -85,8 +85,30 @@ export class ProfileComponent {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.billingShippingSame = true;
+      this.profileForm.setValue({
+        shippingFirstName: this.profileForm.get('billingFirstName'),
+        shippingLastName: this.profileForm.get('billingLastName'),
+        shippingStreet: this.profileForm.get('billingStreet'),
+        shippingCity: this.profileForm.get('billingCity'),
+        shippingState: this.profileForm.get('billingState'),
+        shippingZip: this.profileForm.get('billingZip'),
+      });
     } else {
       this.billingShippingSame = false;
+      this.profileForm.setValue({
+        shippingFirstName:
+          this.customerService.currentCustomer()?.shippingAddress?.firstName,
+        shippingLastName:
+          this.customerService.currentCustomer()?.shippingAddress?.lastName,
+        shippingStreet:
+          this.customerService.currentCustomer()?.shippingAddress?.street,
+        shippingCity:
+          this.customerService.currentCustomer()?.shippingAddress?.city,
+        shippingState:
+          this.customerService.currentCustomer()?.shippingAddress?.state,
+        shippingZip:
+          this.customerService.currentCustomer()?.shippingAddress?.zip,
+      });
     }
   }
 
@@ -95,6 +117,7 @@ export class ProfileComponent {
       console.error('invalid profile form');
       return;
     }
+
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
       lastName: this.profileForm.get('lastName')!.value,
