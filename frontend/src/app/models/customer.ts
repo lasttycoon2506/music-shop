@@ -1,4 +1,4 @@
-import { OrderItem } from './orderItem';
+import { Order } from './order';
 
 export type Customer = {
   firstName: string;
@@ -6,7 +6,7 @@ export type Customer = {
   email: string;
   shippingAddress?: Address;
   billingAddress?: Address;
-  orders?: OrderItem[];
+  orders?: Order[];
   _links?: {
     self: {
       href: string;

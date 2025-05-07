@@ -1,9 +1,4 @@
-import {
-  AbstractControl,
-  ValidationErrors,
-  Validator,
-  ValidatorFn,
-} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function billingAddressValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
