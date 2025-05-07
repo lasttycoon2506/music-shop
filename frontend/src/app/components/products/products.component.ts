@@ -4,10 +4,10 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'product-list',
+  selector: 'products',
   imports: [ProductCardComponent],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.css',
 })
 export class ProductListComponent implements OnInit {
   productService: ProductService = inject(ProductService);
