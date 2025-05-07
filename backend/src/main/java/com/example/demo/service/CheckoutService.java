@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,26 +27,31 @@ public class CheckoutService {
     @Transactional
     public ResponseEntity<String> placeOrder(PurchaseDto purchase) {
         Order order = purchase.getOrder();
+        Optional<Customer> existingCustomer = customerRepository.findByEmail(purchase.getCustomer().getEmail());
 
-        String trackingNumber = generateOrderTrackingNumber();
-        order.setTrackingNumber(trackingNumber);
+        if (existingCustomer.isPresent()) {
+            String trackingNumber = generateOrderTrackingNumber();
+            order.setTrackingNumber(trackingNumber);
 
-        Set<OrderItem> orderItems = purchase.getOrderItems();
-        orderItems.forEach(item -> order.addItem(item));
+            Set<OrderItem> orderItems = purchase.getOrderItems();
+            orderItems.forEach(item -> order.addItem(item));
 
-        Customer customer = purchase.getCustomer();
-        customer.setBillingAddress(purchase.getBillingAddress());
-        customer.setShippingAddress(purchase.getShippingAddress());
-        customer.addOrder(order);
+            Customer customer = existingCustomer.get();
+            customer.setBillingAddress(purchase.getBillingAddress());
+            customer.setShippingAddress(purchase.getShippingAddress());
+            customer.addOrder(order);
 
-        try {
-            customerRepository.save(customer);
-            return ResponseEntity.status(HttpStatus.CREATED).body(trackingNumber);
+            try {
+                customerRepository.save(customer);
+                return ResponseEntity.status(HttpStatus.CREATED).body(trackingNumber);
 
-        } catch (Exception e) {
-            System.err.println(e.getMessage() + " CAUSE:  " + e.getCause());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error creating order: " + e.getMessage() + "CAUSE: " + e.getCause());
+            } catch (Exception e) {
+                System.err.println(e.getMessage() + " CAUSE:  " + e.getCause());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error creating order: " + e.getMessage() + "CAUSE: " + e.getCause());
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("email DNE for that customer!");
         }
 
     }
