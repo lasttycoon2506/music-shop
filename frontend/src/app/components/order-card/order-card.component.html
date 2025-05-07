@@ -1,31 +1,27 @@
 <div class="card shadow-sm">
-  <svg
-    class="bd-placeholder-img card-img-top"
-    width="100%"
-    height="225"
-    xmlns="http://www.w3.org/2000/svg"
-    role="img"
-    aria-label="Placeholder: Thumbnail"
-    preserveAspectRatio="xMidYMid slice"
-  >
-    <title>Placeholder</title>
-    <rect width="100%" height="100%" fill="#55595c" />
-    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-  </svg>
+  <img
+    src="{{ placedOrder().orderItems[0].imageUrl }}"
+    class="card-img-top mt-2"
+    height="100"
+    width="100"
+  />
   <div class="card-body">
-    <p class="card-text">
-      {{ order().order }}
-    </p>
+    <span class="fw-bold">Tracking:</span>
+    <p class="card-text small my-0">{{ placedOrder().trackingNumber }}</p>
     <div class="d-flex justify-content-between align-items-center">
-      <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-outline-secondary">
-          View
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary">
-          Edit
-        </button>
+      <div class="text-danger">
+        {{ placedOrder().totalPrice | currency : "USD" }}
       </div>
-      <small class="text-body-secondary">9 mins</small>
+      <div>Items: {{ placedOrder().totalQuantity }}</div>
+      <small class="text-body-secondary">{{ placedOrder().status }}</small>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <small class="text-body-secondary"
+        >made: {{ placedOrder().dateCreated }}</small
+      >
+      <small class="text-body-secondary"
+        >updated: {{ placedOrder().lastUpdated }}</small
+      >
     </div>
   </div>
 </div>

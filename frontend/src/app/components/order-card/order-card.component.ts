@@ -1,12 +1,13 @@
 import { Component, input, InputSignal } from '@angular/core';
-import { Order } from '../../models/order';
+import { OrderPlaced } from '../../models/orderPlaced';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-card',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.css',
 })
 export class OrderCardComponent {
-  order: InputSignal<Order> = input.required<Order>();
+  placedOrder: InputSignal<OrderPlaced> = input.required<OrderPlaced>();
 }

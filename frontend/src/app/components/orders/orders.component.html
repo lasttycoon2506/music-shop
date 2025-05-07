@@ -6,9 +6,9 @@
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
-            @for (order of customerService.currentCustomer()?.orders; track
-            $index) {
-            <app-order-card [order]="order"></app-order-card>
+            @for (placedOrder of customerService.currentCustomer()?.orders;
+            track $index) {
+            <app-order-card [placedOrder]="placedOrder"></app-order-card>
             }
           </div>
         </div>

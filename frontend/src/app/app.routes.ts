@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductListComponent } from './components/products/products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { productDetailResolver } from './resolvers/product-detail-resolver.resolver';
 import { OktaCallbackComponent } from '@okta/okta-angular';
