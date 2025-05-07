@@ -107,4 +107,35 @@ export class CheckOutComponent implements OnInit {
   placeOrder() {
     console.log(this.checkoutForm.get('billingZip')?.hasError('pattern'));
   }
+
+  sameAddressToggle(event: Event) {
+    const isChecked: boolean = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      this.billingShippingSame = true;
+      this.checkoutForm.patchValue({
+        shippingFirstName: this.checkoutForm.get('billingFirstName')?.value,
+        shippingLastName: this.checkoutForm.get('billingLastName')?.value,
+        shippingStreet: this.checkoutForm.get('billingStreet')?.value,
+        shippingCity: this.checkoutForm.get('billingCity')?.value,
+        shippingState: this.checkoutForm.get('billingState')?.value,
+        shippingZip: this.checkoutForm.get('billingZip')?.value,
+      });
+    } else {
+      this.billingShippingSame = false;
+      this.checkoutForm.setValue({
+        shippingFirstName:
+          this.customerService.currentCustomer()?.shippingAddress?.firstName,
+        shippingLastName:
+          this.customerService.currentCustomer()?.shippingAddress?.lastName,
+        shippingStreet:
+          this.customerService.currentCustomer()?.shippingAddress?.street,
+        shippingCity:
+          this.customerService.currentCustomer()?.shippingAddress?.city,
+        shippingState:
+          this.customerService.currentCustomer()?.shippingAddress?.state,
+        shippingZip:
+          this.customerService.currentCustomer()?.shippingAddress?.zip,
+      });
+    }
+  }
 }
