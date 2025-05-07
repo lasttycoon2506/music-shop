@@ -5,12 +5,17 @@ import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { ParseProductId } from '../../helpers/parseProductId';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-check-out',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './check-out.component.html',
   styleUrl: './check-out.component.css',
 })
@@ -96,5 +101,9 @@ export class CheckOutComponent implements OnInit {
         (total, item) => total + (item.price ?? 0) * item.quantity,
         0
       );
+  }
+
+  placeOrder() {
+    throw new Error('Method not implemented.');
   }
 }
