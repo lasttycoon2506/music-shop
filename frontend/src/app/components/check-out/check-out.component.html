@@ -296,7 +296,11 @@
 
           <hr class="my-4" />
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">
+          <button
+            class="w-100 btn btn-primary btn-lg"
+            type="submit"
+            [disabled]="checkoutForm.invalid"
+          >
             Continue to checkout
           </button>
         </form>
