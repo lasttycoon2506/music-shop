@@ -9,6 +9,7 @@ import { ViewCartComponent } from './components/view-cart/view-cart.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,7 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'products/:id',
@@ -43,14 +45,17 @@ export const routes: Routes = [
   {
     path: 'view-cart',
     component: ViewCartComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'orders',
     component: OrdersComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'checkout',
     component: CheckOutComponent,
+    canActivate: [authGuard],
   },
   { path: '', component: ProductListComponent },
 ];
