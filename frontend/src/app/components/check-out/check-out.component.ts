@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
+import { OktaService } from '../../services/okta.service';
 
 @Component({
   selector: 'app-check-out',
@@ -21,7 +22,8 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class CheckOutComponent implements OnInit {
   private productService: ProductService = inject(ProductService);
-  private customerService: CustomerService = inject(CustomerService);
+  customerService: CustomerService = inject(CustomerService);
+  oktaService: OktaService = inject(OktaService);
   checkoutService: CheckOutService = inject(CheckOutService);
   billingShippingSame: boolean = false;
   products: Product[] = [];

@@ -37,7 +37,41 @@
           </li>
         </ul>
       </div>
+
       <div class="col-md-7 col-lg-8">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              class="form-control-plaintext"
+              value="{{ customerService.currentCustomer()?.firstName }}"
+              readonly
+            />
+          </div>
+
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label" readonly> Last Name</label>
+            <input
+              type="text"
+              class="form-control-plaintext"
+              value="{{ customerService.currentCustomer()?.lastName }}"
+              readonly
+            />
+          </div>
+
+          <div class="col-12">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control-plaintext"
+                value="{{ oktaService.currentUser()?.email }}"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
         <h4 class="mb-3">Billing address</h4>
         <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
           <div class="row g-3">
