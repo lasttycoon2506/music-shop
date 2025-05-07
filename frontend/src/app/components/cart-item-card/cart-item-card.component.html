@@ -35,7 +35,7 @@
         (change)="setNewItemQuantity($event, item())"
       />
       <div class="w-75">x {{ item().price | currency : "USD" }} =</div>
-      <div class="fw-bold ms-1">
+      <div class="fw-bold me-1">
         {{ calculateItemTotal() | currency : "USD" }}
       </div>
     </div>
