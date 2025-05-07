@@ -11,7 +11,7 @@ import { OrderItem } from '../../models/orderItem';
   styleUrl: './view-cart.component.css',
 })
 export class ViewCartComponent {
-  checkoutService = inject(CheckOutService);
+  checkoutService: CheckOutService = inject(CheckOutService);
 
   calculateCartTotal(): number | undefined {
     return this.checkoutService
@@ -22,7 +22,7 @@ export class ViewCartComponent {
       );
   }
 
-  deleteAllItem(item: OrderItem) {
+  deleteAllItem(item: OrderItem): void {
     this.checkoutService.order.update((currentOrder) => {
       return {
         ...currentOrder,

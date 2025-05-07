@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth, { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import appConfig from '../configs/app-config';
@@ -9,11 +9,11 @@ import { User } from '../models/user';
 })
 export class OktaService {
   oktaAuth: OktaAuth = inject(OKTA_AUTH);
-  oktaAuthService = inject(OktaAuthStateService);
-  isAuthenticated = signal<boolean>(false);
-  currentUser = signal<User | null>(null);
+  oktaAuthService: OktaAuthStateService = inject(OktaAuthStateService);
+  isAuthenticated: WritableSignal<boolean> = signal<boolean>(false);
+  currentUser: WritableSignal<User | null> = signal<User | null>(null);
 
-  async createUser(user: any) {
+  async createUser(user: any): Promise<void> {
     // try {
     //   const transaction = this.oktaAuth.idx.register(user);
     //   console.log(transaction);

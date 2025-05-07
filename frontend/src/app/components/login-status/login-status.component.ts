@@ -11,10 +11,10 @@ import { CustomerService } from '../../services/customer.service';
   styleUrl: './login-status.component.css',
 })
 export class LoginStatusComponent implements OnInit {
-  private customerService = inject(CustomerService);
-  private router = inject(Router);
-  checkoutService = inject(CheckOutService);
-  oktaService = inject(OktaService);
+  private customerService: CustomerService = inject(CustomerService);
+  private router: Router = inject(Router);
+  checkoutService: CheckOutService = inject(CheckOutService);
+  oktaService: OktaService = inject(OktaService);
 
   ngOnInit(): void {
     this.oktaService.oktaAuthService.authState$.subscribe((result) => {

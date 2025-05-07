@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class AlertComponent implements OnInit {
   alertPlaceholder: HTMLElement | null = null;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.alertPlaceholder = document.getElementById('liveAlertPlaceholder');
   }
 
-  showAlert(message: string, type: string) {
-    const wrapper = document.createElement('div');
+  showAlert(message: string, type: string): void {
+    const wrapper: HTMLDivElement = document.createElement('div');
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
       `   <div>${message}</div>`,

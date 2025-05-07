@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, viewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { STATES_ABBREVIATIONS } from '../../constants/states.constants';
 import { OktaService } from '../../services/okta.service';
 import { CustomerService } from '../../services/customer.service';
@@ -22,10 +22,10 @@ import { AlertComponent } from '../alert/alert.component';
   styleUrl: './profile.component.css',
 })
 export class ProfileComponent {
-  oktaService = inject(OktaService);
-  customerService = inject(CustomerService);
+  oktaService: OktaService = inject(OktaService);
+  customerService: CustomerService = inject(CustomerService);
   billingShippingSame: boolean = false;
-  STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
+  STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
   @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   profileForm: FormGroup = new FormGroup(
     {
@@ -83,7 +83,7 @@ export class ProfileComponent {
     { validators: [billingAddressValidator(), shippingAddressValidator()] }
   );
 
-  sameAddressToggle(event: Event) {
+  sameAddressToggle(event: Event): void {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.billingShippingSame = true;
@@ -114,7 +114,7 @@ export class ProfileComponent {
     }
   }
 
-  editCustomer() {
+  editCustomer(): void {
     this.alertComponent.showAlert('Profile Edited!', 'success');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.profileForm.markAsPristine();

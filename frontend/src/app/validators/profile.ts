@@ -7,12 +7,12 @@ import {
 
 export function billingAddressValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
-    const billingFirstName = group.get('billingFirstName')?.value;
-    const billingLastName = group.get('billingLastName')?.value;
-    const billingStreet = group.get('billingStreet')?.value;
-    const billingCity = group.get('billingCity')?.value;
-    const billingState = group.get('billingState')?.value;
-    const billingZip = group.get('billingZip')?.value;
+    const billingFirstName: string = group.get('billingFirstName')?.value;
+    const billingLastName: string = group.get('billingLastName')?.value;
+    const billingStreet: string = group.get('billingStreet')?.value;
+    const billingCity: string = group.get('billingCity')?.value;
+    const billingState: string = group.get('billingState')?.value;
+    const billingZip: string = group.get('billingZip')?.value;
 
     const fields = {
       billingFirstName,
@@ -23,7 +23,7 @@ export function billingAddressValidator(): ValidatorFn {
       billingZip,
     };
 
-    const anyFieldFilled = Object.values(fields).some(
+    const anyFieldFilled: boolean = Object.values(fields).some(
       (field) => field && field.trim() !== ''
     );
 
@@ -43,12 +43,12 @@ export function billingAddressValidator(): ValidatorFn {
 
 export function shippingAddressValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
-    const shippingFirstName = group.get('shippingFirstName')?.value;
-    const shippingLastName = group.get('shippingLastName')?.value;
-    const shippingStreet = group.get('shippingStreet')?.value;
-    const shippingCity = group.get('shippingCity')?.value;
-    const shippingState = group.get('shippingState')?.value;
-    const shippingZip = group.get('shippingZip')?.value;
+    const shippingFirstName: string = group.get('shippingFirstName')?.value;
+    const shippingLastName: string = group.get('shippingLastName')?.value;
+    const shippingStreet: string = group.get('shippingStreet')?.value;
+    const shippingCity: string = group.get('shippingCity')?.value;
+    const shippingState: string = group.get('shippingState')?.value;
+    const shippingZip: string = group.get('shippingZip')?.value;
 
     const fields = {
       shippingFirstName,
@@ -59,7 +59,7 @@ export function shippingAddressValidator(): ValidatorFn {
       shippingZip,
     };
 
-    const anyFieldFilled = Object.values(fields).some(
+    const anyFieldFilled: boolean = Object.values(fields).some(
       (field) => field && field.trim() !== ''
     );
 

@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './product-list.component.css',
 })
 export class ProductListComponent implements OnInit {
-  productService = inject(ProductService);
-  private router = inject(ActivatedRoute);
+  productService: ProductService = inject(ProductService);
+  private router: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(() => this.loadProducts());

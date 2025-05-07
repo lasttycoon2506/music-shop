@@ -10,7 +10,7 @@ import { OktaService } from '../../services/okta.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private oktaService = inject(OktaService);
+  private oktaService: OktaService = inject(OktaService);
 
   oktaSignIn: OktaSignIn = new OktaSignIn({
     el: '#okta-signin-widget',

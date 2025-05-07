@@ -12,8 +12,8 @@ import { CheckOutService } from '../../services/check-out.service';
   styleUrl: './cart-item-card.component.css',
 })
 export class CartItemCardComponent implements OnInit {
-  private productService = inject(ProductService);
-  private checkoutService = inject(CheckOutService);
+  private productService: ProductService = inject(ProductService);
+  private checkoutService: CheckOutService = inject(CheckOutService);
   item: InputSignal<OrderItem> = input.required<OrderItem>();
   product: Product | null = null;
 
@@ -29,8 +29,10 @@ export class CartItemCardComponent implements OnInit {
     return this.item().quantity * this.item().price!;
   }
 
-  setNewItemQuantity(event: Event, item: OrderItem) {
-    const newQuantity = parseInt((event.target as HTMLInputElement).value);
+  setNewItemQuantity(event: Event, item: OrderItem): void {
+    const newQuantity: number = parseInt(
+      (event.target as HTMLInputElement).value
+    );
 
     if (newQuantity < 0) {
       return;

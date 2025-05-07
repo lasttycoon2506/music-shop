@@ -14,9 +14,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product-detail.component.css',
 })
 export class ProductDetailComponent implements OnInit {
-  private router = inject(ActivatedRoute);
-  private checkoutService = inject(CheckOutService);
-  oktaService = inject(OktaService);
+  private router: ActivatedRoute = inject(ActivatedRoute);
+  private checkoutService: CheckOutService = inject(CheckOutService);
+  oktaService: OktaService = inject(OktaService);
   product!: Product;
   item: Signal<OrderItem> = computed(
     () =>

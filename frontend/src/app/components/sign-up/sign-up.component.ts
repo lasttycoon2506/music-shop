@@ -14,7 +14,7 @@ import {
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
-  private oktaService = inject(OktaService);
+  private oktaService: OktaService = inject(OktaService);
   userForm: FormGroup = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),

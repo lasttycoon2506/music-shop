@@ -20,12 +20,12 @@ import { CustomerService } from '../../services/customer.service';
   styleUrl: './check-out.component.css',
 })
 export class CheckOutComponent implements OnInit {
-  private productService = inject(ProductService);
-  private customerService = inject(CustomerService);
-  checkoutService = inject(CheckOutService);
+  private productService: ProductService = inject(ProductService);
+  private customerService: CustomerService = inject(CustomerService);
+  checkoutService: CheckOutService = inject(CheckOutService);
   billingShippingSame: boolean = false;
   products: Product[] = [];
-  STATES_ABBREVIATIONS = STATES_ABBREVIATIONS;
+  STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
   checkoutForm: FormGroup = new FormGroup({
     billingFirstName: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.firstName ?? '',
@@ -108,7 +108,7 @@ export class CheckOutComponent implements OnInit {
     console.log(this.checkoutForm.get('billingZip')?.hasError('pattern'));
   }
 
-  sameAddressToggle(event: Event) {
+  sameAddressToggle(event: Event): void {
     const isChecked: boolean = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.billingShippingSame = true;

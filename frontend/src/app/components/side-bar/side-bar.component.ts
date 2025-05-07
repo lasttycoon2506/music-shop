@@ -17,11 +17,11 @@ import { ParseProductId } from '../../helpers/parseProductId';
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent implements OnInit {
-  private productService = inject(ProductService);
-  private router = inject(Router);
+  private productService: ProductService = inject(ProductService);
+  private router: Router = inject(Router);
   productCategories: ProductCategory[] = [];
   @ViewChild('searchInput') searchInput: ElementRef | undefined;
-  parseProductId = ParseProductId;
+  parseProductId: (url: string) => number = ParseProductId;
 
   ngOnInit(): void {
     this.loadProductCategories();
@@ -35,7 +35,7 @@ export class SideBarComponent implements OnInit {
     });
   }
 
-  capitalizeFirstLetter(category: string) {
+  capitalizeFirstLetter(category: string): string {
     return (
       String(category).charAt(0).toUpperCase() + category.toLowerCase().slice(1)
     );

@@ -20,8 +20,8 @@ import { OktaService } from '../../services/okta.service';
   styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent {
-  private checkoutService = inject(CheckOutService);
-  oktaService = inject(OktaService);
+  private checkoutService: CheckOutService = inject(CheckOutService);
+  oktaService: OktaService = inject(OktaService);
   product: InputSignal<Product> = input.required<Product>();
   item: Signal<OrderItem> = computed(
     () =>

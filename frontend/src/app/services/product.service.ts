@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Product } from '../models/product';
 import { environment } from '../../environment/environment.development';
 import { ProductsApiResponse } from '../models/productsApiResponse';
@@ -12,9 +12,9 @@ import { ParseProductId } from '../helpers/parseProductId';
   providedIn: 'root',
 })
 export class ProductService {
-  private httpClient = inject(HttpClient);
+  private httpClient: HttpClient = inject(HttpClient);
   private apiUrl: string = environment.apiUrl;
-  products = signal<Product[]>([]);
+  products: WritableSignal<Product[]> = signal<Product[]>([]);
 
   getAllProducts(): void {
     this.httpClient
