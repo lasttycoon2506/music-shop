@@ -37,10 +37,6 @@ export class ProfileComponent {
         this.customerService.currentCustomer()?.lastName ?? '',
         Validators.required
       ),
-      email: new FormControl(
-        this.customerService.currentCustomer()?.email ?? '',
-        [Validators.required, Validators.email]
-      ),
       billingFirstName: new FormControl(
         this.customerService.currentCustomer()?.billingAddress?.firstName ?? ''
       ),
@@ -120,7 +116,6 @@ export class ProfileComponent {
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
       lastName: this.profileForm.get('lastName')!.value,
-      email: this.profileForm.get('email')!.value,
       billingAddress: {
         firstName: this.profileForm.get('billingFirstName')?.value,
         lastName: this.profileForm.get('billingLastName')?.value,

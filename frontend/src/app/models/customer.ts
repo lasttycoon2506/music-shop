@@ -3,7 +3,7 @@ import { Order } from './order';
 export type Customer = {
   firstName: string;
   lastName: string;
-  email: string;
+  email?: string;
   shippingAddress?: Address;
   billingAddress?: Address;
   orders?: Order[];
