@@ -50,6 +50,9 @@
                 class="form-control"
                 formControlName="billingFirstName"
               />
+              @if(checkoutForm.get("billingFirstName")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
             </div>
 
             <div class="col-sm-6">
@@ -59,6 +62,9 @@
                 class="form-control"
                 formControlName="billingLastName"
               />
+              @if(checkoutForm.get("billingLastName")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
             </div>
 
             <div class="col-12">
@@ -68,6 +74,9 @@
                 class="form-control"
                 formControlName="billingStreet"
               />
+              @if(checkoutForm.get("billingStreet")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
             </div>
 
             <div class="col-12">
@@ -95,6 +104,9 @@
 
                 }
               </select>
+              @if(checkoutForm.get("billingState")?.errors) {
+              <div class="text-danger">Required!</div>
+              }
             </div>
 
             <div class="col-md-3">
@@ -104,6 +116,11 @@
                 class="form-control"
                 formControlName="billingZip"
               />
+              @if(checkoutForm.get("billingZip")?.hasError("required")) {
+              <div class="text-danger">Required!</div>
+              } @if (checkoutForm.get("billingZip")?.hasError("minLength")) {
+              <div class="text-danger">Must be 5 digits!</div>
+              }
             </div>
           </div>
 
