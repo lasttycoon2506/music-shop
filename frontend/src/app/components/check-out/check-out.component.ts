@@ -108,10 +108,9 @@ export class CheckOutComponent implements OnInit {
     console.log(this.checkoutForm.get('billingZip')?.hasError('pattern'));
   }
 
-  sameAddressToggle(event: Event): void {
-    const isChecked: boolean = (event.target as HTMLInputElement).checked;
-    if (isChecked) {
-      this.billingShippingSame = true;
+  sameAddressToggle(): void {
+    this.billingShippingSame = !this.billingShippingSame;
+    if (this.billingShippingSame) {
       this.checkoutForm.patchValue({
         shippingFirstName: this.checkoutForm.get('billingFirstName')?.value,
         shippingLastName: this.checkoutForm.get('billingLastName')?.value,
@@ -121,7 +120,6 @@ export class CheckOutComponent implements OnInit {
         shippingZip: this.checkoutForm.get('billingZip')?.value,
       });
     } else {
-      this.billingShippingSame = false;
       this.checkoutForm.setValue({
         shippingFirstName:
           this.customerService.currentCustomer()?.shippingAddress?.firstName,

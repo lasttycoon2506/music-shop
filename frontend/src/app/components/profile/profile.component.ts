@@ -83,10 +83,9 @@ export class ProfileComponent {
     { validators: [billingAddressValidator(), shippingAddressValidator()] }
   );
 
-  sameAddressToggle(event: Event): void {
-    const isChecked: boolean = (event.target as HTMLInputElement).checked;
-    if (isChecked) {
-      this.billingShippingSame = true;
+  sameAddressToggle(): void {
+    this.billingShippingSame = !this.billingShippingSame;
+    if (this.billingShippingSame) {
       this.profileForm.patchValue({
         shippingFirstName: this.profileForm.get('billingFirstName')?.value,
         shippingLastName: this.profileForm.get('billingLastName')?.value,
@@ -96,7 +95,6 @@ export class ProfileComponent {
         shippingZip: this.profileForm.get('billingZip')?.value,
       });
     } else {
-      this.billingShippingSame = false;
       this.profileForm.setValue({
         shippingFirstName:
           this.customerService.currentCustomer()?.shippingAddress?.firstName,
