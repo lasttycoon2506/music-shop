@@ -52,7 +52,7 @@ public class CustomerService {
             Customer editedCustomer = existingCustomer.get();
             editedCustomer.setFirstName(customerDto.getFirstName());
             editedCustomer.setLastName(customerDto.getLastName());
-            editedCustomer.setEmail(customerDto.getEmail());
+            editedCustomer.setEmail(editedCustomer.getEmail());
             editedCustomer.setBillingAddress(
                     customerDto.getBillingAddress() != null ? customerDto.getBillingAddress() : null);
             editedCustomer.setShippingAddress(
