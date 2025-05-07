@@ -6,7 +6,10 @@
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
-            <app-order-card></app-order-card>
+            @for (order of customerService.currentCustomer()?.orders; track
+            $index) {
+            <app-order-card [order]="order"></app-order-card>
+            }
           </div>
         </div>
       </div>
