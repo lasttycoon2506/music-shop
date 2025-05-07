@@ -48,8 +48,9 @@ export class CheckOutComponent implements OnInit {
       Validators.required
     ),
     billingZip: new FormControl(
-      this.customerService.currentCustomer()?.billingAddress?.zip ?? '',
-      [Validators.minLength(5), Validators.maxLength(5), Validators.required]
+      this.customerService.currentCustomer()?.billingAddress?.zip.toString() ??
+        '',
+      [Validators.pattern(/^[0-9]{5}$/), Validators.required]
     ),
     shippingFirstName: new FormControl(
       this.customerService.currentCustomer()?.shippingAddress?.firstName ?? '',
@@ -73,7 +74,7 @@ export class CheckOutComponent implements OnInit {
     ),
     shippingZip: new FormControl(
       this.customerService.currentCustomer()?.shippingAddress?.zip ?? '',
-      [Validators.minLength(5), Validators.maxLength(5), Validators.required]
+      [Validators.pattern(/^[0-9]{5}$/), Validators.required]
     ),
   });
 
@@ -104,6 +105,6 @@ export class CheckOutComponent implements OnInit {
   }
 
   placeOrder() {
-    throw new Error('Method not implemented.');
+    console.log(this.checkoutForm.get('billingZip')?.hasError('pattern'));
   }
 }

@@ -118,7 +118,7 @@
               />
               @if(checkoutForm.get("billingZip")?.hasError("required")) {
               <div class="text-danger">Required!</div>
-              } @if (checkoutForm.get("billingZip")?.hasError("minLength")) {
+              } @if (checkoutForm.get("billingZip")?.hasError("pattern")) {
               <div class="text-danger">Must be 5 digits!</div>
               }
             </div>
@@ -212,7 +212,7 @@
               />
               @if(checkoutForm.get("shippingZip")?.hasError("required")) {
               <div class="text-danger">Required!</div>
-              } @if (checkoutForm.get("shippingZip")?.hasError("minLength")) {
+              } @if (checkoutForm.get("shippingZip")?.hasError("pattern")) {
               <div class="text-danger">Must be 5 digits!</div>
               }
             </div>
@@ -313,11 +313,7 @@
 
           <hr class="my-4" />
 
-          <button
-            class="w-100 btn btn-primary btn-lg"
-            type="submit"
-            [disabled]="checkoutForm.invalid"
-          >
+          <button class="w-100 btn btn-primary btn-lg" type="submit">
             Continue to checkout
           </button>
         </form>

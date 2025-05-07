@@ -58,7 +58,7 @@ export class ProfileComponent {
       ),
       billingZip: new FormControl(
         this.customerService.currentCustomer()?.billingAddress?.zip ?? '',
-        [Validators.minLength(5), Validators.maxLength(5)]
+        Validators.pattern(/^[0-9]{5}$/)
       ),
       shippingFirstName: new FormControl(
         this.customerService.currentCustomer()?.shippingAddress?.firstName ?? ''
@@ -77,7 +77,7 @@ export class ProfileComponent {
       ),
       shippingZip: new FormControl(
         this.customerService.currentCustomer()?.shippingAddress?.zip ?? '',
-        [Validators.minLength(5), Validators.maxLength(5)]
+        Validators.pattern(/^[0-9]{5}$/)
       ),
     },
     { validators: [billingAddressValidator(), shippingAddressValidator()] }
