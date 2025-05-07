@@ -52,7 +52,9 @@
           <h4 class="mb-3">Billing address</h4>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
+              <label for="billingFirstName" class="form-label"
+                >First name</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -67,7 +69,7 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label>
+              <label for="billingLastName" class="form-label">Last name</label>
               <input
                 type="text"
                 class="form-control"
@@ -81,7 +83,7 @@
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Street</label>
+              <label for="billingStreet" class="form-label">Street</label>
               <input
                 type="text"
                 class="form-control"
@@ -95,7 +97,7 @@
             }
 
             <div class="col-12">
-              <label for="address" class="form-label">City</label>
+              <label for="billingCity" class="form-label">City</label>
               <input
                 type="text"
                 class="form-control"
@@ -109,7 +111,7 @@
             }
 
             <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
+              <label for="billingState" class="form-label">State</label>
               <select class="form-select" formControlName="billingState">
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
@@ -126,7 +128,7 @@
             </div>
 
             <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
+              <label for="billingZip" class="form-label">Zip</label>
               <input
                 type="number"
                 class="form-control"
@@ -162,7 +164,9 @@
           <h4 class="mb-3">Shipping address</h4>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
+              <label for="shippingFirstName" class="form-label"
+                >First name</label
+              >
               <input
                 type="text"
                 class="form-control"
@@ -177,7 +181,7 @@
             </div>
 
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label>
+              <label for="shippingLastName" class="form-label">Last name</label>
               <input
                 type="text"
                 class="form-control"
@@ -192,7 +196,7 @@
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">Street</label>
+              <label for="shippingStreet" class="form-label">Street</label>
               <input
                 type="text"
                 class="form-control"
@@ -206,7 +210,7 @@
             </div>
 
             <div class="col-12">
-              <label for="address" class="form-label">City</label>
+              <label for="shippingCity" class="form-label">City</label>
               <input
                 type="text"
                 class="form-control"
@@ -220,7 +224,7 @@
             </div>
 
             <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
+              <label for="shippingState" class="form-label">State</label>
               <select class="form-select" formControlName="shippingState">
                 <option>Choose...</option>
                 @for (state of STATES_ABBREVIATIONS; track $index) {
@@ -237,7 +241,7 @@
             </div>
 
             <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
+              <label for="shippingZip" class="form-label">Zip</label>
               <input
                 type="number"
                 class="form-control"
