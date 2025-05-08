@@ -73,3 +73,28 @@ VALUES ('picks', 'best variety of picks known', 'assets/images/products/placehol
 
 INSERT INTO products (name, description, image_url, stock, price, category_id)
 VALUES ('tuner non-electronic', 'really long description really long description really long description really long description really long description really long description really long description', 'assets/images/products/placeholder.png', 7, 16.99, 2);
+
+INSERT INTO product_category(category_name) VALUES ('BOOKS');
+
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('guitar pro', 'best book for pros!', 'assets/images/products/placeholder.png', 10, 10.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('guitar beginners', 'best book for beginners!', 'assets/images/products/placeholder.png', 11, 11.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('guitar intermediate', 'best book for intermediates!', 'assets/images/products/placeholder.png', 12, 12.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('piano pro', 'best book for pros!', 'assets/images/products/placeholder.png', 13, 13.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('piano beginners', 'best book for beginners!', 'assets/images/products/placeholder.png', 14, 14.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('piano intermediates!', 'best book for intermediates!', 'assets/images/products/placeholder.png', 15, 15.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('music history', 'music history on every instrument ever', 'assets/images/products/placeholder.png', 16, 16.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('the beatles', 'comprehensive and accurate', 'assets/images/products/placeholder.png', 17, 17.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('about violins', 'violing facts so interesting!', 'assets/images/products/placeholder.png', 18, 18.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('scales', 'scales you would never think of', 'assets/images/products/placeholder.png', 19, 19.99, 3);
+INSERT INTO products (name, description, image_url, stock, price, category_id)
+VALUES ('blues', 'in depth coverage of the blues', 'assets/images/products/placeholder.png', 20, 20.99, 3);
