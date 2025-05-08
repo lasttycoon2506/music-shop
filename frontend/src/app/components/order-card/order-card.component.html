@@ -1,6 +1,6 @@
 <div class="row border border-black rounded border-2 mx-3 my-3">
   <div class="col-4 d-flex justify-content-center align-items-center">
-    <div class="card shadow-sm border border-2 py-2 mx-3">
+    <div class="card shadow-sm border border-2 mx-3 my-1">
       <img
         src="{{ placedOrder().orderItems[0].imageUrl }}"
         class="card-img-top mt-2"
@@ -41,26 +41,30 @@
         <div class="d-flex align-items-center justify-content-center w-25">
           <img
             src="{{ item.imageUrl }}"
-            height="80"
-            width="80"
+            height="60"
+            width="60"
             class="img-fluid rounded-start"
           />
         </div>
         <div class="col">
           <div class="card-body">
-            <h5 class="card-title">
+            <h6 class="card-title">
               {{ productDetails[item.productId!].name }}
-            </h5>
-            <p class="lh-1 card-text mx-0 my-0">
+            </h6>
+            <p class="lh-1 card-text mx-0 my-0 fw-light">
               {{ productDetails[item.productId!].description }}
             </p>
-            <p class="card-text mt-1">
-              <small class="d-flex text-body-secondary">{{
-                item.price | currency : "USD"
-              }}</small>
-            </p>
-            <div class="fst-italic fw-medium">
-              {{ item.quantity }}
+          </div>
+        </div>
+        <div class="col">
+          <div class="row h-100">
+            <div class="col d-flex justify-content-center align-items-center">
+              <small>{{ item.price | currency : "USD" }}</small>
+            </div>
+            <div
+              class="col d-flex justify-content-center fw-light align-items-center"
+            >
+              x {{ item.quantity }}
             </div>
           </div>
         </div>
