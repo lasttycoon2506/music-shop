@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row border border-black rounded border-2">
   <div class="col-3">
     <div class="card shadow-sm">
       <img
@@ -31,10 +31,7 @@
   <div class="col-9">
     <div>
       @for (item of placedOrder().orderItems; track $index) {
-      <div
-        class="card mb-2 border border-black border-2 border-opacity-25 color-primary"
-        style="max-width: 700px"
-      >
+      <div class="card mb-2 shadow-sm color-primary" style="max-width: 700px">
         <div class="row g-0">
           <div class="d-flex align-items-center justify-content-center w-25">
             <img
@@ -46,9 +43,11 @@
           </div>
           <div class="col">
             <div class="card-body">
-              <h5 class="card-title">{{ item.price }}</h5>
+              <h5 class="card-title">
+                {{ productDetails[item.productId!].name }}
+              </h5>
               <p class="lh-1 card-text mx-0 my-0">
-                {{ item.quantity }}
+                {{ productDetails[item.productId!].description }}
               </p>
               <p class="card-text mt-1">
                 <small class="d-flex text-body-secondary">{{
@@ -56,7 +55,7 @@
                 }}</small>
               </p>
               <div class="fst-italic fw-medium text-danger">
-                {{ item.quantity }} left!
+                {{ item.quantity }}
               </div>
             </div>
           </div>
