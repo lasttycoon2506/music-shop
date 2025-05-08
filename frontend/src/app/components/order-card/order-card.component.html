@@ -1,27 +1,68 @@
-<div class="card shadow-sm">
-  <img
-    src="{{ placedOrder().orderItems[0].imageUrl }}"
-    class="card-img-top mt-2"
-    height="100"
-    width="100"
-  />
-  <div class="card-body">
-    <span class="fw-bold">Tracking:</span>
-    <p class="card-text small my-0">{{ placedOrder().trackingNumber }}</p>
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="text-danger">
-        {{ placedOrder().totalPrice | currency : "USD" }}
+<div class="row">
+  <div class="col-3">
+    <div class="card shadow-sm">
+      <img
+        src="{{ placedOrder().orderItems[0].imageUrl }}"
+        class="card-img-top mt-2"
+        height="100"
+        width="100"
+      />
+      <div class="card-body">
+        <span class="fw-bold">Tracking:</span>
+        <p class="card-text small my-0">{{ placedOrder().trackingNumber }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="text-danger">
+            {{ placedOrder().totalPrice | currency : "USD" }}
+          </div>
+          <div>Items: {{ placedOrder().totalQuantity }}</div>
+          <small class="text-body-secondary">{{ placedOrder().status }}</small>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-body-secondary"
+            >made: {{ placedOrder().dateCreated }}</small
+          >
+          <small class="text-body-secondary"
+            >updated: {{ placedOrder().lastUpdated }}</small
+          >
+        </div>
       </div>
-      <div>Items: {{ placedOrder().totalQuantity }}</div>
-      <small class="text-body-secondary">{{ placedOrder().status }}</small>
     </div>
-    <div class="d-flex justify-content-between align-items-center">
-      <small class="text-body-secondary"
-        >made: {{ placedOrder().dateCreated }}</small
+  </div>
+  <div class="col-9">
+    <div>
+      @for (item of placedOrder().orderItems; track $index) {
+      <div
+        class="card mb-2 border border-black border-2 border-opacity-25 color-primary"
+        style="max-width: 700px"
       >
-      <small class="text-body-secondary"
-        >updated: {{ placedOrder().lastUpdated }}</small
-      >
+        <div class="row g-0">
+          <div class="d-flex align-items-center justify-content-center w-25">
+            <img
+              src="{{ item.imageUrl }}"
+              height="20"
+              width="20"
+              class="img-fluid rounded-start"
+            />
+          </div>
+          <div class="col">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.price }}</h5>
+              <p class="lh-1 card-text mx-0 my-0">
+                {{ item.quantity }}
+              </p>
+              <p class="card-text mt-1">
+                <small class="d-flex text-body-secondary">{{
+                  item.price | currency : "USD"
+                }}</small>
+              </p>
+              <div class="fst-italic fw-medium text-danger">
+                {{ item.quantity }} left!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
     </div>
   </div>
 </div>
