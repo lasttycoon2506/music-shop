@@ -15,10 +15,13 @@ export class ProductService {
   private httpClient: HttpClient = inject(HttpClient);
   private apiUrl: string = environment.apiUrl;
   products: WritableSignal<Product[]> = signal<Product[]>([]);
+  currentPg: WritableSignal<number> = signal<number>(0);
 
   getAllProducts(): void {
     this.httpClient
-      .get<ProductsApiResponse>(this.apiUrl + 'products')
+      .get<ProductsApiResponse>(
+        this.apiUrl + `products?page=${this.currentPg()}`
+      )
       .subscribe({
         next: (res) => {
           this.products.set(res._embedded.products);

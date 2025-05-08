@@ -36,4 +36,14 @@ export class ProductListComponent implements OnInit {
   searchByKeyword(keyword: string): void {
     this.productService.getProductsByKeyword(keyword);
   }
+
+  prevPg() {
+    this.productService.currentPg.set(this.productService.currentPg() - 1);
+    this.loadProducts();
+  }
+
+  nextPg() {
+    this.productService.currentPg.set(this.productService.currentPg() + 1);
+    this.loadProducts();
+  }
 }
