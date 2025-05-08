@@ -1,13 +1,13 @@
 <div class="row border border-black rounded border-2 mx-3 my-3">
   <div class="col-4 d-flex justify-content-center align-items-center">
-    <div class="card shadow-sm border border-2 py-2">
+    <div class="card shadow-sm border border-2 py-2 mx-3">
       <img
         src="{{ placedOrder().orderItems[0].imageUrl }}"
         class="card-img-top mt-2"
         height="100"
         width="100"
       />
-      <div class="card-body pb-1">
+      <div class="card-body pb-1 px-2">
         <span class="fw-bold">Tracking:</span>
         <small class="text-body-secondary">
           {{ placedOrder().trackingNumber }}</small
@@ -59,7 +59,7 @@
                 item.price | currency : "USD"
               }}</small>
             </p>
-            <div class="fst-italic fw-medium text-danger">
+            <div class="fst-italic fw-medium">
               {{ item.quantity }}
             </div>
           </div>

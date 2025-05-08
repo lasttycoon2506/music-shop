@@ -1,9 +1,17 @@
 <html lang="en" data-bs-theme="auto">
   <main>
-    <h1 class="fw-light text-center my-5">Your Orders</h1>
+    <h1 class="text-center my-5">Your Orders</h1>
     <div class="container">
       <div class="row">
         <div class="col">
+          <div class="row">
+            <div class="col-4 d-flex justify-content-center">
+              <h5>Order</h5>
+            </div>
+            <div class="col-8 d-flex justify-content-center">
+              <h5>Items</h5>
+            </div>
+          </div>
           @for (placedOrder of customerService.currentCustomer()?.orders; track
           $index) {
           <app-order-card [placedOrder]="placedOrder"></app-order-card>
