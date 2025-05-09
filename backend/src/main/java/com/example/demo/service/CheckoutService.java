@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.example.demo.dto.PurchaseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 
@@ -27,8 +29,10 @@ import jakarta.transaction.Transactional;
 public class CheckoutService {
     private CustomerRepository customerRepository;
 
-    public CheckoutService(CustomerRepository customerRepository) {
+    public CheckoutService(CustomerRepository customerRepository, @Value("${stripe.key.secret}") String secretKey) {
         this.customerRepository = customerRepository;
+
+        Stripe.apiKey = secretKey;
     }
 
     @Transactional
