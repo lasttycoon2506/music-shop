@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,7 @@ export class CheckOutComponent implements OnInit {
   checkoutService: CheckOutService = inject(CheckOutService);
   customerService: CustomerService = inject(CustomerService);
   oktaService: OktaService = inject(OktaService);
-  stripeApi = loadStripe(environment.StripePublishableKey);
+  stripeApi: Stripe | null = null;
   billingShippingSame: boolean = false;
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
@@ -84,7 +84,8 @@ export class CheckOutComponent implements OnInit {
     ),
   });
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.stripeApi = await loadStripe(environment.StripePublishableKey);
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
         .getProductDetail((item.productId ?? '').toString())
@@ -116,7 +117,14 @@ export class CheckOutComponent implements OnInit {
       email: this.oktaService.currentUser()!.email,
     };
 
-    this.checkoutService.createPaymentIntent(payment);
+    this.checkoutService.createPaymentIntent(payment).subscribe({
+      next: (paymentIntentRes) => {
+        this.stripeApi?.confirmCardPayment(
+          paymentIntentRes.paymentIntent!.client_secret!,
+          {}
+        );
+      },
+    });
   }
 
   sameAddressToggle(): void {
