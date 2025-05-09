@@ -8,4 +8,6 @@ export class CheckOutService {
   order: WritableSignal<Order | null> = signal<Order | null>({
     orderItems: [],
   });
+
+  createPaymentIntent() {}
 }
