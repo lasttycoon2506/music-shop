@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CustomerRepository;
+import com.example.demo.dto.PaymentDto;
 import com.example.demo.dto.PurchaseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
+import com.stripe.model.PaymentIntent;
 
 import jakarta.transaction.Transactional;
 
@@ -58,5 +60,10 @@ public class CheckoutService {
 
     private String generateOrderTrackingNumber() {
         return UUID.randomUUID().toString();
+    }
+
+    public PaymentIntent createPaymentIntent(PaymentDto payment) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createPaymentIntent'");
     }
 }
