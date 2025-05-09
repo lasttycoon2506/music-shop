@@ -81,6 +81,7 @@ public class CheckoutService {
         params.put("receipt_email", payment.getEmail());
         params.put("payment_method_types", paymentTypes);
         params.put("description", "music-shop purchase");
+        params.put("currency", "USD");
 
         return PaymentIntent.create(params);
     }
