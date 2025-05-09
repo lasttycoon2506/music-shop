@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CheckOutService } from '../../services/check-out.service';
+import { loadStripe } from '@stripe/stripe-js';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,8 @@ import {
 } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { OktaService } from '../../services/okta.service';
+import { environment } from '../../../environment/environment.development';
+import { CheckOutService } from '../../services/check-out.service';
 
 @Component({
   selector: 'app-check-out',
@@ -22,9 +24,10 @@ import { OktaService } from '../../services/okta.service';
 })
 export class CheckOutComponent implements OnInit {
   private productService: ProductService = inject(ProductService);
+  checkoutService: CheckOutService = inject(CheckOutService);
   customerService: CustomerService = inject(CustomerService);
   oktaService: OktaService = inject(OktaService);
-  checkoutService: CheckOutService = inject(CheckOutService);
+  stripeApi = loadStripe(environment.StripePublishableKey);
   billingShippingSame: boolean = false;
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
