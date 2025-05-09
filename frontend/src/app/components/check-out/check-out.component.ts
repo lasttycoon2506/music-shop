@@ -15,6 +15,7 @@ import { CustomerService } from '../../services/customer.service';
 import { OktaService } from '../../services/okta.service';
 import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
+import { PaymentDto } from '../../models/paymentDto';
 
 @Component({
   selector: 'app-check-out',
@@ -109,7 +110,14 @@ export class CheckOutComponent implements OnInit {
       );
   }
 
-  placeOrder() {}
+  placeOrder() {
+    const payment: PaymentDto = {
+      amount: this.calculateCartTotal()! * 100,
+      email: this.oktaService.currentUser()!.email,
+    };
+
+    this.checkoutService.createPaymentIntent(payment);
+  }
 
   sameAddressToggle(): void {
     this.billingShippingSame = !this.billingShippingSame;

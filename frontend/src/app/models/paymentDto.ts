@@ -1,4 +1,4 @@
 export type PaymentDto = {
   amount: number;
-  email: number;
+  email: string;
 };
