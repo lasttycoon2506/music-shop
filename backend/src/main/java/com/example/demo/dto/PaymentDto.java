@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class PaymentDto {
     private int amount;
+    private String email;
 }
