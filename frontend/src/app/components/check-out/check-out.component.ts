@@ -106,9 +106,7 @@ export class CheckOutComponent implements OnInit {
       );
   }
 
-  placeOrder() {
-    console.log(this.checkoutForm.get('billingZip')?.hasError('pattern'));
-  }
+  placeOrder() {}
 
   sameAddressToggle(): void {
     this.billingShippingSame = !this.billingShippingSame;
