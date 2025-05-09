@@ -1,5 +1,9 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -14,6 +18,7 @@ import com.example.demo.dto.PurchaseDto;
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
+import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 
 import jakarta.transaction.Transactional;
@@ -62,8 +67,17 @@ public class CheckoutService {
         return UUID.randomUUID().toString();
     }
 
-    public PaymentIntent createPaymentIntent(PaymentDto payment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createPaymentIntent'");
+    public PaymentIntent createPaymentIntent(PaymentDto payment) throws StripeException {
+
+        List<String> paymentTypes = new ArrayList<>();
+        paymentTypes.add("card");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("amount", payment.getAmount());
+        params.put("receipt_email", payment.getEmail());
+        params.put("payment_method_types", paymentTypes);
+        params.put("description", "music-shop purchase");
+
+        return PaymentIntent.create(params);
     }
 }
