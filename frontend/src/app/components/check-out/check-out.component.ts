@@ -84,8 +84,10 @@ export class CheckOutComponent implements OnInit {
     ),
   });
 
-  async ngOnInit(): Promise<void> {
-    this.stripeApi = await loadStripe(environment.StripePublishableKey);
+  ngOnInit() {
+    loadStripe(environment.StripePublishableKey).then((stripe) => {
+      this.stripeApi = stripe;
+    });
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
         .getProductDetail((item.productId ?? '').toString())
