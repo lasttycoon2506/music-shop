@@ -1,5 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { loadStripe, Stripe, StripeElement } from '@stripe/stripe-js';
+import {
+  loadStripe,
+  Stripe,
+  StripeCardElement,
+  StripeElements,
+} from '@stripe/stripe-js';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -32,7 +37,8 @@ export class CheckOutComponent implements OnInit {
   billingShippingSame: boolean = false;
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
-  creditCardElement?: StripeElement;
+  creditCardElement: StripeCardElement | undefined;
+  creditCardErrors: HTMLElement | null = null;
   checkoutForm: FormGroup = new FormGroup({
     billingFirstName: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.firstName ?? '',
@@ -160,9 +166,21 @@ export class CheckOutComponent implements OnInit {
   }
 
   initStripePaymentForm() {
-    const stripeElements = this.stripeApi?.elements();
+    const stripeElements: StripeElements | undefined =
+      this.stripeApi?.elements();
 
     this.creditCardElement = stripeElements?.create('card');
     this.creditCardElement?.mount('#credit-card-element');
+    this.creditCardElement!.on('change', (event) => {
+      // get a handle to card-errors element
+      this.creditCardErrors = document.getElementById('credit-card-errors');
+
+      if (event.complete) {
+        this.creditCardErrors!.textContent = '';
+      } else if (event.error) {
+        // show validation error to customer
+        this.creditCardErrors!.textContent = event.error.message;
+      }
+    });
   }
 }
