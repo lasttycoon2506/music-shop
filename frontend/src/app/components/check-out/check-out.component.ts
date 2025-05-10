@@ -33,7 +33,7 @@ export class CheckOutComponent implements OnInit {
   checkoutService: CheckOutService = inject(CheckOutService);
   customerService: CustomerService = inject(CustomerService);
   oktaService: OktaService = inject(OktaService);
-  stripeApi: Stripe | null = null;
+  stripe = Stripe(environment.stripePublishableKey);
   billingShippingSame: boolean = false;
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
@@ -90,11 +90,11 @@ export class CheckOutComponent implements OnInit {
       [Validators.pattern(/^[0-9]{5}$/), Validators.required]
     ),
   });
+  creditCardForm: FormGroup = new FormGroup({});
 
   ngOnInit() {
-    loadStripe(environment.StripePublishableKey).then((stripe) => {
-      this.stripeApi = stripe;
-    });
+    this.initStripe();
+    this.initStripePaymentForm();
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
         .getProductDetail((item.productId ?? '').toString())
@@ -105,7 +105,6 @@ export class CheckOutComponent implements OnInit {
           },
         })
     );
-    this.initStripePaymentForm();
   }
 
   getProduct(id: number): Product | undefined {
@@ -167,10 +166,12 @@ export class CheckOutComponent implements OnInit {
   }
 
   initStripePaymentForm() {
+    console.log(this.stripeApi);
     const stripeElements: StripeElements | undefined =
       this.stripeApi?.elements();
 
     this.creditCardElement = stripeElements?.create('card');
+
     this.creditCardElement?.mount('#credit-card-element');
     if (this.creditCardElement) {
       this.creditCardElement.on('change', (event) => {
