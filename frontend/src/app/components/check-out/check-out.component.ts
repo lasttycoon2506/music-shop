@@ -105,6 +105,7 @@ export class CheckOutComponent implements OnInit {
           },
         })
     );
+    this.initStripePaymentForm();
   }
 
   getProduct(id: number): Product | undefined {
@@ -171,16 +172,16 @@ export class CheckOutComponent implements OnInit {
 
     this.creditCardElement = stripeElements?.create('card');
     this.creditCardElement?.mount('#credit-card-element');
-    this.creditCardElement!.on('change', (event) => {
-      // get a handle to card-errors element
-      this.creditCardErrors = document.getElementById('credit-card-errors');
+    if (this.creditCardElement) {
+      this.creditCardElement.on('change', (event) => {
+        this.creditCardErrors = document.getElementById('credit-card-errors');
 
-      if (event.complete) {
-        this.creditCardErrors!.textContent = '';
-      } else if (event.error) {
-        // show validation error to customer
-        this.creditCardErrors!.textContent = event.error.message;
-      }
-    });
+        if (event.complete) {
+          this.creditCardErrors!.textContent = '';
+        } else if (event.error) {
+          this.creditCardErrors!.textContent = event.error.message;
+        }
+      });
+    }
   }
 }
