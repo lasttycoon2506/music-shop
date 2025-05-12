@@ -6,10 +6,6 @@ import { PaymentIntentResult } from '@stripe/stripe-js';
 import { environment } from '../../environment/environment.development';
 import { Observable } from 'rxjs';
 
-type PurchaseRes = {
-  trackingNumber: number;
-};
-
 @Injectable({
   providedIn: 'root',
 })
@@ -26,8 +22,8 @@ export class CheckOutService {
     );
   }
 
-  makePurchase(order: Order): Observable<PurchaseRes> {
-    return this.httpClient.post<PurchaseRes>(
+  makePurchase(order: Order): Observable<PurchaseResponse> {
+    return this.httpClient.post<PurchaseResponse>(
       environment.apiUrl + 'checkout/purchase',
       order
     );

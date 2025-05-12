@@ -1,0 +1,3 @@
+type PurchaseResponse = {
+  trackingNumber: number;
+};
