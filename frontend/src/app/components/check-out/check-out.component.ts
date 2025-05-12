@@ -15,7 +15,12 @@ import { OktaService } from '../../services/okta.service';
 import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
 import { PaymentDto } from '../../models/paymentDto';
-import { loadStripe, Stripe } from '@stripe/stripe-js';
+import {
+  loadStripe,
+  Stripe,
+  StripeCardElement,
+  StripeElements,
+} from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-check-out',
@@ -88,7 +93,7 @@ export class CheckOutComponent implements OnInit {
   creditCardForm: FormGroup = new FormGroup({});
 
   ngOnInit() {
-    this.initStripePaymentForm();
+    this.initStripe().then(() => this.initStripePaymentForm());
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
         .getProductDetail((item.productId ?? '').toString())
@@ -103,9 +108,6 @@ export class CheckOutComponent implements OnInit {
 
   async initStripe() {
     const stripe = await loadStripe(environment.StripePublishableKey);
-    if (!stripe) {
-      throw new Error('Failed to load Stripe');
-    }
     this.stripeApi = stripe;
   }
 
@@ -130,7 +132,6 @@ export class CheckOutComponent implements OnInit {
 
     this.checkoutService.createPaymentIntent(payment).subscribe({
       next: (paymentIntentRes) => {
-        this.stripe;
         this.stripeApi?.confirmCardPayment(
           paymentIntentRes.paymentIntent!.client_secret!,
           {}
@@ -170,7 +171,7 @@ export class CheckOutComponent implements OnInit {
 
   initStripePaymentForm() {
     if (this.stripeApi) {
-      const stripeElements = this.stripeApi.elements();
+      const stripeElements: StripeElements = this.stripeApi.elements();
 
       this.creditCardElement = stripeElements?.create('card');
 
