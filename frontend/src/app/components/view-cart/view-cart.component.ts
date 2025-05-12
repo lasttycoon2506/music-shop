@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CheckOutService } from '../../services/check-out.service';
 import { CartItemCardComponent } from '../cart-item-card/cart-item-card.component';
 import { CommonModule } from '@angular/common';
+import { OrderItem } from '../../models/orderItem';
 
 @Component({
   selector: 'app-view-cart',

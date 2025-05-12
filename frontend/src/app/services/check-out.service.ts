@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { PaymentIntentResult } from '@stripe/stripe-js';
 import { environment } from '../../environment/environment.development';
 import { Observable } from 'rxjs';
+import { PaymentDto } from '../models/paymentDto';
+import { PurchaseResponse } from '../models/purchaseRes';
+import { Order } from '../models/order';
 
 @Injectable({
   providedIn: 'root',

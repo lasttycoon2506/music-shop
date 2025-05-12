@@ -3,6 +3,10 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../environment/environment.development';
 import { map, Observable } from 'rxjs';
 import { ParseProductId } from '../helpers/parseProductId';
+import { Product } from '../models/product';
+import { ProductsApiResponse } from '../models/productsApiResponse';
+import { ProductCategory } from '../models/productCategory';
+import { ProductsCategoriesApiResponse } from '../models/productsCategoriesApiResponse';
 
 @Injectable({
   providedIn: 'root',

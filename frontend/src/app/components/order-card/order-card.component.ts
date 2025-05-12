@@ -1,6 +1,7 @@
 import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
+import { OrderPlaced } from '../../models/orderPlaced';
 
 @Component({
   selector: 'app-order-card',

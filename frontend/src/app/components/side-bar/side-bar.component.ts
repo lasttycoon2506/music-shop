@@ -8,6 +8,7 @@ import {
 import { ProductService } from '../../services/product.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ParseProductId } from '../../helpers/parseProductId';
+import { ProductCategory } from '../../models/productCategory';
 
 @Component({
   selector: 'side-bar',

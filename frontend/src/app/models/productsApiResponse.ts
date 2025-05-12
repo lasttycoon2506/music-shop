@@ -1,4 +1,6 @@
-type Page = {
+import { Product } from './product';
+
+export type Page = {
   number: number;
   size: number;
   totalElements: number;
@@ -11,7 +13,7 @@ type Links = {
   search: { href: string };
 };
 
-type ProductsApiResponse = {
+export type ProductsApiResponse = {
   _embedded: { products: Product[] };
   page: Page;
   _links: Links;

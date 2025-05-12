@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
 import { OktaService } from '../../services/okta.service';
 import { FormsModule } from '@angular/forms';
+import { Product } from '../../models/product';
+import { OrderItem } from '../../models/orderItem';
 
 @Component({
   selector: 'app-product-detail',

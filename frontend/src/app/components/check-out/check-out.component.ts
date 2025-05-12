@@ -19,6 +19,8 @@ import {
   StripeCardElement,
   StripeElements,
 } from '@stripe/stripe-js';
+import { Product } from '../../models/product';
+import { PaymentDto } from '../../models/paymentDto';
 
 @Component({
   selector: 'app-check-out',
@@ -196,8 +198,23 @@ export class CheckOutComponent implements OnInit {
   }
 
   initStripePaymentForm() {
+    const appearance = {
+      theme: 'stripe' as 'stripe',
+
+      variables: {
+        colorPrimary: '#0570de',
+        colorBackground: '#ffffff',
+        colorText: '#30313d',
+        colorDanger: '#df1b41',
+        fontFamily: 'Ideal Sans, system-ui, sans-serif',
+        spacingUnit: '2px',
+        borderRadius: '4px',
+      },
+    };
     if (this.stripeApi) {
-      const stripeElements: StripeElements = this.stripeApi.elements();
+      const stripeElements: StripeElements = this.stripeApi.elements({
+        appearance: appearance,
+      });
 
       this.creditCardElement = stripeElements?.create('card');
 

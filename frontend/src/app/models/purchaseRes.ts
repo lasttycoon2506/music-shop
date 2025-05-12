@@ -1,3 +1,3 @@
-type PurchaseResponse = {
+export type PurchaseResponse = {
   trackingNumber: number;
 };

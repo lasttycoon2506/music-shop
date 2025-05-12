@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
 import { OktaService } from '../../services/okta.service';
+import { Product } from '../../models/product';
+import { OrderItem } from '../../models/orderItem';
 
 @Component({
   selector: 'product-card',

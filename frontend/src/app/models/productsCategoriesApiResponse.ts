@@ -1,4 +1,7 @@
-type ProductsCategoriesApiResponse = {
+import { ProductCategory } from './productCategory';
+import { Page } from './productsApiResponse';
+
+export type ProductsCategoriesApiResponse = {
   _embedded: { productCategory: ProductCategory[] };
   page: Page;
   _links: ApiResLinks;

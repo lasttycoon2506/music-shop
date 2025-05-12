@@ -2,6 +2,8 @@ import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
+import { OrderItem } from '../../models/orderItem';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'cart-item-card',
