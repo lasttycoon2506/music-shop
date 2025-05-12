@@ -90,7 +90,6 @@ export class CheckOutComponent implements OnInit {
       [Validators.pattern(/^[0-9]{5}$/), Validators.required]
     ),
   });
-  creditCardForm: FormGroup = new FormGroup({});
 
   ngOnInit() {
     this.initStripe().then(() => this.initStripePaymentForm());
