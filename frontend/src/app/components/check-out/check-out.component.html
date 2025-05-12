@@ -277,7 +277,10 @@
           <button
             class="w-100 btn btn-primary btn-lg mt-3"
             type="submit"
-            [disabled]="checkoutForm.invalid"
+            [disabled]="
+              checkoutForm.invalid ||
+              !this.checkoutService.order()?.order?.totalQuantity
+            "
           >
             Checkout
           </button>
