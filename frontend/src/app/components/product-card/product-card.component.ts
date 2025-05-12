@@ -6,11 +6,9 @@ import {
   InputSignal,
   Signal,
 } from '@angular/core';
-import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CheckOutService } from '../../services/check-out.service';
-import { OrderItem } from '../../models/orderItem';
 import { OktaService } from '../../services/okta.service';
 
 @Component({

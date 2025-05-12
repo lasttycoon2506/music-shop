@@ -1,4 +1,4 @@
-export type OrderItem = {
+type OrderItem = {
   imageUrl?: string;
   price?: number;
   quantity: number;

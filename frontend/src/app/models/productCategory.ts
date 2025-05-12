@@ -1,4 +1,4 @@
-export type ProductCategory = {
+type ProductCategory = {
   categoryName: string;
   _links: {
     self: { href: string };

@@ -2,7 +2,6 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth, { CustomUserClaims, UserClaims } from '@okta/okta-auth-js';
 import appConfig from '../configs/app-config';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',

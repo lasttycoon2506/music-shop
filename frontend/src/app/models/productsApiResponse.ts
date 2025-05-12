@@ -1,5 +1,3 @@
-import { Product } from './product';
-
 type Page = {
   number: number;
   size: number;
@@ -13,7 +11,7 @@ type Links = {
   search: { href: string };
 };
 
-export type ProductsApiResponse = {
+type ProductsApiResponse = {
   _embedded: { products: Product[] };
   page: Page;
   _links: Links;

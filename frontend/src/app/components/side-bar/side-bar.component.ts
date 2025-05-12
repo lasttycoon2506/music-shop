@@ -5,7 +5,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ProductCategory } from '../../models/productCategory';
 import { ProductService } from '../../services/product.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ParseProductId } from '../../helpers/parseProductId';

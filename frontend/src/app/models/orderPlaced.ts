@@ -1,6 +1,4 @@
-import { OrderItem } from './orderItem';
-
-export type OrderPlaced = {
+type OrderPlaced = {
   trackingNumber: string;
   totalQuantity: number;
   totalPrice: number;

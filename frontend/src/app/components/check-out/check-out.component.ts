@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { ParseProductId } from '../../helpers/parseProductId';
@@ -14,7 +13,6 @@ import { CustomerService } from '../../services/customer.service';
 import { OktaService } from '../../services/okta.service';
 import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
-import { PaymentDto } from '../../models/paymentDto';
 import {
   loadStripe,
   Stripe,

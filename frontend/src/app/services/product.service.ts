@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { Product } from '../models/product';
 import { environment } from '../../environment/environment.development';
-import { ProductsApiResponse } from '../models/productsApiResponse';
 import { map, Observable } from 'rxjs';
-import { ProductsCategoriesApiResponse } from '../models/productsCategoriesApiResponse';
-import { ProductCategory } from '../models/productCategory';
 import { ParseProductId } from '../helpers/parseProductId';
 
 @Injectable({

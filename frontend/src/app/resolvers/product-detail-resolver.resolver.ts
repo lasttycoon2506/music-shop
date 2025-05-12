@@ -1,5 +1,4 @@
 import { ResolveFn } from '@angular/router';
-import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { inject } from '@angular/core';
 

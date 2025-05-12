@@ -1,5 +1,4 @@
 import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
-import { OrderPlaced } from '../../models/orderPlaced';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 

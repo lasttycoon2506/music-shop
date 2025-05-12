@@ -1,6 +1,4 @@
-import { OrderItem } from './orderItem';
-
-export type Order = {
+type Order = {
   customer?: {
     firstName: string;
     lastName: string;

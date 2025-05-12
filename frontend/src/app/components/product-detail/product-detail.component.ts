@@ -1,9 +1,7 @@
 import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { CheckOutService } from '../../services/check-out.service';
-import { OrderItem } from '../../models/orderItem';
 import { OktaService } from '../../services/okta.service';
 import { FormsModule } from '@angular/forms';
 

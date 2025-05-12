@@ -1,4 +1,4 @@
-export type PaymentDto = {
+type PaymentDto = {
   amount: number;
   email: string;
 };
