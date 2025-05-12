@@ -20,10 +20,10 @@ export class CheckOutService {
     );
   }
 
-  makePurchase(order: Order): Observable<PurchaseResponse> {
+  makePurchase(): Observable<PurchaseResponse> {
     return this.httpClient.post<PurchaseResponse>(
       environment.apiUrl + 'checkout/purchase',
-      order
+      this.order()
     );
   }
 }

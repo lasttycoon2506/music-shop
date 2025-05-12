@@ -153,7 +153,13 @@ export class CheckOutComponent implements OnInit {
             if (result.error) {
               alert('Error Processing Payment!' + result.error.message);
             } else {
-              this.checkoutService.order();
+              this.checkoutService.makePurchase().subscribe({
+                next: (res) => {
+                  alert('Order made! Tracking Number: ' + res.trackingNumber);
+                },
+                error: (error) =>
+                  alert('Error placing order!: ' + error.message),
+              });
             }
           });
       },
