@@ -1,10 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  loadStripe,
-  Stripe,
-  StripeCardElement,
-  StripeElements,
-} from '@stripe/stripe-js';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -21,6 +15,7 @@ import { OktaService } from '../../services/okta.service';
 import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
 import { PaymentDto } from '../../models/paymentDto';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-check-out',
@@ -33,10 +28,10 @@ export class CheckOutComponent implements OnInit {
   checkoutService: CheckOutService = inject(CheckOutService);
   customerService: CustomerService = inject(CustomerService);
   oktaService: OktaService = inject(OktaService);
-  stripe = Stripe(environment.stripePublishableKey);
   billingShippingSame: boolean = false;
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
+  stripeApi: Stripe | null = null;
   creditCardElement: StripeCardElement | undefined;
   creditCardErrors: HTMLElement | null = null;
   checkoutForm: FormGroup = new FormGroup({
@@ -93,7 +88,6 @@ export class CheckOutComponent implements OnInit {
   creditCardForm: FormGroup = new FormGroup({});
 
   ngOnInit() {
-    this.initStripe();
     this.initStripePaymentForm();
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
@@ -105,6 +99,14 @@ export class CheckOutComponent implements OnInit {
           },
         })
     );
+  }
+
+  async initStripe() {
+    const stripe = await loadStripe(environment.StripePublishableKey);
+    if (!stripe) {
+      throw new Error('Failed to load Stripe');
+    }
+    this.stripeApi = stripe;
   }
 
   getProduct(id: number): Product | undefined {
@@ -128,6 +130,7 @@ export class CheckOutComponent implements OnInit {
 
     this.checkoutService.createPaymentIntent(payment).subscribe({
       next: (paymentIntentRes) => {
+        this.stripe;
         this.stripeApi?.confirmCardPayment(
           paymentIntentRes.paymentIntent!.client_secret!,
           {}
@@ -166,23 +169,23 @@ export class CheckOutComponent implements OnInit {
   }
 
   initStripePaymentForm() {
-    console.log(this.stripeApi);
-    const stripeElements: StripeElements | undefined =
-      this.stripeApi?.elements();
+    if (this.stripeApi) {
+      const stripeElements = this.stripeApi.elements();
 
-    this.creditCardElement = stripeElements?.create('card');
+      this.creditCardElement = stripeElements?.create('card');
 
-    this.creditCardElement?.mount('#credit-card-element');
-    if (this.creditCardElement) {
-      this.creditCardElement.on('change', (event) => {
-        this.creditCardErrors = document.getElementById('credit-card-errors');
+      this.creditCardElement?.mount('#credit-card-element');
+      if (this.creditCardElement) {
+        this.creditCardElement.on('change', (event) => {
+          this.creditCardErrors = document.getElementById('credit-card-errors');
 
-        if (event.complete) {
-          this.creditCardErrors!.textContent = '';
-        } else if (event.error) {
-          this.creditCardErrors!.textContent = event.error.message;
-        }
-      });
+          if (event.complete) {
+            this.creditCardErrors!.textContent = '';
+          } else if (event.error) {
+            this.creditCardErrors!.textContent = event.error.message;
+          }
+        });
+      }
     }
   }
 }
