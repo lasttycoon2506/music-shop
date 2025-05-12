@@ -198,23 +198,8 @@ export class CheckOutComponent implements OnInit {
   }
 
   initStripePaymentForm() {
-    const appearance = {
-      theme: 'stripe' as 'stripe',
-
-      variables: {
-        colorPrimary: '#0570de',
-        colorBackground: '#ffffff',
-        colorText: '#30313d',
-        colorDanger: '#df1b41',
-        fontFamily: 'Ideal Sans, system-ui, sans-serif',
-        spacingUnit: '2px',
-        borderRadius: '4px',
-      },
-    };
     if (this.stripeApi) {
-      const stripeElements: StripeElements = this.stripeApi.elements({
-        appearance: appearance,
-      });
+      const stripeElements: StripeElements = this.stripeApi.elements();
 
       this.creditCardElement = stripeElements?.create('card');
 
