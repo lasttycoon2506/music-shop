@@ -15,6 +15,7 @@ import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
 import {
   loadStripe,
+  PaymentIntentResult,
   Stripe,
   StripeCardElement,
   StripeElements,
@@ -131,7 +132,8 @@ export class CheckOutComponent implements OnInit {
     };
 
     this.checkoutService.createPaymentIntent(payment).subscribe({
-      next: (res) => {
+      next: (res: PaymentIntentResult) => {
+        // console.log(res.paymentIntent);
         this.stripeApi
           ?.confirmCardPayment(
             res.paymentIntent!.client_secret!,
@@ -207,7 +209,12 @@ export class CheckOutComponent implements OnInit {
       this.creditCardElement?.mount('#credit-card-element');
       if (this.creditCardElement) {
         this.creditCardElement.on('change', (event) => {
+          if (!event.complete) {
+            this.creditCardInvalid = true;
+          }
+
           this.creditCardErrors = document.getElementById('credit-card-errors');
+
           if (event.complete) {
             this.creditCardInvalid = false;
             this.creditCardErrors!.textContent = '';
