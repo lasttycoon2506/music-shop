@@ -125,16 +125,27 @@ export class CheckOutComponent implements OnInit {
 
   placeOrder() {
     const payment: PaymentDto = {
-      amount: this.calculateCartTotal()! * 100,
+      amount: Math.round(this.calculateCartTotal()! * 100),
       email: this.oktaService.currentUser()!.email,
     };
 
     this.checkoutService.createPaymentIntent(payment).subscribe({
-      next: (paymentIntentRes) => {
-        this.stripeApi?.confirmCardPayment(
-          paymentIntentRes.paymentIntent!.client_secret!,
-          {}
-        );
+      next: (res) => {
+        this.stripeApi?.confirmCardPayment(res.paymentIntent!.client_secret!, {
+          payment_method: {
+            card: this.creditCardElement!,
+            billing_details: {
+              name: this.checkoutForm.get('billingFirstName')!.value,
+              email: this.oktaService.currentUser()?.email,
+              address: {
+                line1: this.checkoutForm.get('billingStreet')!.value,
+                city: this.checkoutForm.get('billingCity')!.value,
+                state: this.checkoutForm.get('billingState')!.value,
+                postal_code: this.checkoutForm.get('billingZip')!.value,
+              },
+            },
+          },
+        });
       },
     });
   }
