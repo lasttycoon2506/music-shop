@@ -279,7 +279,8 @@
             type="submit"
             [disabled]="
               checkoutForm.invalid ||
-              !this.checkoutService.order()?.order?.totalQuantity
+              !this.checkoutService.order()?.order?.totalQuantity ||
+              creditCardInvalid
             "
           >
             Checkout

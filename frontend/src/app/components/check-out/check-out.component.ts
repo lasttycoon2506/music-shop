@@ -37,6 +37,7 @@ export class CheckOutComponent implements OnInit {
   products: Product[] = [];
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
   stripeApi: Stripe | null = null;
+  creditCardInvalid: boolean = true;
   creditCardElement: StripeCardElement | undefined;
   creditCardErrors: HTMLElement | null = null;
   checkoutForm: FormGroup = new FormGroup({
@@ -207,8 +208,8 @@ export class CheckOutComponent implements OnInit {
       if (this.creditCardElement) {
         this.creditCardElement.on('change', (event) => {
           this.creditCardErrors = document.getElementById('credit-card-errors');
-
           if (event.complete) {
+            this.creditCardInvalid = false;
             this.creditCardErrors!.textContent = '';
           } else if (event.error) {
             this.creditCardErrors!.textContent = event.error.message;
