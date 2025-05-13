@@ -16,6 +16,7 @@ import { CheckOutService } from '../../services/check-out.service';
 import {
   loadStripe,
   PaymentIntent,
+  PaymentIntentResult,
   Stripe,
   StripeCardElement,
   StripeElements,
@@ -97,7 +98,7 @@ export class CheckOutComponent implements OnInit {
     ),
   });
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.cartTotal = this.calculateCartTotal();
     this.initStripe().then(() => this.initStripePaymentForm());
     this.checkoutService.order()?.orderItems?.forEach((item) =>
@@ -112,7 +113,7 @@ export class CheckOutComponent implements OnInit {
     );
   }
 
-  async initStripe() {
+  async initStripe(): Promise<void> {
     const stripe = await loadStripe(environment.StripePublishableKey);
     this.stripeApi = stripe;
   }
@@ -137,7 +138,7 @@ export class CheckOutComponent implements OnInit {
     }
   }
 
-  placeOrder() {
+  placeOrder(): void {
     const payment: PaymentDto = {
       amount: Math.round(this.cartTotal * 100),
       email: this.oktaService.currentUser()!.email,
@@ -165,7 +166,7 @@ export class CheckOutComponent implements OnInit {
             },
             { handleActions: false }
           )
-          .then((result) => {
+          .then((result: PaymentIntentResult) => {
             if (result.error) {
               this.alertComponent.showAlert(
                 'Error processing payment!',
@@ -205,9 +206,9 @@ export class CheckOutComponent implements OnInit {
               };
 
               this.checkoutService.makePurchase(newPurchase).subscribe({
-                next: (res) => {
+                next: (trackingNumber: string) => {
                   this.alertComponent.showAlert(
-                    `Order Placed!  Tracking: ${res}`,
+                    `Order Placed!  Tracking: ${trackingNumber}`,
                     'success'
                   );
                   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -259,7 +260,7 @@ export class CheckOutComponent implements OnInit {
     }
   }
 
-  initStripePaymentForm() {
+  initStripePaymentForm(): void {
     if (this.stripeApi) {
       const stripeElements: StripeElements = this.stripeApi.elements();
 
