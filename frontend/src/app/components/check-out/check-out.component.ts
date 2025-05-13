@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { ParseProductId } from '../../helpers/parseProductId';
@@ -23,10 +23,11 @@ import {
 import { Product } from '../../models/product';
 import { PaymentDto } from '../../models/paymentDto';
 import { PurchaseDto } from '../../models/purchaseDto';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-check-out',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './check-out.component.html',
   styleUrl: './check-out.component.css',
 })
@@ -43,6 +44,7 @@ export class CheckOutComponent implements OnInit {
   creditCardInvalid: boolean = true;
   creditCardElement: StripeCardElement | undefined;
   creditCardErrors: HTMLElement | null = null;
+  @ViewChild(AlertComponent) alertComponent!: AlertComponent;
   checkoutForm: FormGroup = new FormGroup({
     billingFirstName: new FormControl(
       this.customerService.currentCustomer()?.billingAddress?.firstName ?? '',
@@ -165,7 +167,11 @@ export class CheckOutComponent implements OnInit {
           )
           .then((result) => {
             if (result.error) {
-              alert('Error Processing Payment!' + result.error.message);
+              this.alertComponent.showAlert(
+                'Error processing payment!',
+                'danger'
+              );
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
               const newPurchase: PurchaseDto = {
                 customer: {
@@ -200,15 +206,22 @@ export class CheckOutComponent implements OnInit {
 
               this.checkoutService.makePurchase(newPurchase).subscribe({
                 next: (res) => {
-                  alert('Order made! \nTracking Number: ' + res);
-                  this.cartTotal = 0;
+                  this.alertComponent.showAlert(
+                    `Order Placed!  Tracking: ${res}`,
+                    'success'
+                  );
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                   this.checkoutService.order.set({
                     order: { totalQuantity: 0, totalPrice: 0, status: '' },
                     orderItems: [],
                   });
                 },
                 error: (error) => {
-                  alert('Error placing order!: ' + error.message);
+                  this.alertComponent.showAlert(
+                    `Error placing order!   ${error.message}`,
+                    'danger'
+                  );
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 },
               });
             }
