@@ -22,6 +22,7 @@ import {
 } from '@stripe/stripe-js';
 import { Product } from '../../models/product';
 import { PaymentDto } from '../../models/paymentDto';
+import { PurchaseDto } from '../../models/purchaseDto';
 
 @Component({
   selector: 'app-check-out',
@@ -157,6 +158,14 @@ export class CheckOutComponent implements OnInit {
             if (result.error) {
               alert('Error Processing Payment!' + result.error.message);
             } else {
+              const purchase: PurchaseDto = {
+                customer: {
+                  firstName: this.customerService.currentCustomer()!.firstName,
+                  lastName: this.customerService.currentCustomer()!.lastName,
+                  email: this.customerService.currentCustomer()!.email,
+                },
+                billingAddress: {},
+              };
               this.checkoutService.makePurchase().subscribe({
                 next: (res) => {
                   // use custom alert component

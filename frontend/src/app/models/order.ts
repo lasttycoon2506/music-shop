@@ -11,7 +11,7 @@ export type Order = {
   orderItems?: OrderItem[];
 };
 
-export type Address = {
+type Address = {
   street: string;
   city: string;
   state: string;
