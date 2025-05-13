@@ -162,7 +162,7 @@ export class CheckOutComponent implements OnInit {
                 customer: {
                   firstName: this.customerService.currentCustomer()!.firstName,
                   lastName: this.customerService.currentCustomer()!.lastName,
-                  email: this.customerService.currentCustomer()!.email,
+                  email: this.customerService.currentCustomer()!.email ?? '',
                 },
                 billingAddress: {
                   firstName: this.checkoutForm.get('billingFirstName')!.value,
@@ -172,7 +172,23 @@ export class CheckOutComponent implements OnInit {
                   state: this.checkoutForm.get('billingState')!.value,
                   zip: this.checkoutForm.get('billingZip')!.value,
                 },
+                shippingAddress: {
+                  firstName: this.checkoutForm.get('shippingFirstName')!.value,
+                  lastName: this.checkoutForm.get('shippingLastName')!.value,
+                  street: this.checkoutForm.get('shippingStreet')!.value,
+                  city: this.checkoutForm.get('shippingCity')!.value,
+                  state: this.checkoutForm.get('shippingState')!.value,
+                  zip: this.checkoutForm.get('shippingZip')!.value,
+                },
+                order: {
+                  totalPrice: this.checkoutService.order()!.order!.totalPrice!,
+                  totalQuantity:
+                    this.checkoutService.order()!.order!.totalQuantity!,
+                  status: 'placed',
+                },
+                orderItems: this.checkoutService.order()!.orderItems!,
               };
+
               this.checkoutService.makePurchase().subscribe({
                 next: (res) => {
                   // use custom alert component
