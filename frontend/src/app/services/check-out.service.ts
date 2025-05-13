@@ -2,9 +2,7 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PaymentIntent } from '@stripe/stripe-js';
 import { environment } from '../../environment/environment.development';
-import { Observable } from 'rxjs';
 import { PaymentDto } from '../models/paymentDto';
-import { PurchaseResponse } from '../models/purchaseRes';
 import { Order } from '../models/order';
 import { PurchaseDto } from '../models/purchaseDto';
 
