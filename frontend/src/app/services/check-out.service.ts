@@ -5,6 +5,7 @@ import { environment } from '../../environment/environment.development';
 import { PaymentDto } from '../models/paymentDto';
 import { Order } from '../models/order';
 import { PurchaseDto } from '../models/purchaseDto';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +16,14 @@ export class CheckOutService {
     orderItems: [],
   });
 
-  createPaymentIntent(payment: PaymentDto) {
+  createPaymentIntent(payment: PaymentDto): Observable<PaymentIntent> {
     return this.httpClient.post<PaymentIntent>(
       environment.apiUrl + 'checkout/payment-intent',
       payment
     );
   }
 
-  makePurchase(purchase: PurchaseDto) {
+  makePurchase(purchase: PurchaseDto): Observable<string> {
     return this.httpClient.post<string>(
       environment.apiUrl + 'checkout/purchase',
       purchase,
