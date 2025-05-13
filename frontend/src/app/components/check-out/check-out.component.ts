@@ -200,11 +200,14 @@ export class CheckOutComponent implements OnInit {
 
               this.checkoutService.makePurchase(newPurchase).subscribe({
                 next: (res) => {
+                  console.log(res);
                   // use custom alert component
-                  alert('Order made! Tracking Number: ' + res.trackingNumber);
+                  alert('Order made! Tracking Number: ' + res);
                 },
-                error: (error) =>
-                  alert('Error placing order!: ' + error.message),
+                error: (error) => {
+                  console.log(error);
+                  alert('Error placing order!: ' + error.message);
+                },
               });
             }
           });

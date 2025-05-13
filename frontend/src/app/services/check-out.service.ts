@@ -24,10 +24,11 @@ export class CheckOutService {
     );
   }
 
-  makePurchase(purchase: PurchaseDto): Observable<PurchaseResponse> {
-    return this.httpClient.post<PurchaseResponse>(
+  makePurchase(purchase: PurchaseDto) {
+    return this.httpClient.post<string>(
       environment.apiUrl + 'checkout/purchase',
-      this.order()
+      purchase,
+      { responseType: 'text' as 'json' }
     );
   }
 }
