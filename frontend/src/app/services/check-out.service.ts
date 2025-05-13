@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { PaymentDto } from '../models/paymentDto';
 import { PurchaseResponse } from '../models/purchaseRes';
 import { Order } from '../models/order';
+import { PurchaseDto } from '../models/purchaseDto';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class CheckOutService {
     );
   }
 
-  makePurchase(): Observable<PurchaseResponse> {
+  makePurchase(purchase: PurchaseDto): Observable<PurchaseResponse> {
     return this.httpClient.post<PurchaseResponse>(
       environment.apiUrl + 'checkout/purchase',
       this.order()

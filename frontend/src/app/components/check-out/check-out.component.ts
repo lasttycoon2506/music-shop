@@ -37,6 +37,7 @@ export class CheckOutComponent implements OnInit {
   oktaService: OktaService = inject(OktaService);
   billingShippingSame: boolean = false;
   products: Product[] = [];
+  cartTotal: number = 0;
   STATES_ABBREVIATIONS: string[] = STATES_ABBREVIATIONS;
   stripeApi: Stripe | null = null;
   creditCardInvalid: boolean = true;
@@ -95,6 +96,7 @@ export class CheckOutComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.cartTotal = this.calculateCartTotal();
     this.initStripe().then(() => this.initStripePaymentForm());
     this.checkoutService.order()?.orderItems?.forEach((item) =>
       this.productService
@@ -117,18 +119,25 @@ export class CheckOutComponent implements OnInit {
     return this.products.find((product) => product.productId === id);
   }
 
-  calculateCartTotal(): number | undefined {
-    return this.checkoutService
-      .order()
-      ?.orderItems?.reduce(
-        (total, item) => total + (item.price ?? 0) * item.quantity,
-        0
-      );
+  calculateCartTotal(): number {
+    if (
+      this.checkoutService.order()?.order?.totalQuantity === 0 ||
+      !this.checkoutService.order()?.order
+    ) {
+      return 0;
+    } else {
+      return this.checkoutService
+        .order()!
+        .orderItems!.reduce(
+          (total, item) => total + (item.price ?? 0) * item.quantity,
+          0
+        );
+    }
   }
 
   placeOrder() {
     const payment: PaymentDto = {
-      amount: Math.round(this.calculateCartTotal()! * 100),
+      amount: Math.round(this.cartTotal * 100),
       email: this.oktaService.currentUser()!.email,
     };
 
@@ -158,7 +167,7 @@ export class CheckOutComponent implements OnInit {
             if (result.error) {
               alert('Error Processing Payment!' + result.error.message);
             } else {
-              const purchase: PurchaseDto = {
+              const newPurchase: PurchaseDto = {
                 customer: {
                   firstName: this.customerService.currentCustomer()!.firstName,
                   lastName: this.customerService.currentCustomer()!.lastName,
@@ -181,7 +190,7 @@ export class CheckOutComponent implements OnInit {
                   zip: this.checkoutForm.get('shippingZip')!.value,
                 },
                 order: {
-                  totalPrice: this.checkoutService.order()!.order!.totalPrice!,
+                  totalPrice: this.cartTotal,
                   totalQuantity:
                     this.checkoutService.order()!.order!.totalQuantity!,
                   status: 'placed',
@@ -189,7 +198,7 @@ export class CheckOutComponent implements OnInit {
                 orderItems: this.checkoutService.order()!.orderItems!,
               };
 
-              this.checkoutService.makePurchase().subscribe({
+              this.checkoutService.makePurchase(newPurchase).subscribe({
                 next: (res) => {
                   // use custom alert component
                   alert('Order made! Tracking Number: ' + res.trackingNumber);
