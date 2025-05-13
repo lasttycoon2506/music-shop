@@ -200,8 +200,12 @@ export class CheckOutComponent implements OnInit {
 
               this.checkoutService.makePurchase(newPurchase).subscribe({
                 next: (res) => {
-                  // use custom alert component
                   alert('Order made! \nTracking Number: ' + res);
+                  this.cartTotal = 0;
+                  this.checkoutService.order.set({
+                    order: { totalQuantity: 0, totalPrice: 0, status: '' },
+                    orderItems: [],
+                  });
                 },
                 error: (error) => {
                   alert('Error placing order!: ' + error.message);
