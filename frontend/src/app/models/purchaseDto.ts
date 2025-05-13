@@ -1,6 +1,8 @@
+import { Address } from './order';
 import { OrderItem } from './orderItem';
 
-export type Order = {
+export type PurchaseDto = {
+  customer: { firstName: string; lastName: string; email: string };
   shippingAddress?: Address;
   billingAddress?: Address;
   order?: {
@@ -9,11 +11,4 @@ export type Order = {
     status?: string;
   };
   orderItems?: OrderItem[];
-};
-
-export type Address = {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
 };
