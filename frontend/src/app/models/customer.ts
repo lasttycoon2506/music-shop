@@ -17,7 +17,7 @@ export type Customer = {
   };
 };
 
-type Address = {
+export type Address = {
   firstName: string;
   lastName: string;
   street: string;

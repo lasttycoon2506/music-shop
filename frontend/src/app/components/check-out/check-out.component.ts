@@ -164,7 +164,14 @@ export class CheckOutComponent implements OnInit {
                   lastName: this.customerService.currentCustomer()!.lastName,
                   email: this.customerService.currentCustomer()!.email,
                 },
-                billingAddress: {},
+                billingAddress: {
+                  firstName: this.checkoutForm.get('billingFirstName')!.value,
+                  lastName: this.checkoutForm.get('billingLastName')!.value,
+                  street: this.checkoutForm.get('billingStreet')!.value,
+                  city: this.checkoutForm.get('billingCity')!.value,
+                  state: this.checkoutForm.get('billingState')!.value,
+                  zip: this.checkoutForm.get('billingZip')!.value,
+                },
               };
               this.checkoutService.makePurchase().subscribe({
                 next: (res) => {
