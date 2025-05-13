@@ -1,6 +1,6 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PaymentIntentResult } from '@stripe/stripe-js';
+import { PaymentIntent } from '@stripe/stripe-js';
 import { environment } from '../../environment/environment.development';
 import { Observable } from 'rxjs';
 import { PaymentDto } from '../models/paymentDto';
@@ -16,8 +16,8 @@ export class CheckOutService {
     orderItems: [],
   });
 
-  createPaymentIntent(payment: PaymentDto): Observable<PaymentIntentResult> {
-    return this.httpClient.post<PaymentIntentResult>(
+  createPaymentIntent(payment: PaymentDto) {
+    return this.httpClient.post<PaymentIntent>(
       environment.apiUrl + 'checkout/payment-intent',
       payment
     );

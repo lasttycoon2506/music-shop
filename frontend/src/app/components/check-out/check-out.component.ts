@@ -15,7 +15,7 @@ import { environment } from '../../../environment/environment.development';
 import { CheckOutService } from '../../services/check-out.service';
 import {
   loadStripe,
-  PaymentIntentResult,
+  PaymentIntent,
   Stripe,
   StripeCardElement,
   StripeElements,
@@ -132,11 +132,10 @@ export class CheckOutComponent implements OnInit {
     };
 
     this.checkoutService.createPaymentIntent(payment).subscribe({
-      next: (res: PaymentIntentResult) => {
-        // console.log(res.paymentIntent);
+      next: (res: PaymentIntent) => {
         this.stripeApi
           ?.confirmCardPayment(
-            res.paymentIntent!.client_secret!,
+            res.client_secret!,
             {
               payment_method: {
                 card: this.creditCardElement!,
@@ -160,6 +159,7 @@ export class CheckOutComponent implements OnInit {
             } else {
               this.checkoutService.makePurchase().subscribe({
                 next: (res) => {
+                  // use custom alert component
                   alert('Order made! Tracking Number: ' + res.trackingNumber);
                 },
                 error: (error) =>
