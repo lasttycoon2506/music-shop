@@ -30,7 +30,7 @@
 ### Home Cart
 ![Screenshot 2025-05-14 135404](https://github.com/user-attachments/assets/a31f8c0c-856b-43ce-8679-11b4fdb76868)
 ### Product Details
-![Screenshot 2025-05-14 135454](https://github.com/user-attachments/assets/3e608f67-2819-493a-9081-1fa4da8795d9)
+![Screenshot 2025-05-14 154143](https://github.com/user-attachments/assets/09cfb6b2-d072-4e9e-8ebc-0331451338dd)
 ### View Cart
 ![Screenshot 2025-05-14 150132](https://github.com/user-attachments/assets/48a85f6e-945f-4293-a60c-ce86aa482fbd)
 ![Screenshot 2025-05-14 150202](https://github.com/user-attachments/assets/ea6d5aaf-6cb0-48a0-a65a-4c8fb9416016)
