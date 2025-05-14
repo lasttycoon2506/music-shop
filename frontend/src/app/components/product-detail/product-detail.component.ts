@@ -6,6 +6,7 @@ import { OktaService } from '../../services/okta.service';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product';
 import { OrderItem } from '../../models/orderItem';
+import { ParseProductId } from '../../helpers/parseProductId';
 
 @Component({
   selector: 'app-product-detail',
@@ -37,9 +38,9 @@ export class ProductDetailComponent implements OnInit {
     this.router.data.subscribe({
       next: (data) => {
         this.product = data['product'];
+        this.product.productId = ParseProductId(this.product._links.self.href);
       },
     });
-    console.log(this.item());
   }
 
   setNewItemQuantity(event: Event): void {
