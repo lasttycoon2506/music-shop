@@ -35,9 +35,7 @@
           }
           <li class="list-group-item d-flex justify-content-between">
             <span>Total</span>
-            <strong>{{
-              checkoutService.order()?.order?.totalPrice | currency : "USD"
-            }}</strong>
+            <strong>{{ cartTotal | currency : "USD" }}</strong>
           </li>
         </ul>
       </div>

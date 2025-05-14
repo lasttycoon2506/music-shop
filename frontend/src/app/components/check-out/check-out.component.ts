@@ -212,6 +212,7 @@ export class CheckOutComponent implements OnInit {
                     'success'
                   );
                   window.scrollTo({ top: 0, behavior: 'smooth' });
+                  this.cartTotal = 0;
                   this.checkoutService.order.set({
                     order: { totalQuantity: 0, totalPrice: 0, status: '' },
                     orderItems: [],
