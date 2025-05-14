@@ -2,11 +2,11 @@
 **music-store using authentication (Okta) and purchasing (Stripe) with Angular, TypeScript, Bootstrap, Java Spring Boot & MySQL (Docker)**
 
 ### Features
--User Authentication (Okta)
--Purchase (Stripe)
--Sort/Search products
--View placed Orders
--Update/Delete cart
+-User Authentication (Okta)  
+-Purchase (Stripe)  
+-Sort/Search products  
+-View placed Orders  
+-Update/Delete cart  
 
 
 ### Home
