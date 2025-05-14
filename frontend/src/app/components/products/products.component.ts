@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit {
     } else {
       this.productService.getAllProducts();
     }
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   searchByCategoryId(id: string): void {

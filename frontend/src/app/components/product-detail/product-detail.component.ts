@@ -33,11 +33,13 @@ export class ProductDetailComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     this.router.data.subscribe({
       next: (data) => {
         this.product = data['product'];
       },
     });
+    console.log(this.item());
   }
 
   setNewItemQuantity(event: Event): void {
