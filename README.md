@@ -33,7 +33,7 @@
 ![Screenshot 2025-05-14 154143](https://github.com/user-attachments/assets/09cfb6b2-d072-4e9e-8ebc-0331451338dd)&nbsp;&nbsp;&nbsp;&nbsp;
 ### View Cart
 ![Screenshot 2025-05-14 150132](https://github.com/user-attachments/assets/48a85f6e-945f-4293-a60c-ce86aa482fbd)&nbsp;&nbsp;
-![Screenshot 2025-05-14 150202](https://github.com/user-attachments/assets/ea6d5aaf-6cb0-48a0-a65a-4c8fb9416016)&nbsp;&nbsp;&nbsp;&nbsp;
+![image](https://github.com/user-attachments/assets/04b1bb43-7ba4-4785-9a29-5236c8ceb95e)&nbsp;&nbsp;&nbsp;&nbsp;
 #### Delete Item
 ![Screenshot 2025-05-14 141141](https://github.com/user-attachments/assets/d82b29cf-646b-455f-9f9c-e335f163ca7d)&nbsp;&nbsp;&nbsp;&nbsp;
 #### Edit Item Quantity
