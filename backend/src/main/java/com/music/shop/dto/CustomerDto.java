@@ -1,6 +1,6 @@
-package com.example.demo.dto;
+package com.music.shop.dto;
 
-import com.example.demo.entity.Address;
+import com.music.shop.entity.Address;
 
 import lombok.Getter;
 import lombok.Setter;

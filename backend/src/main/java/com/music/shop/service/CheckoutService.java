@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.music.shop.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.CustomerRepository;
-import com.example.demo.dto.PaymentDto;
-import com.example.demo.dto.PurchaseDto;
-import com.example.demo.entity.Customer;
-import com.example.demo.entity.Order;
-import com.example.demo.entity.OrderItem;
+import com.music.shop.dao.CustomerRepository;
+import com.music.shop.dto.PaymentDto;
+import com.music.shop.dto.PurchaseDto;
+import com.music.shop.entity.Customer;
+import com.music.shop.entity.Order;
+import com.music.shop.entity.OrderItem;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;

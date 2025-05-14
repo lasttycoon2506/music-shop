@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.music.shop.entity;
 
 import java.util.HashSet;
 import java.util.Set;

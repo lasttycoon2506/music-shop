@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.music.shop.service;
 
 import java.util.Optional;
 
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.CustomerRepository;
-import com.example.demo.dto.CustomerDto;
-import com.example.demo.entity.Customer;
+import com.music.shop.dao.CustomerRepository;
+import com.music.shop.dto.CustomerDto;
+import com.music.shop.entity.Customer;
 
 @Service
 public class CustomerService {

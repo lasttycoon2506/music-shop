@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.music.shop.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.PaymentDto;
-import com.example.demo.dto.PurchaseDto;
-import com.example.demo.service.CheckoutService;
+import com.music.shop.dto.PaymentDto;
+import com.music.shop.dto.PurchaseDto;
+import com.music.shop.service.CheckoutService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 

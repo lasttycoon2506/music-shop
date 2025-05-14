@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.music.shop.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.CustomerDto;
-import com.example.demo.service.CustomerService;
+import com.music.shop.dto.CustomerDto;
+import com.music.shop.service.CustomerService;
 
 @CrossOrigin("http://localhost:4200")
 @RestController

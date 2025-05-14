@@ -1,11 +1,11 @@
-package com.example.demo.dto;
+package com.music.shop.dto;
 
 import java.util.Set;
 
-import com.example.demo.entity.Address;
-import com.example.demo.entity.Customer;
-import com.example.demo.entity.Order;
-import com.example.demo.entity.OrderItem;
+import com.music.shop.entity.Address;
+import com.music.shop.entity.Customer;
+import com.music.shop.entity.Order;
+import com.music.shop.entity.OrderItem;
 
 import lombok.Getter;
 import lombok.Setter;
