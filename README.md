@@ -1,5 +1,5 @@
 # Music Shop
-**music-store using authentication (Okta) and purchasing (Stripe) with Angular, TypeScript, Bootstrap, Java Spring Boot & MySQL (Docker)**
+**Music-store using authentication (Okta) and purchasing (Stripe) with Angular, TypeScript, Bootstrap, Java Spring Boot & MySQL (Docker)**
 
 ### Features
 -User Authentication (Okta)  
