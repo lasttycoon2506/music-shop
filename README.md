@@ -33,11 +33,11 @@
 ![Screenshot 2025-05-14 154143](https://github.com/user-attachments/assets/09cfb6b2-d072-4e9e-8ebc-0331451338dd)&nbsp;&nbsp;&nbsp;&nbsp;
 ### View Cart
 ![Screenshot 2025-05-14 150132](https://github.com/user-attachments/assets/48a85f6e-945f-4293-a60c-ce86aa482fbd)&nbsp;&nbsp;
-![image](https://github.com/user-attachments/assets/04b1bb43-7ba4-4785-9a29-5236c8ceb95e)&nbsp;&nbsp;&nbsp;&nbsp;
+![Screenshot 2025-05-14 164950](https://github.com/user-attachments/assets/e3dc6da6-f734-4f1b-8378-9748ddb10eff)&nbsp;&nbsp;&nbsp;&nbsp;
 #### Delete Item
-![Screenshot 2025-05-14 141141](https://github.com/user-attachments/assets/d82b29cf-646b-455f-9f9c-e335f163ca7d)&nbsp;&nbsp;&nbsp;&nbsp;
+![Screenshot 2025-05-14 164836](https://github.com/user-attachments/assets/57e9da8b-e142-463a-8dbc-8f06e82f417d)&nbsp;&nbsp;&nbsp;&nbsp;
 #### Edit Item Quantity
-![Screenshot 2025-05-14 141224](https://github.com/user-attachments/assets/ef4fd792-52fc-4265-9ebf-6df9104c0592)&nbsp;&nbsp;&nbsp;&nbsp;
+![Screenshot 2025-05-14 165044](https://github.com/user-attachments/assets/c27b1961-037b-4e3a-b195-dcdff57a5b1c)&nbsp;&nbsp;&nbsp;&nbsp;
 ### Checkout
 ![Screenshot 2025-05-14 141947](https://github.com/user-attachments/assets/30eec628-c86b-4cb5-937f-fed1a0434901)&nbsp;&nbsp;
 ![Screenshot 2025-05-14 154659](https://github.com/user-attachments/assets/ce6a293f-0647-48ed-9f65-8b9f45c55604)&nbsp;&nbsp;&nbsp;&nbsp;
