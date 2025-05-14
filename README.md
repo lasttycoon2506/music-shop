@@ -25,7 +25,7 @@
 ![Screenshot 2025-05-14 134706](https://github.com/user-attachments/assets/00733b77-87b5-45b0-81a1-37e4b7b6f5fc)&nbsp;&nbsp;&nbsp;&nbsp;
 ### Profile
 ![Screenshot 2025-05-14 135139](https://github.com/user-attachments/assets/2b262406-e5d8-48aa-b1c1-f4b9fabbbeba)&nbsp;&nbsp;&nbsp;&nbsp;
-#### Edited
+#### Profile Edited
 ![Screenshot 2025-05-14 135314](https://github.com/user-attachments/assets/f0313a43-6317-4516-a877-39d57b3b9ab4)&nbsp;&nbsp;&nbsp;&nbsp;
 ### Home Cart
 ![Screenshot 2025-05-14 135404](https://github.com/user-attachments/assets/a31f8c0c-856b-43ce-8679-11b4fdb76868)&nbsp;&nbsp;&nbsp;&nbsp;
