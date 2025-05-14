@@ -40,7 +40,7 @@
 ![Screenshot 2025-05-14 141224](https://github.com/user-attachments/assets/ef4fd792-52fc-4265-9ebf-6df9104c0592)
 ### Checkout
 ![Screenshot 2025-05-14 141947](https://github.com/user-attachments/assets/30eec628-c86b-4cb5-937f-fed1a0434901)
-![Screenshot 2025-05-14 141309](https://github.com/user-attachments/assets/65380d69-c344-410e-b2cf-b6043323f805)
+![Screenshot 2025-05-14 154659](https://github.com/user-attachments/assets/ce6a293f-0647-48ed-9f65-8b9f45c55604)
 #### Place-order
 ![Screenshot 2025-05-14 141407](https://github.com/user-attachments/assets/74f47ecf-d7dc-4be6-9202-52afceffa75b)
 #### Successful Purchase Confirmation
