@@ -32,8 +32,8 @@
 ### Product Details
 ![Screenshot 2025-05-14 135454](https://github.com/user-attachments/assets/3e608f67-2819-493a-9081-1fa4da8795d9)
 ### View Cart
-![Screenshot 2025-05-14 142033](https://github.com/user-attachments/assets/5e489842-ed63-4804-a5fb-bd92ac62acc8)
-![Screenshot 2025-05-14 140959](https://github.com/user-attachments/assets/e3f061f6-0d2a-4c9f-a507-3facf1a4b550)
+![Screenshot 2025-05-14 150132](https://github.com/user-attachments/assets/48a85f6e-945f-4293-a60c-ce86aa482fbd)
+![Screenshot 2025-05-14 150202](https://github.com/user-attachments/assets/ea6d5aaf-6cb0-48a0-a65a-4c8fb9416016)
 #### Delete Item
 ![Screenshot 2025-05-14 141141](https://github.com/user-attachments/assets/d82b29cf-646b-455f-9f9c-e335f163ca7d)
 #### Edit Item Quantity
