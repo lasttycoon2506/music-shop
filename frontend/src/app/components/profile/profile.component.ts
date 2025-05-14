@@ -116,6 +116,7 @@ export class ProfileComponent {
     const customer: Customer = {
       firstName: this.profileForm.get('firstName')!.value,
       lastName: this.profileForm.get('lastName')!.value,
+      email: this.oktaService.currentUser()?.email,
       billingAddress: {
         firstName: this.profileForm.get('billingFirstName')?.value,
         lastName: this.profileForm.get('billingLastName')?.value,
