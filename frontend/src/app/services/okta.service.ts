@@ -13,6 +13,7 @@ export class OktaService {
   isAuthenticated: WritableSignal<boolean> = signal<boolean>(false);
   currentUser: WritableSignal<User | null> = signal<User | null>(null);
 
+  //requires paid okta account
   async createUser(user: any): Promise<void> {
     // try {
     //   const transaction = this.oktaAuth.idx.register(user);
