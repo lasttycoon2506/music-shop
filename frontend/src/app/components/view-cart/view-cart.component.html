@@ -16,10 +16,13 @@
       </div>
     </div>
     }
-    <div class="d-flex justify-content-center ms-5 ps-5">
-      Total =
-      <div class="fw-bold text-danger ps-2">
-        {{ calculateCartTotal() | currency : "USD" }}
+    <div class="row">
+      <div class="col"></div>
+      <div class="col ms-5 ps-5">
+        Total =
+        <span class="fw-bold text-danger">
+          {{ calculateCartTotal() | currency : "USD" }}
+        </span>
       </div>
     </div>
   </div>
