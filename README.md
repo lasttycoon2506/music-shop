@@ -7,6 +7,7 @@
 -Sort/Search products  
 -View placed Orders  
 -Update/Delete cart  
+-Update Profile
 
 
 ### Home
